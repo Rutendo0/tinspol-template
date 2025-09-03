@@ -36,7 +36,7 @@ export function Hero() {
                 <Phone className="w-5 h-5" />
                 <span>+263 123 456 789</span>
               </Button>
-              <Button variant="ghost" className="flex items-center space-x-2 text-accent">
+              <Button variant="ghost" className="flex items-center space-x-2 text-green-600">
                 <MessageCircle className="w-5 h-5" />
                 <span>WhatsApp Us</span>
               </Button>

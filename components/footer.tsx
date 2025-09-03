@@ -1,4 +1,5 @@
 import { MapPin, Phone, Mail, MessageCircle, Facebook, Twitter, Instagram } from "lucide-react"
+import Link from "next/link"
 
 export function Footer() {
   return (
@@ -7,15 +8,15 @@ export function Footer() {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="space-y-4">
-            <div className="flex items-center space-x-2">
+            <Link href="/" className="flex items-center space-x-2">
               <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
                 <span className="text-primary-foreground font-bold font-sans">T</span>
               </div>
               <span className="font-sans font-bold text-xl">Tinspol Motors</span>
-            </div>
+            </Link>
             <p className="text-muted-foreground text-pretty">
               Zimbabwe's trusted automotive repair specialists. Quality workmanship, genuine parts, and exceptional
-              service since 2008.
+              service since 2010.
             </p>
             <div className="flex space-x-4">
               <Facebook className="w-5 h-5 text-muted-foreground hover:text-primary cursor-pointer transition-colors" />
@@ -29,34 +30,34 @@ export function Footer() {
             <h3 className="font-sans font-semibold text-lg mb-4">Our Services</h3>
             <ul className="space-y-2 text-muted-foreground">
               <li>
-                <a href="#" className="hover:text-primary transition-colors">
+                <Link href="/services/motor-mechanics" className="hover:text-primary transition-colors">
                   Motor Mechanics
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-primary transition-colors">
+                <Link href="/services/suspension" className="hover:text-primary transition-colors">
                   Suspension Repairs
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-primary transition-colors">
+                <Link href="/services/tyres" className="hover:text-primary transition-colors">
                   Tyre Services
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-primary transition-colors">
+                <Link href="/services/panel-beating" className="hover:text-primary transition-colors">
                   Panel Beating
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-primary transition-colors">
+                <Link href="/services/car-wash" className="hover:text-primary transition-colors">
                   Car Wash
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-primary transition-colors">
-                  Spares & Parts
-                </a>
+                <Link href="/quote" className="hover:text-primary transition-colors">
+                  Spares & Parts Quote
+                </Link>
               </li>
             </ul>
           </div>
@@ -66,29 +67,34 @@ export function Footer() {
             <h3 className="font-sans font-semibold text-lg mb-4">Quick Links</h3>
             <ul className="space-y-2 text-muted-foreground">
               <li>
-                <a href="#" className="hover:text-primary transition-colors">
+                <Link href="/about" className="hover:text-primary transition-colors">
                   About Us
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-primary transition-colors">
+                <Link href="/#gallery" className="hover:text-primary transition-colors">
                   Gallery
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-primary transition-colors">
+                <Link href="/blog" className="hover:text-primary transition-colors">
                   Blog
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-primary transition-colors">
+                <Link href="/contact" className="hover:text-primary transition-colors">
                   Contact
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-primary transition-colors">
+                <Link href="/quote" className="hover:text-primary transition-colors">
                   Get Quote
-                </a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/booking" className="hover:text-primary transition-colors">
+                  Book Car Wash
+                </Link>
               </li>
             </ul>
           </div>
@@ -103,15 +109,21 @@ export function Footer() {
               </div>
               <div className="flex items-center space-x-3">
                 <Phone className="w-4 h-4 text-primary flex-shrink-0" />
-                <span className="text-sm">+263 123 456 789</span>
+                <a href="tel:+263123456789" className="text-sm hover:text-primary transition-colors">
+                  +263 123 456 789
+                </a>
               </div>
               <div className="flex items-center space-x-3">
                 <MessageCircle className="w-4 h-4 text-primary flex-shrink-0" />
-                <span className="text-sm">WhatsApp: +263 123 456 789</span>
+                <a href="https://wa.me/263123456789" className="text-sm hover:text-primary transition-colors">
+                  WhatsApp: +263 123 456 789
+                </a>
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="w-4 h-4 text-primary flex-shrink-0" />
-                <span className="text-sm">info@tinspolmotors.co.zw</span>
+                <a href="mailto:info@tinspolmotors.co.zw" className="text-sm hover:text-primary transition-colors">
+                  info@tinspolmotors.co.zw
+                </a>
               </div>
             </div>
           </div>

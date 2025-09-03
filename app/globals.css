@@ -10,33 +10,40 @@
   --card-foreground: #4b5563;
   --popover: #ffffff;
   --popover-foreground: #4b5563;
-  --primary: #0891b2;
+  /* Updated primary color to red for Tinspol Motors branding */
+  --primary: #dc2626;
   --primary-foreground: #ffffff;
-  --secondary: #f97316;
+  /* Updated secondary color to darker red for accent */
+  --secondary: #b91c1c;
   --secondary-foreground: #ffffff;
   --muted: #f9fafb;
   --muted-foreground: #6b7280;
-  --accent: #f97316;
+  /* Updated accent color to match red theme */
+  --accent: #dc2626;
   --accent-foreground: #ffffff;
   --destructive: #ea580c;
   --destructive-foreground: #ffffff;
   --border: #e5e7eb;
   --input: #ffffff;
-  --ring: rgba(8, 145, 178, 0.5);
-  --chart-1: #0891b2;
-  --chart-2: #f97316;
+  /* Updated ring color to red with opacity */
+  --ring: rgba(220, 38, 38, 0.5);
+  /* Updated chart colors to red-based palette */
+  --chart-1: #dc2626;
+  --chart-2: #b91c1c;
   --chart-3: #4b5563;
   --chart-4: #f9fafb;
-  --chart-5: #ea580c;
+  --chart-5: #991b1b;
   --radius: 0.5rem;
   --sidebar: #ffffff;
   --sidebar-foreground: #4b5563;
-  --sidebar-primary: #0891b2;
+  /* Updated sidebar colors to red theme */
+  --sidebar-primary: #dc2626;
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #f97316;
+  --sidebar-accent: #b91c1c;
   --sidebar-accent-foreground: #ffffff;
   --sidebar-border: #e5e7eb;
-  --sidebar-ring: rgba(8, 145, 178, 0.5);
+  /* Updated sidebar ring to red */
+  --sidebar-ring: rgba(220, 38, 38, 0.5);
 }
 
 .dark {
@@ -46,32 +53,38 @@
   --card-foreground: #f9fafb;
   --popover: #374151;
   --popover-foreground: #f9fafb;
-  --primary: #0891b2;
+  /* Updated dark mode primary to lighter red */
+  --primary: #ef4444;
   --primary-foreground: #ffffff;
-  --secondary: #f97316;
+  /* Updated dark mode secondary to red */
+  --secondary: #dc2626;
   --secondary-foreground: #ffffff;
   --muted: #4b5563;
   --muted-foreground: #9ca3af;
-  --accent: #f97316;
+  /* Updated dark mode accent to red */
+  --accent: #ef4444;
   --accent-foreground: #ffffff;
   --destructive: #ea580c;
   --destructive-foreground: #ffffff;
   --border: #4b5563;
   --input: #374151;
-  --ring: rgba(8, 145, 178, 0.5);
-  --chart-1: #0891b2;
-  --chart-2: #f97316;
+  /* Updated dark mode ring to red */
+  --ring: rgba(239, 68, 68, 0.5);
+  /* Updated dark mode chart colors */
+  --chart-1: #ef4444;
+  --chart-2: #dc2626;
   --chart-3: #f9fafb;
   --chart-4: #4b5563;
-  --chart-5: #ea580c;
+  --chart-5: #b91c1c;
   --sidebar: #1f2937;
   --sidebar-foreground: #f9fafb;
-  --sidebar-primary: #0891b2;
+  /* Updated dark mode sidebar colors */
+  --sidebar-primary: #ef4444;
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #f97316;
+  --sidebar-accent: #dc2626;
   --sidebar-accent-foreground: #ffffff;
   --sidebar-border: #4b5563;
-  --sidebar-ring: rgba(8, 145, 178, 0.5);
+  --sidebar-ring: rgba(239, 68, 68, 0.5);
 }
 
 @theme inline {

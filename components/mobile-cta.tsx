@@ -9,7 +9,7 @@ export function MobileCTA() {
           <Phone className="w-4 h-4" />
           <span>Call</span>
         </Button>
-        <Button size="sm" className="flex-1 flex items-center justify-center space-x-2 bg-accent hover:bg-accent/90">
+        <Button size="sm" className="flex-1 flex items-center justify-center space-x-2 bg-green-600 hover:bg-green-700">
           <MessageCircle className="w-4 h-4" />
           <span>WhatsApp</span>
         </Button>

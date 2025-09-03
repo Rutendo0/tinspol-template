@@ -19,10 +19,31 @@ export function Contact() {
     message: "",
   })
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSubmitted, setIsSubmitted] = useState(false)
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle form submission
+    setIsSubmitting(true)
+
+    // Simulate form submission
+    await new Promise((resolve) => setTimeout(resolve, 1000))
+
     console.log("Form submitted:", formData)
+    setIsSubmitted(true)
+    setIsSubmitting(false)
+
+    // Reset form after 3 seconds
+    setTimeout(() => {
+      setIsSubmitted(false)
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        service: "",
+        message: "",
+      })
+    }, 3000)
   }
 
   return (
@@ -106,13 +127,17 @@ export function Contact() {
             <div className="space-y-4">
               <h4 className="font-semibold">Quick Actions</h4>
               <div className="flex flex-col sm:flex-row gap-3">
-                <Button className="flex items-center space-x-2 bg-primary hover:bg-primary/90">
-                  <Phone className="w-4 h-4" />
-                  <span>Call Now</span>
+                <Button asChild className="flex items-center space-x-2 bg-primary hover:bg-primary/90">
+                  <a href="tel:+263123456789">
+                    <Phone className="w-4 h-4" />
+                    <span>Call Now</span>
+                  </a>
                 </Button>
-                <Button className="flex items-center space-x-2 bg-accent hover:bg-accent/90">
-                  <MessageCircle className="w-4 h-4" />
-                  <span>WhatsApp</span>
+                <Button asChild className="flex items-center space-x-2 bg-green-600 hover:bg-green-700">
+                  <a href="https://wa.me/263123456789">
+                    <MessageCircle className="w-4 h-4" />
+                    <span>WhatsApp</span>
+                  </a>
                 </Button>
               </div>
             </div>
@@ -124,75 +149,90 @@ export function Contact() {
               <CardTitle className="text-2xl font-sans">Request a Quote</CardTitle>
             </CardHeader>
             <CardContent>
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-4">
+              {isSubmitted ? (
+                <div className="text-center py-8">
+                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <MessageCircle className="w-8 h-8 text-green-600" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-green-600 mb-2">Quote Request Sent!</h3>
+                  <p className="text-gray-600">We'll contact you within 24 hours with your personalized quote.</p>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Full Name</label>
+                      <Input
+                        value={formData.name}
+                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        placeholder="Your full name"
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Phone Number</label>
+                      <Input
+                        value={formData.phone}
+                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                        placeholder="+263 123 456 789"
+                        required
+                      />
+                    </div>
+                  </div>
+
                   <div>
-                    <label className="block text-sm font-medium mb-2">Full Name</label>
+                    <label className="block text-sm font-medium mb-2">Email Address</label>
                     <Input
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      placeholder="Your full name"
+                      type="email"
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      placeholder="your.email@example.com"
                       required
                     />
                   </div>
+
                   <div>
-                    <label className="block text-sm font-medium mb-2">Phone Number</label>
-                    <Input
-                      value={formData.phone}
-                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      placeholder="+263 123 456 789"
-                      required
+                    <label className="block text-sm font-medium mb-2">Service Required</label>
+                    <Select
+                      value={formData.service}
+                      onValueChange={(value) => setFormData({ ...formData, service: value })}
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select a service" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="motor-mechanics">Motor Mechanics</SelectItem>
+                        <SelectItem value="suspension">Suspension Repairs</SelectItem>
+                        <SelectItem value="tyres">Tyre Services</SelectItem>
+                        <SelectItem value="car-wash">Car Wash</SelectItem>
+                        <SelectItem value="panel-beating">Panel Beating</SelectItem>
+                        <SelectItem value="spares">Spares & Parts</SelectItem>
+                        <SelectItem value="routine">Routine Service</SelectItem>
+                        <SelectItem value="other">Other</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium mb-2">Message</label>
+                    <Textarea
+                      value={formData.message}
+                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                      placeholder="Describe your vehicle issue or service requirements..."
+                      rows={4}
                     />
                   </div>
-                </div>
 
-                <div>
-                  <label className="block text-sm font-medium mb-2">Email Address</label>
-                  <Input
-                    type="email"
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    placeholder="your.email@example.com"
-                    required
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium mb-2">Service Required</label>
-                  <Select
-                    value={formData.service}
-                    onValueChange={(value) => setFormData({ ...formData, service: value })}
+                  <Button
+                    type="submit"
+                    size="lg"
+                    className="w-full bg-primary hover:bg-primary/90"
+                    disabled={isSubmitting}
                   >
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select a service" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="motor-mechanics">Motor Mechanics</SelectItem>
-                      <SelectItem value="suspension">Suspension Repairs</SelectItem>
-                      <SelectItem value="tyres">Tyre Services</SelectItem>
-                      <SelectItem value="car-wash">Car Wash</SelectItem>
-                      <SelectItem value="panel-beating">Panel Beating</SelectItem>
-                      <SelectItem value="spares">Spares & Parts</SelectItem>
-                      <SelectItem value="routine">Routine Service</SelectItem>
-                      <SelectItem value="other">Other</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium mb-2">Message</label>
-                  <Textarea
-                    value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    placeholder="Describe your vehicle issue or service requirements..."
-                    rows={4}
-                  />
-                </div>
-
-                <Button type="submit" size="lg" className="w-full bg-primary hover:bg-primary/90">
-                  Send Quote Request
-                </Button>
-              </form>
+                    {isSubmitting ? "Sending..." : "Send Quote Request"}
+                  </Button>
+                </form>
+              )}
             </CardContent>
           </Card>
         </div>
@@ -201,12 +241,17 @@ export function Contact() {
         <div className="mt-16">
           <Card>
             <CardContent className="p-0">
-              <div className="aspect-[16/9] bg-muted rounded-lg flex items-center justify-center">
-                <div className="text-center space-y-2">
-                  <MapPin className="w-12 h-12 text-muted-foreground mx-auto" />
-                  <p className="text-muted-foreground">Interactive Map</p>
-                  <p className="text-sm text-muted-foreground">123 Industrial Road, Harare, Zimbabwe</p>
-                </div>
+              <div className="aspect-[16/9] bg-muted rounded-lg overflow-hidden">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3798.4!2d31.0522!3d-17.8252!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTfCsDQ5JzMwLjciUyAzMcKwMDMnMDcuOSJF!5e0!3m2!1sen!2szw!4v1620000000000!5m2!1sen!2szw"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Tinspol Motors Location"
+                />
               </div>
             </CardContent>
           </Card>
