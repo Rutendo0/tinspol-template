@@ -92,8 +92,7 @@ export function Contact() {
             <span className="block text-red-600">Started?</span>
           </h2>
           <p className="text-base text-gray-600 max-w-2xl mx-auto leading-relaxed">
-            Contact us today for expert automotive services. We're here to help with all your vehicle needs,
-            from routine maintenance to complex repairs.
+            Contact us today for expert automotive services.
           </p>
         </div>
 
@@ -105,7 +104,7 @@ export function Contact() {
                 <Send className="w-5 h-5 text-red-600" />
                 <span>Send us a Message</span>
               </CardTitle>
-              <p className="text-gray-600 text-xs">Fill out the form below and we'll get back to you within 24 hours.</p>
+              <p className="text-gray-600 text-xs">Fill out the form below and we'll get back to you.</p>
             </CardHeader>
             <CardContent className="p-4">
               {isSubmitted ? (
@@ -208,13 +207,7 @@ export function Contact() {
 
           {/* Contact Information */}
           <div className="space-y-5">
-            <div className="mb-4">
-              <h3 className="text-xl font-bold text-black mb-2">Get in Touch</h3>
-              <p className="text-gray-600 leading-relaxed text-sm">
-                We're here to help! Reach out to us through any of the channels below, and our friendly team will assist you.
-              </p>
-            </div>
-
+            
             {/* Two-column (3 left, 3 right) cards */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {contactInfo.map((info, index) => (
@@ -268,9 +261,6 @@ export function Contact() {
                         <span className="text-red-400 font-semibold">CLOSED</span>
                       </div>
                     </div>
-                    <p className="text-red-400 text-xs mt-2 font-semibold">
-                      Quality vehicle repairs • Professional service
-                    </p>
                   </div>
                 </div>
               </CardContent>

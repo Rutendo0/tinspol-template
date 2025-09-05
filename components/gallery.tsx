@@ -32,9 +32,6 @@ export function Gallery() {
             A Glimpse Into
             <span className="block text-red-600">Tinspol Motors</span>
           </h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Discover our workshop, our team in action, and vehicles we proudly service. Real images from our day-to-day work.
-          </p>
         </div>
 
         {/* Image Grid */}
@@ -73,9 +70,6 @@ export function Gallery() {
         <div className="text-center">
           <div className="bg-gradient-to-r from-black to-gray-900 rounded-2xl p-8 text-white shadow-2xl">
             <h3 className="text-2xl font-bold mb-4">Ready to Work With Us?</h3>
-            <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
-              Join hundreds of satisfied customers who trust Tinspol Motors for quality service and workmanship.
-            </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button 
                 size="lg" 
@@ -91,7 +85,7 @@ export function Gallery() {
                 size="lg" 
                 variant="outline"
                 asChild
-                className="border-white text-white hover:bg-white hover:text-black font-semibold transition-all duration-300 hover:scale-105"
+                className="bg-red-600 text-white hover:bg-white hover:text-black font-semibold transition-all duration-300 hover:scale-105"
               >
                 <Link href="/gallery" className="flex items-center space-x-2">
                   <ArrowRight className="w-5 h-5" />

@@ -8,51 +8,38 @@ const features = [
     icon: Shield,
     title: "Quality Guarantee",
     description: "All work backed by comprehensive warranty and quality assurance standards.",
-    stat: "100%",
     statLabel: "Guaranteed"
   },
   {
     icon: Users,
     title: "Professional Team",
     description: "Experienced technicians dedicated to providing exceptional vehicle repair services.",
-    stat: "Expert",
     statLabel: "Technicians"
   },
   {
     icon: Clock,
     title: "Reliable Service",
     description: "Efficient service delivery without compromising on quality standards.",
-    stat: "Mon-Sat",
     statLabel: "Available"
   },
   {
     icon: Award,
     title: "Genuine Parts",
     description: "Quality OEM and aftermarket parts from trusted suppliers for lasting repairs.",
-    stat: "100%",
     statLabel: "Authentic"
   },
   {
     icon: Wrench,
     title: "Quality Equipment",
     description: "Professional diagnostic tools and repair equipment for accurate service.",
-    stat: "Modern",
     statLabel: "Equipment"
   },
   {
     icon: MapPin,
     title: "Convenient Location",
     description: "Easily accessible location in Harare with customer-friendly facilities.",
-    stat: "Central",
     statLabel: "Location"
   },
-]
-
-const stats = [
-  { number: "100%", label: "Zimbabwean Owned", icon: Users },
-  { number: "Quality", label: "Vehicle Repairs", icon: Star },
-  { number: "Professional", label: "Service", icon: Award },
-  { number: "Trusted", label: "Expertise", icon: Clock },
 ]
 
 export function WhyChooseUs() {
@@ -67,14 +54,9 @@ export function WhyChooseUs() {
               <span className="text-red-600 font-semibold uppercase tracking-wider text-sm">Why Choose Us</span>
               <div className="w-12 h-0.5 bg-red-600"></div>
             </div>
-            <h2 className="text-3xl lg:text-4xl font-bold text-black mb-6">
-              Why Choose 
+            <h2 className="text-3xl lg:text-4xl font-bold text-black mb-6"> 
               <span className="block text-red-600">Tinspol Motors?</span>
             </h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              As a wholly owned Zimbabwean company, we've built our reputation on providing quality vehicle repairs,
-              professional service, and exceptional customer care that keeps customers coming back.
-            </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
@@ -109,16 +91,16 @@ export function WhyChooseUs() {
 
           {/* CTA Section */}
           <div className="text-center">
-            <div className="bg-white rounded-2xl p-8 shadow-xl border border-gray-100">
-              <h3 className="text-2xl font-bold text-black mb-4">Ready to Experience the Difference?</h3>
-              <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
+            <div className="bg-red-600 rounded-2xl p-8 shadow-xl border border-gray-100">
+              <h3 className="text-2xl font-bold text-white mb-4">Ready to Experience the Difference?</h3>
+              <p className="text-white mb-6 max-w-2xl mx-auto">
                 Join thousands of satisfied customers who trust Tinspol Motors for all their automotive needs.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button 
                   size="lg" 
                   asChild
-                  className="bg-red-600 hover:bg-red-700 text-white font-semibold"
+                  className="bg-white hover:bg-black text-red-600 font-semibold"
                 >
                   <Link href="/quote">Get Your Quote</Link>
                 </Button>
@@ -126,7 +108,7 @@ export function WhyChooseUs() {
                   size="lg" 
                   variant="outline"
                   asChild
-                  className="border-red-600 text-red-600 hover:bg-red-600 hover:text-white font-semibold"
+                  className="border-red-600 text-red-600 hover:bg-black hover:text-white font-semibold"
                 >
                   <Link href="/about">Learn More</Link>
                 </Button>

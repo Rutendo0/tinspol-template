@@ -63,19 +63,6 @@ export default async function BlogPage() {
 
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            {/* Back Button */}
-            <div className="mb-8">
-              <Button 
-                variant="outline" 
-                asChild
-                className="border-white/20 text-white hover:bg-white hover:text-black backdrop-blur-sm"
-              >
-                <Link href="/" className="flex items-center space-x-2">
-                  <ArrowLeft className="w-4 h-4" />
-                  <span>Back to Home</span>
-                </Link>
-              </Button>
-            </div>
 
             {/* Header */}
             <div className="mb-12">
@@ -87,7 +74,6 @@ export default async function BlogPage() {
               </div>
               
               <h1 className="text-4xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-                Tinspol Motors
                 <span className="block text-red-500 gradient-text">Blog</span>
               </h1>
               

@@ -4,7 +4,6 @@ import { AboutPreview } from "@/components/about-preview"
 import { Services } from "@/components/services"
 import { WhyChooseUs } from "@/components/why-choose-us"
 import { Gallery } from "@/components/gallery"
-import { CTASection } from "@/components/cta-section"
 import { Contact } from "@/components/contact"
 import { Footer } from "@/components/footer"
 import { MobileCTA } from "@/components/mobile-cta"
@@ -27,9 +26,6 @@ export default function HomePage() {
         </Reveal>
         <Reveal delay={140}>
           <Gallery />
-        </Reveal>
-        <Reveal delay={160}>
-          <CTASection />
         </Reveal>
         <Reveal delay={180}>
           <Contact />

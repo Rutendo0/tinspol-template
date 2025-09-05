@@ -72,20 +72,7 @@ export default async function GalleryPage() {
 
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            {/* Back Button */}
-            <div className="mb-8">
-              <Button 
-                variant="outline" 
-                asChild
-                className="border-white/20 text-white hover:bg-white hover:text-black backdrop-blur-sm"
-              >
-                <Link href="/" className="flex items-center space-x-2">
-                  <ArrowLeft className="w-4 h-4" />
-                  <span>Back to Home</span>
-                </Link>
-              </Button>
-            </div>
-
+           
             {/* Header */}
             <div className="mb-12">
               <div className="inline-flex items-center space-x-2 bg-red-600/20 backdrop-blur-sm border border-red-500/30 rounded-full px-6 py-3 mb-8">
@@ -96,13 +83,11 @@ export default async function GalleryPage() {
               </div>
               
               <h1 className="text-4xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-                Before & After
                 <span className="block text-red-500 gradient-text">Gallery</span>
               </h1>
               
               <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-                See the transformation! From repairs and resprays to suspension work and detailing, 
-                witness the quality craftsmanship that makes Tinspol Motors Zimbabwe's trusted choice.
+                See the transformation! Witness the quality craftsmanship that makes Tinspol Motors Zimbabwe's trusted choice.
               </p>
             </div>
           </div>
@@ -278,25 +263,6 @@ export default async function GalleryPage() {
           )}
         </div>
       </section>
-
-      {/* CTA Section */}
-      <section className="py-16 bg-red-600 text-white">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-4">Ready for Your Transformation?</h2>
-          <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
-            Whether it's repairs, resprays, suspension work, or detailing - we'll make your vehicle look and perform like new.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button asChild variant="secondary" size="lg">
-              <Link href="/quote">Get Free Quote</Link>
-            </Button>
-            <Button asChild variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-red-600">
-              <Link href="/services">View Services</Link>
-            </Button>
-          </div>
-        </div>
-      </section>
-
       <Footer />
       <MobileCTA />
     </div>

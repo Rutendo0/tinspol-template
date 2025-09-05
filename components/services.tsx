@@ -157,35 +157,6 @@ export function Services() {
             </Card>
           ))}
         </div>
-
-        {/* Bottom CTA */}
-        <div className="text-center">
-          <div className="bg-gradient-to-r from-red-600 to-red-700 rounded-2xl p-8 text-white shadow-2xl">
-            <h3 className="text-2xl font-bold mb-4">Need a Custom Solution?</h3>
-            <p className="text-red-100 mb-6 max-w-2xl mx-auto">
-              Can't find exactly what you're looking for? Our expert team can create a custom 
-              maintenance plan tailored to your vehicle's specific needs.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button 
-                size="lg" 
-                variant="secondary"
-                asChild
-                className="bg-white text-red-600 hover:bg-gray-100 font-semibold"
-              >
-                <Link href="/quote">Get Custom Quote</Link>
-              </Button>
-              <Button 
-                size="lg" 
-                variant="outline"
-                asChild
-                className="border-white text-white hover:bg-white hover:text-red-600 font-semibold"
-              >
-                <Link href="/contact">Speak to Expert</Link>
-              </Button>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   )
