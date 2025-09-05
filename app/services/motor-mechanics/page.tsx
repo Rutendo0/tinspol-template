@@ -4,7 +4,7 @@ import { MobileCTA } from "@/components/mobile-cta"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { CheckCircle, Clock, Shield, Wrench } from "lucide-react"
+import { CheckCircle, Clock, Shield, Wrench, ArrowLeft } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -14,22 +14,46 @@ export default function MotorMechanicsPage() {
       <Header />
 
       {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-r from-primary/10 to-primary/5">
-        <div className="container mx-auto px-4">
+      <section className="relative pt-32 pb-20 bg-gradient-to-br from-black via-gray-900 to-black overflow-hidden">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23dc2626' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+          }}></div>
+        </div>
+
+        <div className="container mx-auto px-4 relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <Badge className="mb-4">Professional Service</Badge>
-              <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">Motor Mechanics & Engine Repair</h1>
-              <p className="text-xl text-gray-600 mb-8">
-                Expert engine diagnostics, repairs, and maintenance services. Our certified mechanics use the latest
+              {/* Back Button */}
+              <div className="mb-6">
+                <Button 
+                  variant="outline" 
+                  asChild
+                  className="border-white/20 text-white hover:bg-white hover:text-black backdrop-blur-sm"
+                >
+                  <Link href="/services" className="flex items-center space-x-2">
+                    <ArrowLeft className="w-4 h-4" />
+                    <span>Back to Services</span>
+                  </Link>
+                </Button>
+              </div>
+
+              <Badge className="mb-4 bg-red-600 text-white hover:bg-red-700">Professional Service</Badge>
+              <h1 className="text-4xl lg:text-5xl font-bold text-white mb-6">
+                Motor Mechanics & 
+                <span className="block text-red-500 gradient-text">Engine Repair</span>
+              </h1>
+              <p className="text-xl text-gray-300 mb-8">
+                Expert engine diagnostics, repairs, and maintenance services. Our certified mechanics use quality
                 diagnostic equipment to keep your vehicle running smoothly.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" asChild>
+                <Button size="lg" asChild className="bg-red-600 hover:bg-red-700 text-white">
                   <Link href="/quote">Get Free Quote</Link>
                 </Button>
-                <Button variant="outline" size="lg" asChild>
-                  <a href="tel:+263123456789">Call Now</a>
+                <Button variant="outline" size="lg" asChild className="border-white text-white hover:bg-white hover:text-black">
+                  <a href="tel:+263776556717">Call Now</a>
                 </Button>
               </div>
             </div>
@@ -190,7 +214,7 @@ export default function MotorMechanicsPage() {
               className="bg-transparent border-white text-white hover:bg-white hover:text-primary"
               asChild
             >
-              <a href="https://wa.me/263123456789" className="bg-green-600 hover:bg-green-700 border-green-600">
+              <a href="https://wa.me/263776556717" className="bg-green-600 hover:bg-green-700 border-green-600">
                 WhatsApp Us
               </a>
             </Button>

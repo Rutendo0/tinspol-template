@@ -83,10 +83,18 @@ export default function BookingPage() {
     setFormData((prev) => ({ ...prev, [field]: value }))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    console.log("Booking submitted:", formData)
-    alert("Booking request submitted! We'll confirm your appointment within 2 hours.")
+    const res = await fetch('/api/lead/booking', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    })
+    if (!res.ok) {
+      alert('Failed to submit. Please try again.')
+      return
+    }
+    alert("Booking request submitted! We'll confirm your appointment via WhatsApp/SMS.")
   }
 
   const calculateTotal = () => {

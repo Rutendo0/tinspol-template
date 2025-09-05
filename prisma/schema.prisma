@@ -1,0 +1,92 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String
+  role      Role     @default(ADMIN)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  blogPosts BlogPost[]
+  galleryItems GalleryItem[]
+
+  @@map("users")
+}
+
+model BlogPost {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  excerpt     String
+  content     String
+  image       String?
+  category    String
+  featured    Boolean  @default(false)
+  published   Boolean  @default(true)
+  readTime    String   @default("5 min read")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  author   User   @relation(fields: [authorId], references: [id])
+  authorId String
+
+  @@map("blog_posts")
+}
+
+model GalleryItem {
+  id          String      @id @default(cuid())
+  title       String
+  description String?
+  beforeImage String
+  afterImage  String
+  category    GalleryCategory
+  featured    Boolean     @default(false)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  // Relations
+  author   User   @relation(fields: [authorId], references: [id])
+  authorId String
+
+  @@map("gallery_items")
+}
+
+model LeadSubmission {
+  id          String   @id @default(cuid())
+  type        String   // e.g., "tyres-spares", "quote", "booking"
+  name        String
+  phone       String
+  email       String
+  payload     String   // JSON string with all submitted fields
+  createdAt   DateTime @default(now())
+
+  @@map("lead_submissions")
+}
+
+enum Role {
+  ADMIN
+  EDITOR
+}
+
+enum GalleryCategory {
+  REPAIRS
+  RESPRAYS
+  SUSPENSION
+  WHEEL_ALIGNMENT
+  DETAILING
+  OTHER
+}

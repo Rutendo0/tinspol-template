@@ -4,83 +4,35 @@ import { MobileCTA } from "@/components/mobile-cta"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Calendar, Clock, User, ArrowRight } from "lucide-react"
+import { Calendar, Clock, User, ArrowRight, ArrowLeft } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
-
-const blogPosts = [
-  {
-    id: "winter-car-maintenance-tips",
-    title: "Essential Winter Car Maintenance Tips for Zimbabwe",
-    excerpt:
-      "Prepare your vehicle for the cooler months with these essential maintenance tips from our expert mechanics.",
-    author: "James Tinspol",
-    date: "2024-05-15",
-    readTime: "5 min read",
-    category: "Maintenance Tips",
-    image: "/images/routine-service.jpg",
-    featured: true,
-  },
-  {
-    id: "tyre-safety-guide",
-    title: "Complete Guide to Tyre Safety and Maintenance",
-    excerpt: "Learn how to check your tyres, when to replace them, and how to extend their lifespan with proper care.",
-    author: "Michael Chikwanha",
-    date: "2024-05-10",
-    readTime: "7 min read",
-    category: "Safety",
-    image: "/images/tyre-service.jpg",
-    featured: false,
-  },
-  {
-    id: "engine-warning-signs",
-    title: "5 Warning Signs Your Engine Needs Immediate Attention",
-    excerpt: "Don't ignore these critical warning signs that could save you from expensive engine repairs.",
-    author: "James Tinspol",
-    date: "2024-05-05",
-    readTime: "4 min read",
-    category: "Engine Care",
-    image: "/images/motor-mechanics.jpg",
-    featured: false,
-  },
-  {
-    id: "may-promotion-announcement",
-    title: "May Special: 20% Off All Suspension Services",
-    excerpt: "This month only - get professional suspension repairs and replacements at discounted rates.",
-    author: "Sarah Mukamuri",
-    date: "2024-05-01",
-    readTime: "2 min read",
-    category: "Promotions",
-    image: "/images/suspension-repair.jpg",
-    featured: false,
-  },
-  {
-    id: "panel-beating-process",
-    title: "Understanding the Panel Beating Process: From Damage to Restoration",
-    excerpt: "Take a behind-the-scenes look at how we restore damaged vehicles to their original condition.",
-    author: "Michael Chikwanha",
-    date: "2024-04-25",
-    readTime: "6 min read",
-    category: "Services",
-    image: "/images/panel-beating.jpg",
-    featured: false,
-  },
-  {
-    id: "car-wash-benefits",
-    title: "Why Regular Car Washing is More Than Just Aesthetics",
-    excerpt: "Discover the hidden benefits of regular car washing for your vehicle's longevity and value.",
-    author: "Sarah Mukamuri",
-    date: "2024-04-20",
-    readTime: "3 min read",
-    category: "Car Care",
-    image: "/images/car-wash.jpg",
-    featured: false,
-  },
-]
+import { prisma } from "@/lib/prisma"
 
 const categories = ["All", "Maintenance Tips", "Safety", "Engine Care", "Promotions", "Services", "Car Care"]
 
-export default function BlogPage() {
+async function getBlogPosts() {
+  try {
+    const posts = await prisma.blogPost.findMany({
+      where: { published: true },
+      include: {
+        author: {
+          select: {
+            name: true,
+          }
+        }
+      },
+      orderBy: { createdAt: 'desc' }
+    })
+    return posts
+  } catch (error) {
+    console.error('Error fetching blog posts:', error)
+    return []
+  }
+}
+
+export default async function BlogPage() {
+  const blogPosts = await getBlogPosts()
   const featuredPost = blogPosts.find((post) => post.featured)
   const regularPosts = blogPosts.filter((post) => !post.featured)
 
@@ -89,14 +41,49 @@ export default function BlogPage() {
       <Header />
 
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-r from-primary/10 to-primary/5">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">Tinspol Motors Blog</h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Expert automotive advice, maintenance tips, and the latest news from Zimbabwe's trusted car care
-              specialists.
-            </p>
+      <section className="relative pt-32 pb-20 bg-gradient-to-br from-black via-gray-900 to-black overflow-hidden">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23dc2626' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+          }}></div>
+        </div>
+
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-4xl mx-auto text-center">
+            {/* Back Button */}
+            <div className="mb-8">
+              <Button 
+                variant="outline" 
+                asChild
+                className="border-white/20 text-white hover:bg-white hover:text-black backdrop-blur-sm"
+              >
+                <Link href="/" className="flex items-center space-x-2">
+                  <ArrowLeft className="w-4 h-4" />
+                  <span>Back to Home</span>
+                </Link>
+              </Button>
+            </div>
+
+            {/* Header */}
+            <div className="mb-12">
+              <div className="inline-flex items-center space-x-2 bg-red-600/20 backdrop-blur-sm border border-red-500/30 rounded-full px-6 py-3 mb-8">
+                <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
+                <span className="text-red-400 font-semibold text-sm uppercase tracking-wider">
+                  Expert Advice
+                </span>
+              </div>
+              
+              <h1 className="text-4xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+                Tinspol Motors
+                <span className="block text-red-500 gradient-text">Blog</span>
+              </h1>
+              
+              <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+                Expert automotive advice, maintenance tips, and the latest news from Zimbabwe's trusted 
+                vehicle repair specialists.
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -114,7 +101,7 @@ export default function BlogPage() {
               <div className="grid lg:grid-cols-2">
                 <div className="relative h-64 lg:h-full">
                   <Image
-                    src={featuredPost.image || "/placeholder.svg"}
+                    src={featuredPost.image || "/images/routine-service.jpg"}
                     alt={featuredPost.title}
                     fill
                     className="object-cover"
@@ -125,7 +112,7 @@ export default function BlogPage() {
                     <Badge variant="secondary">{featuredPost.category}</Badge>
                     <div className="flex items-center gap-2 text-sm text-gray-600">
                       <Calendar className="h-4 w-4" />
-                      {new Date(featuredPost.date).toLocaleDateString()}
+                      {new Date(featuredPost.createdAt).toLocaleDateString()}
                     </div>
                     <div className="flex items-center gap-2 text-sm text-gray-600">
                       <Clock className="h-4 w-4" />
@@ -137,10 +124,10 @@ export default function BlogPage() {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <User className="h-4 w-4 text-gray-400" />
-                      <span className="text-sm text-gray-600">{featuredPost.author}</span>
+                      <span className="text-sm text-gray-600">{featuredPost.author.name}</span>
                     </div>
                     <Button asChild>
-                      <Link href={`/blog/${featuredPost.id}`}>
+                      <Link href={`/blog/${featuredPost.slug}`}>
                         Read More <ArrowRight className="h-4 w-4 ml-2" />
                       </Link>
                     </Button>
@@ -174,7 +161,7 @@ export default function BlogPage() {
             {regularPosts.map((post) => (
               <Card key={post.id} className="overflow-hidden hover:shadow-lg transition-shadow">
                 <div className="relative h-48">
-                  <Image src={post.image || "/placeholder.svg"} alt={post.title} fill className="object-cover" />
+                  <Image src={post.image || "/images/routine-service.jpg"} alt={post.title} fill className="object-cover" />
                 </div>
                 <CardHeader>
                   <div className="flex items-center gap-2 mb-2">
@@ -183,7 +170,7 @@ export default function BlogPage() {
                     </Badge>
                     <div className="flex items-center gap-1 text-xs text-gray-500">
                       <Calendar className="h-3 w-3" />
-                      {new Date(post.date).toLocaleDateString()}
+                      {new Date(post.createdAt).toLocaleDateString()}
                     </div>
                   </div>
                   <CardTitle className="text-lg leading-tight">{post.title}</CardTitle>
@@ -193,12 +180,12 @@ export default function BlogPage() {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <User className="h-3 w-3 text-gray-400" />
-                      <span className="text-xs text-gray-600">{post.author}</span>
+                      <span className="text-xs text-gray-600">{post.author.name}</span>
                       <span className="text-xs text-gray-400">•</span>
                       <span className="text-xs text-gray-600">{post.readTime}</span>
                     </div>
                     <Button variant="ghost" size="sm" asChild>
-                      <Link href={`/blog/${post.id}`}>
+                      <Link href={`/blog/${post.slug}`}>
                         Read More <ArrowRight className="h-3 w-3 ml-1" />
                       </Link>
                     </Button>

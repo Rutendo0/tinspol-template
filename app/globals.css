@@ -5,85 +5,82 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #4b5563;
-  --card: #f9fafb;
-  --card-foreground: #4b5563;
+  --foreground: #1a1a1a; /* near black */
+  --card: #ffffff;
+  --card-foreground: #1a1a1a;
   --popover: #ffffff;
-  --popover-foreground: #4b5563;
-  /* Updated primary color to red for Tinspol Motors branding */
-  --primary: #dc2626;
+  --popover-foreground: #1a1a1a;
+  /* Primary brand (red) */
+  --primary: #dc2626; /* red-600 */
   --primary-foreground: #ffffff;
-  /* Updated secondary color to darker red for accent */
-  --secondary: #b91c1c;
+  /* Secondary (black) */
+  --secondary: #1a1a1a; /* near black */
   --secondary-foreground: #ffffff;
-  --muted: #f9fafb;
-  --muted-foreground: #6b7280;
-  /* Updated accent color to match red theme */
-  --accent: #dc2626;
+  --muted: #f8f8f8; /* light gray */
+  --muted-foreground: #6b7280; /* gray-500 */
+  /* Accent (darker red) */
+  --accent: #b91c1c; /* red-700 */
   --accent-foreground: #ffffff;
-  --destructive: #ea580c;
+  --destructive: #ef4444;
   --destructive-foreground: #ffffff;
-  --border: #e5e7eb;
+  --border: #e5e7eb; /* gray-200 */
   --input: #ffffff;
-  /* Updated ring color to red with opacity */
+  /* Brand ring */
   --ring: rgba(220, 38, 38, 0.5);
-  /* Updated chart colors to red-based palette */
+  /* Charts (red/black palette) */
   --chart-1: #dc2626;
-  --chart-2: #b91c1c;
-  --chart-3: #4b5563;
-  --chart-4: #f9fafb;
+  --chart-2: #1a1a1a;
+  --chart-3: #b91c1c;
+  --chart-4: #ef4444;
   --chart-5: #991b1b;
-  --radius: 0.5rem;
+  --radius: 0.75rem;
   --sidebar: #ffffff;
-  --sidebar-foreground: #4b5563;
-  /* Updated sidebar colors to red theme */
+  --sidebar-foreground: #1a1a1a;
+  /* Sidebar accents */
   --sidebar-primary: #dc2626;
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #b91c1c;
-  --sidebar-accent-foreground: #ffffff;
+  --sidebar-accent: #fef2f2; /* red-50 */
+  --sidebar-accent-foreground: #7f1d1d; /* red-900 */
   --sidebar-border: #e5e7eb;
-  /* Updated sidebar ring to red */
   --sidebar-ring: rgba(220, 38, 38, 0.5);
 }
 
 .dark {
-  --background: #1f2937;
-  --foreground: #f9fafb;
-  --card: #374151;
-  --card-foreground: #f9fafb;
-  --popover: #374151;
-  --popover-foreground: #f9fafb;
-  /* Updated dark mode primary to lighter red */
-  --primary: #ef4444;
+  --background: #1a1a1a;
+  --foreground: #ffffff;
+  --card: #2a2a2a;
+  --card-foreground: #ffffff;
+  --popover: #2a2a2a;
+  --popover-foreground: #ffffff;
+  /* Dark brand variants */
+  --primary: #ef4444; /* red-500 */
   --primary-foreground: #ffffff;
-  /* Updated dark mode secondary to red */
-  --secondary: #dc2626;
-  --secondary-foreground: #ffffff;
-  --muted: #4b5563;
-  --muted-foreground: #9ca3af;
-  /* Updated dark mode accent to red */
-  --accent: #ef4444;
+  --secondary: #ffffff; /* white */
+  --secondary-foreground: #1a1a1a;
+  --muted: #2a2a2a; /* dark gray */
+  --muted-foreground: #9ca3af; /* gray-400 */
+  --accent: #dc2626; /* red-600 */
   --accent-foreground: #ffffff;
-  --destructive: #ea580c;
+  --destructive: #ef4444;
   --destructive-foreground: #ffffff;
-  --border: #4b5563;
-  --input: #374151;
-  /* Updated dark mode ring to red */
+  --border: #374151; /* gray-700 */
+  --input: #2a2a2a;
+  /* Brand ring */
   --ring: rgba(239, 68, 68, 0.5);
-  /* Updated dark mode chart colors */
+  /* Charts */
   --chart-1: #ef4444;
-  --chart-2: #dc2626;
-  --chart-3: #f9fafb;
-  --chart-4: #4b5563;
+  --chart-2: #ffffff;
+  --chart-3: #dc2626;
+  --chart-4: #f87171;
   --chart-5: #b91c1c;
-  --sidebar: #1f2937;
-  --sidebar-foreground: #f9fafb;
-  /* Updated dark mode sidebar colors */
+  --sidebar: #1a1a1a;
+  --sidebar-foreground: #ffffff;
+  /* Sidebar dark */
   --sidebar-primary: #ef4444;
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #dc2626;
+  --sidebar-accent: #2a2a2a;
   --sidebar-accent-foreground: #ffffff;
-  --sidebar-border: #4b5563;
+  --sidebar-border: #374151;
   --sidebar-ring: rgba(239, 68, 68, 0.5);
 }
 
@@ -134,5 +131,182 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+  
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+
+  a:focus-visible { outline: 2px solid var(--ring); outline-offset: 3px; border-radius: 0.5rem; }
+  
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #dc2626;
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #b91c1c;
+  }
+}
+
+@layer utilities {
+  /* Glass morphism effect */
+  .glass {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  /* Gradient text */
+  .gradient-text {
+    background: linear-gradient(135deg, #dc2626, #b91c1c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  /* Smooth transitions */
+  .smooth-transition {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  /* Hover lift effect */
+  .hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+  
+  /* Pulse animation for CTAs */
+  .pulse-red {
+    animation: pulse-red 2s infinite;
+  }
+  
+  @keyframes pulse-red {
+    0%, 100% {
+      box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7);
+    }
+    70% {
+      box-shadow: 0 0 0 10px rgba(220, 38, 38, 0);
+    }
+  }
+  
+  /* Fade in animation */
+  .fade-in {
+    animation: fadeIn 0.6s ease-in-out;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Slide in from left */
+  .slide-in-left {
+    animation: slideInLeft 0.6s ease-out;
+  }
+  
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  /* Slide in from right */
+  .slide-in-right {
+    animation: slideInRight 0.6s ease-out;
+  }
+  
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  /* Slow spin animation */
+  .animate-spin-slow {
+    animation: spin 8s linear infinite;
+  }
+  
+  /* Enhanced gradient text */
+  .gradient-text {
+    background: linear-gradient(135deg, #dc2626, #ef4444, #f87171);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientShift 3s ease-in-out infinite;
+  }
+  
+  @keyframes gradientShift {
+    0%, 100% {
+      background: linear-gradient(135deg, #dc2626, #ef4444, #f87171);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    50% {
+      background: linear-gradient(135deg, #ef4444, #f87171, #dc2626);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+  }
+  
+  /* Floating animation */
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+  
+  /* Glow effect */
+  .glow-red {
+    box-shadow: 0 0 20px rgba(220, 38, 38, 0.3);
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .glow-red:hover {
+    box-shadow: 0 0 30px rgba(220, 38, 38, 0.5);
   }
 }

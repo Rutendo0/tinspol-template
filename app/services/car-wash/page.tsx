@@ -29,7 +29,7 @@ export default function CarWashPage() {
                   <Link href="/booking">Book Car Wash</Link>
                 </Button>
                 <Button variant="outline" size="lg" asChild>
-                  <a href="tel:+263123456789">Call Now</a>
+                  <a href="tel:+263776556717">Call Now</a>
                 </Button>
               </div>
             </div>
@@ -169,7 +169,7 @@ export default function CarWashPage() {
               className="bg-transparent border-white text-white hover:bg-white hover:text-primary"
               asChild
             >
-              <a href="https://wa.me/263123456789" className="bg-green-600 hover:bg-green-700 border-green-600">
+              <a href="https://wa.me/263776556717" className="bg-green-600 hover:bg-green-700 border-green-600">
                 WhatsApp Us
               </a>
             </Button>

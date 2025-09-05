@@ -1,125 +1,104 @@
 "use client"
 
-import { useState } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Camera, Eye } from "lucide-react"
+import Image from "next/image"
+import Link from "next/link"
+import { Camera, ArrowRight } from "lucide-react"
 
-const galleryItems = [
-  {
-    id: 1,
-    category: "Panel Beating",
-    title: "Accident Damage Repair",
-    before: "/images/gallery-before-1.jpg",
-    after: "/images/gallery-after-1.jpg",
-    description: "Complete front-end collision repair and paint matching",
-  },
-  {
-    id: 2,
-    category: "Suspension",
-    title: "Suspension Overhaul",
-    before: "/images/gallery-before-2.jpg",
-    after: "/images/gallery-after-2.jpg",
-    description: "Full suspension system replacement and alignment",
-  },
-  {
-    id: 3,
-    category: "Engine",
-    title: "Engine Rebuild",
-    before: "/images/gallery-before-3.jpg",
-    after: "/images/gallery-after-3.jpg",
-    description: "Complete engine overhaul and performance optimization",
-  },
-  {
-    id: 4,
-    category: "Car Wash",
-    title: "Full Detailing Service",
-    before: "/images/gallery-before-1.jpg",
-    after: "/images/gallery-after-1.jpg",
-    description: "Interior and exterior deep cleaning and protection",
-  },
+// Simple image showcase for homepage
+// This replaces the before/after sliders and filters with a clean image grid
+const workImages = [
+  { src: "/images/hero-workshop.jpg", title: "Our Workshop" },
+  { src: "/images/motor-mechanics.jpg", title: "Motor Mechanics" },
+  { src: "/images/panel-beating.jpg", title: "Panel Beating" },
+  { src: "/images/suspension-repair.jpg", title: "Suspension Repairs" },
+  { src: "/images/tyre-service.jpg", title: "Tyre Services" },
+  { src: "/images/car-wash.jpg", title: "Car Wash & Detailing" },
 ]
 
-const categories = ["All", "Panel Beating", "Suspension", "Engine", "Car Wash"]
-
 export function Gallery() {
-  const [activeCategory, setActiveCategory] = useState("All")
-  const [showBefore, setShowBefore] = useState<{ [key: number]: boolean }>({})
-
-  const filteredItems =
-    activeCategory === "All" ? galleryItems : galleryItems.filter((item) => item.category === activeCategory)
-
-  const toggleImage = (id: number) => {
-    setShowBefore((prev) => ({
-      ...prev,
-      [id]: !prev[id],
-    }))
-  }
-
   return (
-    <section id="gallery" className="py-20 bg-muted/50">
+    <section id="gallery" className="py-24 bg-gradient-to-b from-gray-50 to-white">
       <div className="container mx-auto px-4">
-        <div className="text-center space-y-4 mb-16">
-          <div className="flex items-center justify-center space-x-2 mb-4">
-            <Camera className="w-6 h-6 text-primary" />
-            <span className="text-primary font-semibold">Our Work Gallery</span>
+        {/* Section Header */}
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center space-x-2 mb-6">
+            <div className="w-12 h-0.5 bg-red-600"></div>
+            <span className="text-red-600 font-semibold uppercase tracking-wider text-sm">Our Work</span>
+            <div className="w-12 h-0.5 bg-red-600"></div>
           </div>
-          <h2 className="text-3xl lg:text-5xl font-bold text-foreground">See Our Quality Work</h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            See the quality of our workmanship through before and after photos of recent projects. Click on any image to
-            toggle between before and after views.
+          <h2 className="text-4xl lg:text-5xl font-bold text-black mb-4">
+            A Glimpse Into
+            <span className="block text-red-600">Tinspol Motors</span>
+          </h2>
+          <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            Discover our workshop, our team in action, and vehicles we proudly service. Real images from our day-to-day work.
           </p>
         </div>
 
-        <div className="flex flex-wrap justify-center gap-2 mb-12">
-          {categories.map((category) => (
-            <Button
-              key={category}
-              variant={activeCategory === category ? "default" : "outline"}
-              onClick={() => setActiveCategory(category)}
-              className="transition-colors"
-            >
-              {category}
-            </Button>
-          ))}
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-8">
-          {filteredItems.map((item) => (
-            <Card key={item.id} className="overflow-hidden cursor-pointer" onClick={() => toggleImage(item.id)}>
-              <CardContent className="p-0">
-                <div className="relative aspect-[4/3] overflow-hidden">
-                  <img
-                    src={showBefore[item.id] ? item.before : item.after}
-                    alt={`${item.title} - ${showBefore[item.id] ? "Before" : "After"}`}
-                    className="w-full h-full object-cover transition-transform hover:scale-105"
-                  />
-                  <div className="absolute top-4 left-4">
-                    <span
-                      className={`px-3 py-1 rounded-full text-sm font-bold text-white ${
-                        showBefore[item.id] ? "bg-red-500" : "bg-green-500"
-                      }`}
-                    >
-                      {showBefore[item.id] ? "BEFORE" : "AFTER"}
-                    </span>
-                  </div>
+        {/* Image Grid */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+          {workImages.map((item, idx) => (
+            <Card key={idx} className="overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 bg-white">
+              <div className="relative aspect-[4/3]">
+                <Image
+                  src={item.src}
+                  alt={item.title}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  priority={idx < 3}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/0 to-transparent"></div>
+                <div className="absolute bottom-3 left-3">
+                  <span className="inline-block bg-white/90 text-black text-xs font-semibold px-2 py-1 rounded">
+                    {item.title}
+                  </span>
                 </div>
-                <div className="p-6">
-                  <div className="text-sm text-primary font-semibold mb-2">{item.category}</div>
-                  <h3 className="text-xl font-bold mb-2">{item.title}</h3>
-                  <p className="text-muted-foreground">{item.description}</p>
+              </div>
+              <CardContent className="p-4">
+                <div className="flex items-center justify-between">
+                  <span className="text-sm text-gray-600">Captured at Tinspol Motors</span>
+                  <Link href="/gallery" className="text-sm font-semibold text-red-600 hover:text-red-700 inline-flex items-center">
+                    View Details <ArrowRight className="w-4 h-4 ml-1" />
+                  </Link>
                 </div>
               </CardContent>
             </Card>
           ))}
         </div>
 
-        <div className="text-center mt-12">
-          <div className="bg-background rounded-lg p-8 max-w-md mx-auto">
-            <Eye className="w-8 h-8 text-primary mx-auto mb-4" />
-            <h3 className="text-xl font-bold mb-4">Want to See More?</h3>
-            <p className="text-muted-foreground mb-6">Browse our complete portfolio</p>
-            <Button variant="outline">View Full Gallery</Button>
+        {/* Bottom CTA */}
+        <div className="text-center">
+          <div className="bg-gradient-to-r from-black to-gray-900 rounded-2xl p-8 text-white shadow-2xl">
+            <h3 className="text-2xl font-bold mb-4">Ready to Work With Us?</h3>
+            <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
+              Join hundreds of satisfied customers who trust Tinspol Motors for quality service and workmanship.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button 
+                size="lg" 
+                asChild
+                className="bg-red-600 hover:bg-red-700 text-white font-semibold shadow-lg hover:shadow-red-600/25 transition-all duration-300 hover:scale-105"
+              >
+                <Link href="/quote" className="flex items-center space-x-2">
+                  <Camera className="w-5 h-5" />
+                  <span>Start Your Project</span>
+                </Link>
+              </Button>
+              <Button 
+                size="lg" 
+                variant="outline"
+                asChild
+                className="border-white text-white hover:bg-white hover:text-black font-semibold transition-all duration-300 hover:scale-105"
+              >
+                <Link href="/gallery" className="flex items-center space-x-2">
+                  <ArrowRight className="w-5 h-5" />
+                  <span>View More Work</span>
+                </Link>
+              </Button>
+            </div>
           </div>
         </div>
       </div>

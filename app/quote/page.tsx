@@ -15,7 +15,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Checkbox } from "@/components/ui/checkbox"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Badge } from "@/components/ui/badge"
-import { CheckCircle, Upload, Car, Wrench, Settings, Droplets, Hammer, Package, Clock } from "lucide-react"
+import { CheckCircle, Upload, Car, Wrench, Settings, Droplets, Hammer, Package, Clock, ArrowLeft } from "lucide-react"
+import Link from "next/link"
 
 const services = [
   { id: "motor-mechanics", name: "Motor Mechanics", icon: Wrench },
@@ -66,17 +67,29 @@ export default function QuotePage() {
     setFormData((prev) => ({ ...prev, [field]: value }))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle form submission
-    console.log("Quote request submitted:", { service: selectedService, ...formData })
+    const res = await fetch('/api/lead/quote', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ service: selectedService, ...formData }),
+    })
+    if (!res.ok) {
+      alert('Failed to submit. Please try again.')
+      return
+    }
     alert("Quote request submitted! We'll contact you within 24 hours.")
   }
 
   const renderServiceSelection = () => (
     <div className="space-y-6">
       <div className="text-center">
-        <h2 className="text-2xl font-bold mb-2">Select Service</h2>
+        <div className="inline-flex items-center space-x-2 mb-4">
+          <div className="w-12 h-0.5 bg-red-600"></div>
+          <span className="text-red-600 font-semibold uppercase tracking-wider text-sm">Select Service</span>
+          <div className="w-12 h-0.5 bg-red-600"></div>
+        </div>
+        <h2 className="text-2xl font-bold mb-2 text-black">Select Service</h2>
         <p className="text-gray-600">Choose the service you need a quote for</p>
       </div>
 
@@ -84,14 +97,14 @@ export default function QuotePage() {
         {services.map((service) => (
           <Card
             key={service.id}
-            className={`cursor-pointer transition-all hover:shadow-md ${
-              selectedService === service.id ? "ring-2 ring-primary bg-primary/5" : ""
+            className={`cursor-pointer transition-all hover:shadow-xl hover:-translate-y-1 border-0 shadow-md ${
+              selectedService === service.id ? "ring-2 ring-red-600 bg-red-50" : ""
             }`}
             onClick={() => setSelectedService(service.id)}
           >
             <CardContent className="p-6 text-center">
-              <service.icon className="h-12 w-12 text-primary mx-auto mb-3" />
-              <h3 className="font-semibold">{service.name}</h3>
+              <service.icon className={`h-12 w-12 mx-auto mb-3 ${selectedService === service.id ? "text-red-600" : "text-red-600"}`} />
+              <h3 className="font-semibold text-black">{service.name}</h3>
             </CardContent>
           </Card>
         ))}
@@ -574,12 +587,60 @@ export default function QuotePage() {
     <div className="min-h-screen">
       <Header />
 
-      <section className="py-20 bg-gradient-to-r from-primary/10 to-primary/5">
+      {/* Hero Section */}
+      <section className="relative pt-32 pb-20 bg-gradient-to-br from-black via-gray-900 to-black overflow-hidden">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23dc2626' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+          }}></div>
+        </div>
+
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-4xl mx-auto text-center">
+            {/* Back Button */}
+            <div className="mb-8">
+              <Button 
+                variant="outline" 
+                asChild
+                className="border-white/20 text-white hover:bg-white hover:text-black backdrop-blur-sm"
+              >
+                <Link href="/" className="flex items-center space-x-2">
+                  <ArrowLeft className="w-4 h-4" />
+                  <span>Back to Home</span>
+                </Link>
+              </Button>
+            </div>
+
+            {/* Header */}
+            <div className="mb-12">
+              <div className="inline-flex items-center space-x-2 bg-red-600/20 backdrop-blur-sm border border-red-500/30 rounded-full px-6 py-3 mb-8">
+                <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
+                <span className="text-red-400 font-semibold text-sm uppercase tracking-wider">
+                  Free Quote
+                </span>
+              </div>
+              
+              <h1 className="text-4xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+                Get Your
+                <span className="block text-red-500 gradient-text">Free Quote</span>
+              </h1>
+              
+              <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+                Tell us about your vehicle and service needs. We'll provide you with a detailed quote 
+                from Zimbabwe's trusted automotive specialists.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">Get Your Free Quote</h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Tell us about your vehicle and service needs. We'll provide you with a detailed quote within 24 hours.
+            <h2 className="text-3xl font-bold text-black mb-4">Quick & Easy Process</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Follow our simple 5-step process to get your personalized quote
             </p>
           </div>
 
