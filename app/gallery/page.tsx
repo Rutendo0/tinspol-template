@@ -9,6 +9,10 @@ import Image from "next/image"
 import Link from "next/link"
 import { prisma } from "@/lib/prisma"
 
+// Ensure this page runs on the Node.js runtime and is rendered dynamically
+export const runtime = 'nodejs'
+export const dynamic = 'force-dynamic'
+
 const categoryLabels = {
   REPAIRS: 'Repairs',
   RESPRAYS: 'Resprays', 
