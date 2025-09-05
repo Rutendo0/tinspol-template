@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
-import { Menu, X, Phone, MessageCircle, ChevronDown, Calendar, FileText, Settings } from "lucide-react"
+import { Menu, X, Phone, ChevronDown, FileText, Settings } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
@@ -40,16 +40,16 @@ export function Header() {
           <Link href="/" className="flex items-center space-x-3 group">
             <div className="relative">
               <img
-                src="/placeholder-logo.png"
+                src="/logo.jpg"
                 alt="Tinspol Motors Logo"
                 className="w-12 h-12 rounded-xl shadow-lg group-hover:shadow-red-600/25 transition-all duration-300 group-hover:scale-105 object-cover"
               />
             </div>
             <div>
-              <h1 className="font-bold text-2xl text-black group-hover:text-red-600 transition-colors duration-300">
+              <h1 className="font-bold text-1xl text-black group-hover:text-red-600 transition-colors duration-300">
                 Tinspol Motors
               </h1>
-              <p className="text-sm text-gray-600 font-medium">Quality Vehicle Repairs</p>
+             
             </div>
           </Link>
 
