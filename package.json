@@ -3,8 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "preinstall": "npx only-allow pnpm",
-    "postinstall": "prisma generate",
     "build": "prisma generate && next build",
     "dev": "next dev",
     "lint": "next lint",
@@ -14,6 +12,9 @@
     "db:migrate": "prisma migrate dev",
     "db:init": "tsx scripts/init-db.ts",
     "db:setup": "pnpm db:generate && pnpm db:push && pnpm db:init"
+  },
+  "engines": {
+    "node": ">=20"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
