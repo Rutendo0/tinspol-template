@@ -46,7 +46,7 @@ export function WhyChooseUs() {
   return (
     <>
       {/* Main Why Choose Us Section */}
-      <section className="py-24 bg-gradient-to-b from-white to-gray-50">
+      <section className="py-24 bg-gradient-to-b from-gray-50 to-gray-100">
         <div className="container mx-auto px-4">
           <div className="text-center space-y-4 mb-20">
             <div className="inline-flex items-center space-x-2 mb-6">
@@ -71,7 +71,6 @@ export function WhyChooseUs() {
                       <feature.icon className="w-8 h-8 text-white" />
                     </div>
                     <div className="text-right">
-                      <div className="text-2xl font-bold text-red-600">{feature.stat}</div>
                       <div className="text-xs text-gray-500 uppercase tracking-wider">{feature.statLabel}</div>
                     </div>
                   </div>

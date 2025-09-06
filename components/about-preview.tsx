@@ -54,9 +54,9 @@ export function AboutPreview() {
             </div>
 
             <Button 
-              size="lg" 
+              size="sm" 
               asChild
-              className="bg-red-600 hover:bg-red-700 text-white px-5 py-4 rounded-xl shadow-lg hover:shadow-red-600/25 transition-all duration-300 hover:scale-105"
+              className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg shadow-md hover:shadow-red-600/25 transition-all duration-300"
             >
               <Link href="/about" className="flex items-center space-x-2">
                 <span>Learn More About Us</span>
@@ -72,7 +72,7 @@ export function AboutPreview() {
               <CardContent className="p-0">
                 <div className="aspect-[4/3] relative">
                   <img
-                    src="public/image.jpg"
+                    src="/image.jpg"
                     alt="Tinspol Motors"
                     className="w-full h-full object-cover"
                   />
