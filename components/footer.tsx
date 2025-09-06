@@ -11,8 +11,8 @@ export function Footer() {
         }}></div>
       </div>
 
-      <div className="container mx-auto px-4 py-16 relative z-10">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+      <div className="container mx-auto px-4 py-8 relative z-10">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           {/* Company Info */}
           <div className="space-y-6">
             <Link href="/" className="flex items-center space-x-3 group">
@@ -113,7 +113,7 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-gray-800 pt-8">
+        <div className="border-t border-gray-800 pt-4">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="text-gray-400 text-sm">
               © 2024 Tinspol Motors. All rights reserved.

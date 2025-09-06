@@ -12,7 +12,7 @@ const services = [
     description: "Complete engine diagnostics, repairs, and maintenance by certified technicians.",
     features: ["Engine Diagnostics", "Oil Changes", "Brake Repairs", "Transmission Service"],
     turnaround: "1-3 days",
-    image: "/images/motor-mechanics.jpg",
+    image: "/image1.jpg",
     href: "/services/motor-mechanics",
     color: "from-red-500 to-red-600"
   },
@@ -22,7 +22,7 @@ const services = [
     description: "Professional suspension system repairs and upgrades for optimal ride comfort.",
     features: ["Shock Absorbers", "Struts Replacement", "Alignment", "Springs"],
     turnaround: "1-2 days",
-    image: "/images/suspension-repair.jpg",
+    image: "/image2.jpg",
     href: "/services/suspension",
     color: "from-black to-gray-800"
   },
@@ -32,7 +32,7 @@ const services = [
     description: "Expert tyre services including repairs, balancing, and new tyre installations.",
     features: ["Puncture Repairs", "Wheel Balancing", "Tyre Fitting", "Alignment"],
     turnaround: "Same day",
-    image: "/images/tyre-service.jpg",
+    image: "/image3.jpg",
     href: "/services/tyres",
     color: "from-red-600 to-red-700"
   },
@@ -42,7 +42,7 @@ const services = [
     description: "Professional car cleaning services from basic wash to full detailing.",
     features: ["Exterior Wash", "Interior Cleaning", "Waxing", "Engine Cleaning"],
     turnaround: "2-4 hours",
-    image: "/images/car-wash.jpg",
+    image: "/image4.jpg",
     href: "/services/car-wash",
     color: "from-black to-gray-900"
   },
@@ -52,7 +52,7 @@ const services = [
     description: "Accident damage repairs and bodywork restoration to factory standards.",
     features: ["Dent Removal", "Paint Matching", "Rust Treatment", "Body Alignment"],
     turnaround: "3-7 days",
-    image: "/images/panel-beating.jpg",
+    image: "/placeholder.jpg",
     href: "/services/panel-beating",
     color: "from-red-500 to-red-600"
   },
@@ -62,7 +62,7 @@ const services = [
     description: "Genuine and aftermarket parts supply for all vehicle makes and models.",
     features: ["OEM Parts", "Aftermarket Options", "Fast Sourcing", "Warranty"],
     turnaround: "1-2 days",
-    image: "/images/spares-parts.jpg",
+    image: "/placeholder-user.jpg",
     href: "/services/spares",
     color: "from-black to-gray-800"
   },

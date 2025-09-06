@@ -9,12 +9,12 @@ import { Camera, ArrowRight } from "lucide-react"
 // Simple image showcase for homepage
 // This replaces the before/after sliders and filters with a clean image grid
 const workImages = [
-  { src: "/images/hero-workshop.jpg", title: "Our Workshop" },
-  { src: "/images/motor-mechanics.jpg", title: "Motor Mechanics" },
-  { src: "/images/panel-beating.jpg", title: "Panel Beating" },
-  { src: "/images/suspension-repair.jpg", title: "Suspension Repairs" },
-  { src: "/images/tyre-service.jpg", title: "Tyre Services" },
-  { src: "/images/car-wash.jpg", title: "Car Wash & Detailing" },
+  { src: "/image.jpg", title: "Our Workshop" },
+  { src: "/image1.jpg", title: "Motor Mechanics" },
+  { src: "/image2.jpg", title: "Panel Beating" },
+  { src: "/image3.jpg", title: "Suspension Repairs" },
+  { src: "/image4.jpg", title: "Tyre Services" },
+  { src: "/placeholder.jpg", title: "Car Wash & Detailing" },
 ]
 
 export function Gallery() {

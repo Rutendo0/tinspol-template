@@ -45,7 +45,7 @@ export default function AboutPage() {
             </div>
             <div className="relative h-96 rounded-lg overflow-hidden">
               <Image
-                src="/images/hero-workshop.jpg"
+                src="/image.jpg"
                 alt="Tinspol Motors professional workshop"
                 fill
                 className="object-cover"
@@ -111,7 +111,7 @@ export default function AboutPage() {
               </div>
               <div className="relative h-80 rounded-lg overflow-hidden">
                 <Image
-                  src="/images/motor-mechanics.jpg"
+                  src="/image1.jpg"
                   alt="Tinspol Motors team at work"
                   fill
                   className="object-cover"

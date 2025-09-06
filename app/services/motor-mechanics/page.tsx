@@ -59,7 +59,7 @@ export default function MotorMechanicsPage() {
             </div>
             <div className="relative h-96 rounded-lg overflow-hidden">
               <Image
-                src="/images/motor-mechanics.jpg"
+                src="/image1.jpg"
                 alt="Professional motor mechanics at work"
                 fill
                 className="object-cover"

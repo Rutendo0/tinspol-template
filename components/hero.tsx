@@ -28,30 +28,30 @@ export function Hero() {
             
 
             {/* Main Heading */}
-            <div className="space-y-4">
-              <div className="text-4xl lg:text-6xl xl:text-7xl font-bold text-red-500 leading-tight">
+            <div className="space-y-4 animate-fade-in-up">
+              <div className="text-4xl lg:text-6xl xl:text-7xl font-bold text-red-500 leading-tight hover:scale-105 transition-all duration-500">
                 Quality Vehicle Repairs
               </div>
             </div>
 
             {/* Subheading */}
-            <p className="text-lg lg:text-xl text-gray-300 max-w-2xl leading-relaxed">
+            <p className="text-lg lg:text-xl text-gray-300 max-w-2xl leading-relaxed animate-fade-in-up animation-delay-300">
              Tinspol Motors is wholly owned Zimbabwean Company that specializes in providing
               quality vehicle repairs.
             </p>
 
             {/* Trust Indicators */}
-            <div className="flex flex-wrap justify-center lg:justify-start gap-6 py-8 mt-8">
-              <div className="flex items-center space-x-2 text-white">
-                <Shield className="w-5 h-5 text-red-500" />
+            <div className="flex flex-wrap justify-center lg:justify-start gap-6 py-8 mt-8 animate-fade-in-up animation-delay-600">
+              <div className="flex items-center space-x-2 text-white hover:text-red-400 transition-colors duration-300">
+                <Shield className="w-5 h-5 text-red-500 hover:scale-110 transition-transform duration-300" />
                 <span className="text-sm font-medium">Quality Guaranteed</span>
               </div>
-              <div className="flex items-center space-x-2 text-white">
-                <Award className="w-5 h-5 text-red-500" />
+              <div className="flex items-center space-x-2 text-white hover:text-red-400 transition-colors duration-300">
+                <Award className="w-5 h-5 text-red-500 hover:scale-110 transition-transform duration-300" />
                 <span className="text-sm font-medium">Professional Service</span>
               </div>
-              <div className="flex items-center space-x-2 text-white">
-                <Star className="w-5 h-5 text-red-500" />
+              <div className="flex items-center space-x-2 text-white hover:text-red-400 transition-colors duration-300">
+                <Star className="w-5 h-5 text-red-500 hover:scale-110 transition-transform duration-300" />
                 <span className="text-sm font-medium">Trusted Expertise</span>
               </div>
             </div>
