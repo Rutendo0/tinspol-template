@@ -96,8 +96,103 @@ export default function MotorMechanicsPage() {
         </div>
       </section>
 
-      {/* Process & Pricing */}
+      {/* Routine Service Packages */}
       <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold mb-4">Routine Service Packages</h2>
+            <p className="text-lg text-gray-600">Professional maintenance schedules to keep your vehicle running perfectly</p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8 mb-16">
+            {[
+              {
+                name: "A SERVICE",
+                interval: "Every 5,000 km",
+                duration: "2 Hours",
+                color: "from-blue-500 to-blue-600",
+                items: [
+                  "Drive belts - Inspect and adjust as required",
+                  "Engine oil - Replace",
+                  "Engine oil filter - Replace", 
+                  "Cooling system - Check level and top up if required",
+                  "Idle speed - Check and adjust as required",
+                  "Air filter - Clean and inspect",
+                  "Fuel filter, fuel lines and hoses - Check for leaks",
+                  "Battery electrolyte - Check level and top up if required",
+                  "Brake fluid - Check level and top up if required",
+                  "Clutch fluid - Check and top if required",
+                  "Power steering fluid - Check level and top up if required"
+                ]
+              },
+              {
+                name: "B SERVICE", 
+                interval: "Every 10,000 km",
+                duration: "3 Hours",
+                color: "from-green-500 to-green-600",
+                items: [
+                  "All A Service items included",
+                  "Fuel filter/Spark plugs - Replace",
+                  "Heater plugs - Inspect and adjust as required",
+                  "Brake and clutch pedals - Check for free play and adjust",
+                  "Parking brake - Inspect and adjust as required",
+                  "Disc brakes - Inspect",
+                  "Drum brakes - Inspect", 
+                  "Power steering lines and fluid - Check condition",
+                  "Gearbox oil level - Check level and top up if required"
+                ]
+              },
+              {
+                name: "C SERVICE",
+                interval: "Every 20,000 km", 
+                duration: "4 Hours",
+                color: "from-red-500 to-red-600",
+                items: [
+                  "All B Service items included",
+                  "Air filter - Replace",
+                  "Fuel filter/Spark plugs - Replace",
+                  "Ignition timing - Check and adjust as required",
+                  "Idle mixture (leaded fuel) - Check and adjust",
+                  "Evaporated system (if fitted) - Inspect",
+                  "Brake lines, hoses and connectors - Inspect for leaks",
+                  "Power brake unit and hoses - Inspect condition",
+                  "Steering operations and gear housing - Inspect", 
+                  "Steering linkages, racking guides and tie rod ends - Inspect",
+                  "Bolts and nuts on chassis and body - Tighten"
+                ]
+              }
+            ].map((service, index) => (
+              <Card key={index} className="h-full">
+                <CardHeader className={`bg-gradient-to-r ${service.color} text-white rounded-t-lg`}>
+                  <CardTitle className="text-2xl font-bold">{service.name}</CardTitle>
+                  <CardDescription className="text-white/90 text-lg">{service.interval}</CardDescription>
+                  <Badge className="bg-white/20 text-white w-fit">Labour: {service.duration}</Badge>
+                </CardHeader>
+                <CardContent className="p-6">
+                  <ul className="space-y-2 text-sm">
+                    {service.items.slice(0, 6).map((item, idx) => (
+                      <li key={idx} className="flex items-start gap-2">
+                        <CheckCircle className="h-4 w-4 text-green-600 flex-shrink-0 mt-0.5" />
+                        <span className="text-gray-700">{item}</span>
+                      </li>
+                    ))}
+                    {service.items.length > 6 && (
+                      <li className="text-gray-500 font-medium">+ {service.items.length - 6} more items</li>
+                    )}
+                  </ul>
+                  <div className="mt-6">
+                    <Button className="w-full" asChild>
+                      <Link href="/quote">Book {service.name}</Link>
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Process & Pricing */}
+      <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12">
             <div>

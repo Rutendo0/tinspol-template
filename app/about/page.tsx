@@ -32,7 +32,7 @@ export default function AboutPage() {
                 <span className="block text-red-500 gradient-text">Vehicle Repair Specialists</span>
               </h1>
               <p className="text-xl text-gray-300 mb-8">
-                Tinspol Motors (Tinspol Enterprises) is a wholly owned Zimbabwean company providing quality vehicle repairs and maintenance services. We combine total quality control, a safe workplace, and innovation to deliver exceptional results and improved customer experience.
+                Tinspol Motors is a full-service automotive repairing company offering a broad range of services that the Zimbabwean market relies on daily. We are your trusted one-stop shop for repairs, tyres, spares, bodywork, and routine servicing, with clear communication and professional service standards.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button size="lg" asChild className="bg-red-600 hover:bg-red-700 text-white">
