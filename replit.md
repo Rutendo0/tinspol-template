@@ -36,6 +36,9 @@ All required environment variables are configured with placeholder values:
 - Set up development workflow with all required environment variables
 - Initialized database with sample content
 - Configured deployment for autoscale target
+- Updated suspension service page with comprehensive components list:
+  - Added detailed suspension components section (12 components)
+  - Improved service page layout and information structure
 
 ## Admin Access
 Visit `/admin/login` to access the admin panel with the configured credentials.

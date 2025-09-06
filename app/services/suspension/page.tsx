@@ -72,8 +72,53 @@ export default function SuspensionPage() {
         </div>
       </section>
 
-      {/* Warning Signs */}
+      {/* Suspension Components */}
       <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-12">Suspension Components We Service</h2>
+          <p className="text-lg text-gray-600 text-center mb-12">
+            We specialize in servicing and replacing all suspension system components to ensure optimal vehicle performance and safety.
+          </p>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {[
+              "Shock Absorbers",
+              "Coil Springs (depending on mode)",
+              "Control Arms",
+              "Stabilizer Links",
+              "Stabilizer Bar Bushes",
+              "Steering Knuckle",
+              "Wheel Hub & Bearings",
+              "Tie Rod Ends",
+              "Leaf Springs",
+              "D Bushes",
+              "Shackles Bushes",
+              "Bump Stops"
+            ].map((component, index) => (
+              <Card key={index} className="text-center p-4 hover:shadow-md transition-shadow">
+                <Settings className="h-8 w-8 text-primary mx-auto mb-3" />
+                <h3 className="font-semibold text-gray-900">{component}</h3>
+              </Card>
+            ))}
+          </div>
+          <div className="mt-12 text-center">
+            <Card className="max-w-3xl mx-auto">
+              <CardHeader>
+                <CardTitle className="text-xl">Complete Suspension System Care</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-600">
+                  Our experienced technicians can diagnose, repair, or replace any of these suspension components 
+                  using quality parts and professional installation. Whether you need a single component replaced 
+                  or a complete suspension overhaul, we have the expertise to keep your vehicle riding smoothly and safely.
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Warning Signs */}
+      <section className="py-16">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12">Signs You Need Suspension Repair</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
