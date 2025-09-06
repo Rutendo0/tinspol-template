@@ -96,9 +96,7 @@ export default function AboutPage() {
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="space-y-6">
                 <p className="text-gray-600 leading-relaxed">
-                  Tinspol Motors is a wholly owned Zimbabwean company with a simple mission: to provide honest, reliable, and
-                  professional automotive repair services to the people of Zimbabwe. We specialize in quality vehicle repairs
-                  using genuine parts and professional service standards.
+                  Tinspol Motors is a full-service automotive repairing company offering a broad range of services that the Zimbabwean market relies on daily. We specialize in motor mechanics, suspension repairs and fitments, tyre repairs and fitments, car wash, panel beating, spares and body parts supplies, tyres supply, and routine services.
                 </p>
                 <p className="text-gray-600 leading-relaxed">
                   Our experienced team recognizes the need for a service center that combines technical expertise with 
