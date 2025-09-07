@@ -1,22 +1,11 @@
 'use client'
 
-import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { 
-  FileText, 
-  Image, 
-  Users, 
-  BarChart3, 
-  Plus,
-  Eye,
-  Edit,
-  Trash2,
-  Calendar
-} from 'lucide-react'
+import { FileText, Image, BarChart3, Plus, Edit } from 'lucide-react'
 import Link from 'next/link'
 import { AdminLayout } from '@/components/admin/admin-layout'
 
@@ -29,36 +18,51 @@ interface DashboardStats {
   recentGalleryItems: any[]
 }
 
+interface SessionResponse {
+  user: { id: string; email: string; role: string }
+}
+
 export default function AdminDashboard() {
-  const { data: session, status } = useSession()
   const router = useRouter()
+  const [session, setSession] = useState<SessionResponse | null>(null)
   const [stats, setStats] = useState<DashboardStats | null>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    if (status === 'loading') return
-    if (!session) {
-      router.push('/admin/login')
-      return
+    const getSession = async () => {
+      try {
+        const res = await fetch('/api/session', { credentials: 'include' })
+        if (!res.ok) {
+          router.push('/admin/login')
+          return
+        }
+        const data: SessionResponse = await res.json()
+        setSession(data)
+        await fetchDashboardStats()
+      } catch (e) {
+        router.push('/admin/login')
+        return
+      } finally {
+        setLoading(false)
+      }
     }
-    fetchDashboardStats()
-  }, [session, status, router])
+    getSession()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const fetchDashboardStats = async () => {
     try {
-      const response = await fetch('/api/admin/dashboard')
+      const response = await fetch('/api/admin/dashboard', { credentials: 'include' })
       if (response.ok) {
         const data = await response.json()
         setStats(data)
       }
     } catch (error) {
       console.error('Error fetching dashboard stats:', error)
-    } finally {
-      setLoading(false)
     }
   }
 
-  if (status === 'loading' || loading) {
+  if (loading) {
     return (
       <AdminLayout>
         <div className="flex items-center justify-center h-64">
@@ -68,9 +72,7 @@ export default function AdminDashboard() {
     )
   }
 
-  if (!session) {
-    return null
-  }
+  if (!session) return null
 
   return (
     <AdminLayout>
@@ -78,7 +80,7 @@ export default function AdminDashboard() {
         {/* Header */}
         <div>
           <h1 className="text-3xl font-bold text-white mb-2">Dashboard</h1>
-          <p className="text-gray-400">Welcome back, {session.user?.name}</p>
+          <p className="text-gray-400">Welcome back, {session.user.email}</p>
         </div>
 
         {/* Stats Cards */}
@@ -164,8 +166,8 @@ export default function AdminDashboard() {
                         <div className="flex-1 min-w-0">
                           <h4 className="font-medium text-white truncate">{post.title}</h4>
                           <div className="flex items-center space-x-2 mt-1">
-                            <Badge variant={post.published ? "default" : "secondary"} className="text-xs">
-                              {post.published ? "Published" : "Draft"}
+                            <Badge variant={post.published ? 'default' : 'secondary'} className="text-xs">
+                              {post.published ? 'Published' : 'Draft'}
                             </Badge>
                             <span className="text-xs text-gray-400">
                               {new Date(post.createdAt).toLocaleDateString('en-GB', { year: 'numeric', month: '2-digit', day: '2-digit', timeZone: 'UTC' })}

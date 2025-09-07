@@ -1,6 +1,5 @@
 'use client'
 
-import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
@@ -21,10 +20,14 @@ import {
 } from 'lucide-react'
 import { AdminLayout } from '@/components/admin/admin-layout'
 
+interface SessionResponse {
+  user: { id: string; email: string; role: string }
+}
+
 export default function AdminSettingsPage() {
-  const { data: session, status } = useSession()
   const router = useRouter()
-  const [loading, setLoading] = useState(false)
+  const [session, setSession] = useState<SessionResponse | null>(null)
+  const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
   const [showPassword, setShowPassword] = useState(false)
@@ -46,24 +49,35 @@ export default function AdminSettingsPage() {
   })
 
   useEffect(() => {
-    if (status === 'loading') return
-    if (!session) {
-      router.push('/admin/login')
-      return
+    const getSessionAndInit = async () => {
+      try {
+        const res = await fetch('/api/session', { credentials: 'include' })
+        if (!res.ok) {
+          router.push('/admin/login')
+          return
+        }
+        const data: SessionResponse = await res.json()
+        setSession(data)
+        setProfileData(prev => ({
+          ...prev,
+          name: '', // no name in custom session
+          email: data.user.email,
+        }))
+        await fetchStats()
+      } catch (e) {
+        router.push('/admin/login')
+        return
+      } finally {
+        setLoading(false)
+      }
     }
-    
-    setProfileData(prev => ({
-      ...prev,
-      name: session.user?.name || '',
-      email: session.user?.email || ''
-    }))
-    
-    fetchStats()
-  }, [session, status, router])
+    getSessionAndInit()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const fetchStats = async () => {
     try {
-      const response = await fetch('/api/admin/stats')
+      const response = await fetch('/api/admin/stats', { credentials: 'include' })
       if (response.ok) {
         const data = await response.json()
         setStats(data)
@@ -75,22 +89,19 @@ export default function AdminSettingsPage() {
 
   const handleProfileUpdate = async (e: React.FormEvent) => {
     e.preventDefault()
-    setLoading(true)
     setError('')
     setSuccess('')
 
     if (profileData.newPassword && profileData.newPassword !== profileData.confirmPassword) {
       setError('New passwords do not match')
-      setLoading(false)
       return
     }
 
     try {
       const response = await fetch('/api/admin/profile', {
         method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
         body: JSON.stringify({
           name: profileData.name,
           currentPassword: profileData.currentPassword,
@@ -112,12 +123,10 @@ export default function AdminSettingsPage() {
       }
     } catch (error) {
       setError('An error occurred. Please try again.')
-    } finally {
-      setLoading(false)
     }
   }
 
-  if (status === 'loading') {
+  if (loading) {
     return (
       <AdminLayout>
         <div className="flex items-center justify-center h-64">
@@ -267,11 +276,10 @@ export default function AdminSettingsPage() {
                   <div className="flex justify-end">
                     <Button
                       type="submit"
-                      disabled={loading}
                       className="bg-red-600 hover:bg-red-700"
                     >
                       <Save className="h-4 w-4 mr-2" />
-                      {loading ? 'Saving...' : 'Save Changes'}
+                      Save Changes
                     </Button>
                   </div>
                 </form>
@@ -330,17 +338,13 @@ export default function AdminSettingsPage() {
                     <span className="text-gray-300">Platform</span>
                     <Badge variant="outline" className="border-white/20 text-white">Next.js 15</Badge>
                   </div>
-                  <div className="flex justify-between items-center py-2 border-b border-white/10">
+                  <div className="flex justify-between items-center py-2 border-b border:white/10">
                     <span className="text-gray-300">Database</span>
                     <Badge variant="outline" className="border-white/20 text-white">PostgreSQL</Badge>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-white/10">
-                    <span className="text-gray-300">Authentication</span>
-                    <Badge variant="outline" className="border-white/20 text-white">NextAuth.js</Badge>
-                  </div>
-                  <div className="flex justify-between items-center py-2">
-                    <span className="text-gray-300">Image Storage</span>
-                    <Badge variant="outline" className="border-white/20 text-white">Cloudinary</Badge>
+                    <span className="text-gray-300">Node</span>
+                    <Badge variant="outline" className="border-white/20 text-white">18+</Badge>
                   </div>
                 </div>
               </CardContent>

@@ -1,21 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getServerSession } from 'next-auth'
-import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
+import { getSession } from '@/lib/session'
 
 export async function GET(request: NextRequest) {
   try {
-    const session = await getServerSession(authOptions)
-    
+    const session = getSession()
     if (!session) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
     // Get blog post stats
     const totalPosts = await prisma.blogPost.count()
-    const publishedPosts = await prisma.blogPost.count({
-      where: { published: true }
-    })
+    const publishedPosts = await prisma.blogPost.count({ where: { published: true } })
     const draftPosts = totalPosts - publishedPosts
 
     // Get gallery stats
@@ -25,26 +21,14 @@ export async function GET(request: NextRequest) {
     const recentPosts = await prisma.blogPost.findMany({
       take: 5,
       orderBy: { createdAt: 'desc' },
-      select: {
-        id: true,
-        title: true,
-        image: true,
-        slug: true,
-        published: true,
-        createdAt: true,
-      }
+      select: { id: true, title: true, image: true, slug: true, published: true, createdAt: true }
     })
 
     // Get recent gallery items
     const recentGalleryItems = await prisma.galleryItem.findMany({
       take: 5,
       orderBy: { createdAt: 'desc' },
-      select: {
-        id: true,
-        title: true,
-        category: true,
-        createdAt: true,
-      }
+      select: { id: true, title: true, category: true, createdAt: true }
     })
 
     return NextResponse.json({
@@ -57,9 +41,6 @@ export async function GET(request: NextRequest) {
     })
   } catch (error) {
     console.error('Dashboard API error:', error)
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    )
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }

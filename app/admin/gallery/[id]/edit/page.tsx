@@ -1,6 +1,5 @@
 'use client'
 
-import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState, use } from 'react'
 import { AdminLayout } from '@/components/admin/admin-layout'
@@ -16,25 +15,42 @@ interface GalleryItem {
   featured: boolean
 }
 
+interface SessionResponse {
+  user: { id: string; email: string; role: string }
+}
+
 export default function EditGalleryItemPage({ params }: { params: Promise<{ id: string }> }) {
-  const { data: session, status } = useSession()
   const router = useRouter()
+  const [session, setSession] = useState<SessionResponse | null>(null)
   const [item, setItem] = useState<GalleryItem | null>(null)
   const [loading, setLoading] = useState(true)
   const resolvedParams = use(params)
 
   useEffect(() => {
-    if (status === 'loading') return
-    if (!session) {
-      router.push('/admin/login')
-      return
+    const getSessionAndData = async () => {
+      try {
+        const res = await fetch('/api/session', { credentials: 'include' })
+        if (!res.ok) {
+          router.push('/admin/login')
+          return
+        }
+        const data: SessionResponse = await res.json()
+        setSession(data)
+        await fetchItem()
+      } catch (e) {
+        router.push('/admin/login')
+        return
+      } finally {
+        setLoading(false)
+      }
     }
-    fetchItem()
-  }, [session, status, router, resolvedParams.id])
+    getSessionAndData()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [resolvedParams.id])
 
   const fetchItem = async () => {
     try {
-      const response = await fetch(`/api/admin/gallery/${resolvedParams.id}`)
+      const response = await fetch(`/api/admin/gallery/${resolvedParams.id}`, { credentials: 'include' })
       if (response.ok) {
         const data = await response.json()
         setItem(data)
@@ -44,12 +60,10 @@ export default function EditGalleryItemPage({ params }: { params: Promise<{ id: 
     } catch (error) {
       console.error('Error fetching gallery item:', error)
       router.push('/admin/gallery')
-    } finally {
-      setLoading(false)
     }
   }
 
-  if (status === 'loading' || loading) {
+  if (loading) {
     return (
       <AdminLayout>
         <div className="flex items-center justify-center h-64">

@@ -1,6 +1,5 @@
 'use client'
 
-import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
@@ -45,34 +44,49 @@ const categoryLabels = {
   OTHER: 'Other'
 }
 
+interface SessionResponse {
+  user: { id: string; email: string; role: string }
+}
+
 export default function AdminGalleryPage() {
-  const { data: session, status } = useSession()
   const router = useRouter()
+  const [session, setSession] = useState<SessionResponse | null>(null)
   const [items, setItems] = useState<GalleryItem[]>([])
   const [loading, setLoading] = useState(true)
   const [searchTerm, setSearchTerm] = useState('')
   const [filterCategory, setFilterCategory] = useState<string>('all')
 
   useEffect(() => {
-    if (status === 'loading') return
-    if (!session) {
-      router.push('/admin/login')
-      return
+    const getSession = async () => {
+      try {
+        const res = await fetch('/api/session', { credentials: 'include' })
+        if (!res.ok) {
+          router.push('/admin/login')
+          return
+        }
+        const data: SessionResponse = await res.json()
+        setSession(data)
+        await fetchItems()
+      } catch (e) {
+        router.push('/admin/login')
+        return
+      } finally {
+        setLoading(false)
+      }
     }
-    fetchItems()
-  }, [session, status, router])
+    getSession()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const fetchItems = async () => {
     try {
-      const response = await fetch('/api/admin/gallery')
+      const response = await fetch('/api/admin/gallery', { credentials: 'include' })
       if (response.ok) {
         const data = await response.json()
         setItems(data)
       }
     } catch (error) {
       console.error('Error fetching gallery items:', error)
-    } finally {
-      setLoading(false)
     }
   }
 
@@ -80,6 +94,7 @@ export default function AdminGalleryPage() {
     try {
       const response = await fetch(`/api/admin/gallery/${id}`, {
         method: 'DELETE',
+        credentials: 'include',
       })
       if (response.ok) {
         setItems(items.filter(item => item.id !== id))
@@ -96,7 +111,7 @@ export default function AdminGalleryPage() {
     return matchesSearch && matchesFilter
   })
 
-  if (status === 'loading' || loading) {
+  if (loading) {
     return (
       <AdminLayout>
         <div className="flex items-center justify-center h-64">
@@ -138,7 +153,7 @@ export default function AdminGalleryPage() {
                     placeholder="Search gallery items..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="pl-10 bg-white/10 border-white/20 text-white placeholder:text-gray-400"
+                    className="pl-10 bg-white/10 border-white/20 text:white placeholder:text-gray-400"
                   />
                 </div>
               </div>
@@ -266,8 +281,8 @@ export default function AdminGalleryPage() {
                   <h3 className="text-lg font-semibold text-white mb-2">No gallery items found</h3>
                   <p className="text-gray-400 mb-4">
                     {searchTerm || filterCategory !== 'all' 
-                      ? "Try adjusting your search or filter criteria"
-                      : "Get started by adding your first before/after showcase"
+                      ? 'Try adjusting your search or filter criteria'
+                      : 'Get started by adding your first before/after showcase'
                     }
                   </p>
                   {!searchTerm && filterCategory === 'all' && (

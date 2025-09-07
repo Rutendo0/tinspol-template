@@ -1,6 +1,5 @@
 'use client'
 
-import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
@@ -38,9 +37,13 @@ interface BlogPost {
   }
 }
 
+interface SessionResponse {
+  user: { id: string; email: string; role: string }
+}
+
 export default function AdminBlogPage() {
-  const { data: session, status } = useSession()
   const router = useRouter()
+  const [session, setSession] = useState<SessionResponse | null>(null)
   const [posts, setPosts] = useState<BlogPost[]>([])
   const [loading, setLoading] = useState(true)
   const [searchTerm, setSearchTerm] = useState('')
@@ -53,25 +56,36 @@ export default function AdminBlogPage() {
     })
 
   useEffect(() => {
-    if (status === 'loading') return
-    if (!session) {
-      router.push('/admin/login')
-      return
+    const getSession = async () => {
+      try {
+        const res = await fetch('/api/session', { credentials: 'include' })
+        if (!res.ok) {
+          router.push('/admin/login')
+          return
+        }
+        const data: SessionResponse = await res.json()
+        setSession(data)
+        await fetchPosts()
+      } catch (e) {
+        router.push('/admin/login')
+        return
+      } finally {
+        setLoading(false)
+      }
     }
-    fetchPosts()
-  }, [session, status, router])
+    getSession()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const fetchPosts = async () => {
     try {
-      const response = await fetch('/api/admin/blog')
+      const response = await fetch('/api/admin/blog', { credentials: 'include' })
       if (response.ok) {
         const data = await response.json()
         setPosts(data)
       }
     } catch (error) {
       console.error('Error fetching posts:', error)
-    } finally {
-      setLoading(false)
     }
   }
 
@@ -79,6 +93,7 @@ export default function AdminBlogPage() {
     try {
       const response = await fetch(`/api/admin/blog/${id}`, {
         method: 'DELETE',
+        credentials: 'include',
       })
       if (response.ok) {
         setPosts(posts.filter(post => post.id !== id))
@@ -97,7 +112,7 @@ export default function AdminBlogPage() {
     return matchesSearch && matchesFilter
   })
 
-  if (status === 'loading' || loading) {
+  if (loading) {
     return (
       <AdminLayout>
         <div className="flex items-center justify-center h-64">
@@ -204,12 +219,12 @@ export default function AdminBlogPage() {
                       })()}
                       <div className="flex-1">
                         <div className="flex items-center space-x-2 mb-2">
-                          <h3 className="text-lg font-semibold text-white">{post.title}</h3>
+                          <h3 className="text-lg font-semibold text:white">{post.title}</h3>
                           {post.featured && (
                             <Badge className="bg-yellow-600 text-white">Featured</Badge>
                           )}
-                          <Badge variant={post.published ? "default" : "secondary"}>
-                            {post.published ? "Published" : "Draft"}
+                          <Badge variant={post.published ? 'default' : 'secondary'}>
+                            {post.published ? 'Published' : 'Draft'}
                           </Badge>
                         </div>
                         <p className="text-gray-300 mb-3 line-clamp-2">{post.excerpt}</p>
@@ -277,8 +292,8 @@ export default function AdminBlogPage() {
                 <h3 className="text-lg font-semibold text-white mb-2">No posts found</h3>
                 <p className="text-gray-400 mb-4">
                   {searchTerm || filterStatus !== 'all' 
-                    ? "Try adjusting your search or filter criteria"
-                    : "Get started by creating your first blog post"
+                    ? 'Try adjusting your search or filter criteria'
+                    : 'Get started by creating your first blog post'
                   }
                 </p>
                 {!searchTerm && filterStatus === 'all' && (

@@ -1,6 +1,5 @@
 'use client'
 
-import { SessionProvider } from 'next-auth/react'
 import { useEffect, useState } from 'react'
 
 // Global scroll progress bar and parallax setter
@@ -80,13 +79,13 @@ export function Providers({ children }: { children: React.ReactNode }) {
   }, [pathname])
 
   return (
-    <SessionProvider>
+    <>
       <ScrollProgressBar />
       <div id="route-root" className="route-container">
         {children}
       </div>
       {/* App Toaster */}
       {require('@/components/ui/toaster').Toaster ? require('@/components/ui/toaster').Toaster() : null}
-    </SessionProvider>
+    </>
   )
 }

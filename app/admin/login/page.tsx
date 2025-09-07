@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import { signIn, getSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -45,36 +44,21 @@ export default function AdminLoginPage() {
     setError('')
 
     try {
-      console.log('Attempting login with:', { email })
-      
-      const result = await signIn('credentials', {
-        email,
-        password,
-        redirect: false,
+      const res = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
       })
 
-      console.log('SignIn result:', result)
-
-      if (result?.error) {
-        console.error('SignIn error:', result.error)
-        setError(`Login failed: ${result.error}`)
-      } else if (result?.ok) {
-        console.log('SignIn successful, getting session...')
-        const session = await getSession()
-        console.log('Session:', session)
-        
-        if (session) {
-          console.log('Redirecting to dashboard...')
-          router.push('/admin/dashboard')
-        } else {
-          setError('Session creation failed')
-        }
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({ error: 'Login failed' }))
+        setError(data.error || 'Login failed')
       } else {
-        setError('Unknown login error')
+        router.push('/admin/dashboard')
       }
     } catch (error) {
-      console.error('Login catch error:', error)
-      setError(`An error occurred: ${error}`)
+      console.error('Login error:', error)
+      setError('An error occurred')
     } finally {
       setLoading(false)
     }

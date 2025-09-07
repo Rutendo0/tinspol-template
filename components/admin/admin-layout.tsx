@@ -1,6 +1,5 @@
 'use client'
 
-import { useSession, signOut } from 'next-auth/react'
 import { useRouter, usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
@@ -28,29 +27,44 @@ const navigation = [
   { name: 'Settings', href: '/admin/settings', icon: Settings },
 ]
 
+async function fetchSession(): Promise<{ user: { email: string } } | null> {
+  try {
+    const res = await fetch('/api/session', { cache: 'no-store' })
+    if (!res.ok) return null
+    return await res.json()
+  } catch {
+    return null
+  }
+}
+
 export function AdminLayout({ children }: AdminLayoutProps) {
-  const { data: session, status } = useSession()
   const router = useRouter()
   const pathname = usePathname()
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
+  const [session, setSession] = useState<{ user: { email: string } } | null>(null)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     setMounted(true)
   }, [])
 
   useEffect(() => {
-    if (status === 'loading') return
-    if (!session) {
-      router.push('/admin/login')
-    }
-  }, [session, status, router])
+    (async () => {
+      setLoading(true)
+      const s = await fetchSession()
+      setSession(s)
+      setLoading(false)
+      if (!s) router.push('/admin/login')
+    })()
+  }, [router, pathname])
 
   const handleSignOut = async () => {
-    await signOut({ callbackUrl: '/' })
+    await fetch('/api/logout', { method: 'POST' })
+    router.push('/')
   }
 
-  if (status === 'loading') {
+  if (loading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black flex items-center justify-center">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-red-600"></div>
@@ -58,9 +72,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
     )
   }
 
-  if (!session) {
-    return null
-  }
+  if (!session) return null
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black">
