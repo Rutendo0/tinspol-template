@@ -4,7 +4,7 @@ import { MobileCTA } from "@/components/mobile-cta"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { CheckCircle, Clock, Shield, Hammer } from "lucide-react"
+import { CheckCircle, Clock, Shield, Hammer, ArrowLeft, Wrench } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -14,29 +14,201 @@ export default function PanelBeatingPage() {
       <Header />
 
       {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-r from-primary/10 to-primary/5">
+      <section className="relative pt-32 pb-20 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="space-y-6">
+              {/* Back Button */}
+              <div>
+                <Button 
+                  variant="outline" 
+                  asChild
+                  className="border-gray-300 text-gray-600 hover:bg-gray-50"
+                >
+                  <Link href="/services" className="flex items-center space-x-2">
+                    <ArrowLeft className="w-4 h-4" />
+                    <span>Back to Services</span>
+                  </Link>
+                </Button>
+              </div>
+
+              <div className="space-y-4">
+                <Badge className="bg-red-50 text-red-600 border-red-200 hover:bg-red-100">
+                  Collision Repair Experts
+                </Badge>
+                
+                <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
+                  Panel Beating & 
+                  <span className="text-red-600">Body Repairs</span>
+                </h1>
+                
+                <p className="text-lg text-gray-600 leading-relaxed">
+                  Professional collision repair and panel beating services. We restore your vehicle to its original
+                  condition with quality workmanship, attention to detail, and modern equipment.
+                </p>
+                
+                <div className="flex flex-col sm:flex-row gap-3 pt-4">
+                  <Button size="lg" asChild className="bg-red-600 hover:bg-red-700 text-white">
+                    <Link href="/quote" className="flex items-center space-x-2">
+                      <span>Get Repair Quote</span>
+                      <CheckCircle className="w-4 h-4" />
+                    </Link>
+                  </Button>
+                  <Button variant="outline" size="lg" asChild className="border-gray-300 text-gray-700 hover:bg-gray-50">
+                    <a href="tel:+263776556717" className="flex items-center space-x-2">
+                      <span>Call Now</span>
+                      <Clock className="w-4 h-4" />
+                    </a>
+                  </Button>
+                </div>
+              </div>
+            </div>
+            
+            <div className="relative">
+              <div className="relative h-[400px] rounded-lg overflow-hidden shadow-lg">
+                <Image
+                  src="/placeholder.jpg"
+                  alt="Professional panel beating service"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Services Overview */}
+      <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Our Panel Beating Services</h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Complete collision repair and body work services
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                icon: Hammer,
+                title: "Dent Repair",
+                desc: "Professional dent removal using modern techniques and equipment",
+              },
+              {
+                icon: Wrench,
+                title: "Panel Replacement",
+                desc: "Complete panel replacement with genuine or OEM equivalent parts",
+              },
+              {
+                icon: Shield,
+                title: "Paint Matching",
+                desc: "Expert color matching and professional spray painting services",
+              },
+              {
+                icon: CheckCircle,
+                title: "Rust Repair",
+                desc: "Comprehensive rust treatment and prevention services",
+              },
+              {
+                icon: Hammer,
+                title: "Frame Straightening",
+                desc: "Professional frame alignment and straightening services",
+              },
+              {
+                icon: Wrench,
+                title: "Bumper Repair",
+                desc: "Plastic bumper repair and replacement services",
+              },
+            ].map((service, index) => (
+              <Card key={index} className="border-0 shadow-md hover:shadow-lg transition-shadow">
+                <CardHeader>
+                  <service.icon className="w-8 h-8 text-red-600 mb-2" />
+                  <CardTitle className="text-xl">{service.title}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600">{service.desc}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Repair Process */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Our Repair Process</h2>
+            <p className="text-lg text-gray-600">
+              Professional approach to collision repair
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              {
+                step: "1",
+                title: "Assessment",
+                desc: "Thorough damage assessment and repair estimate"
+              },
+              {
+                step: "2", 
+                title: "Planning",
+                desc: "Detailed repair plan and parts ordering"
+              },
+              {
+                step: "3",
+                title: "Repair Work",
+                desc: "Professional panel beating and bodywork"
+              },
+              {
+                step: "4",
+                title: "Finishing",
+                desc: "Paint matching, application, and quality check"
+              }
+            ].map((item, index) => (
+              <div key={index} className="text-center">
+                <div className="w-16 h-16 bg-red-600 text-white rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-4">
+                  {item.step}
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">{item.title}</h3>
+                <p className="text-gray-600">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Insurance Work */}
+      <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <Badge className="mb-4">Collision Repair Experts</Badge>
-              <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">Panel Beating & Body Repairs</h1>
-              <p className="text-xl text-gray-600 mb-8">
-                Professional collision repair and panel beating services. We restore your vehicle to its original
-                condition with quality workmanship and attention to detail.
+              <h2 className="text-3xl font-bold text-gray-900 mb-6">Insurance Work Welcome</h2>
+              <p className="text-lg text-gray-600 mb-6">
+                We work with all major insurance companies to make your claim process as smooth as possible.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" asChild>
-                  <Link href="/quote">Get Repair Quote</Link>
-                </Button>
-                <Button variant="outline" size="lg" asChild>
-                  <a href="tel:+263123456789">Call Now</a>
-                </Button>
+              <div className="space-y-4">
+                {[
+                  "Direct billing to insurance companies",
+                  "Assistance with claim paperwork",
+                  "Approved by major insurers",
+                  "Quality repairs that meet insurance standards",
+                  "Warranty on all insurance work",
+                  "Free estimates for insurance claims"
+                ].map((feature, index) => (
+                  <div key={index} className="flex items-center space-x-3">
+                    <CheckCircle className="w-5 h-5 text-red-600 flex-shrink-0" />
+                    <span className="text-gray-700">{feature}</span>
+                  </div>
+                ))}
               </div>
             </div>
-            <div className="relative h-96 rounded-lg overflow-hidden">
+            <div className="relative h-[300px] rounded-lg overflow-hidden shadow-lg">
               <Image
-                src="/images/panel-beating.jpg"
-                alt="Professional panel beating service"
+                src="/placeholder.jpg"
+                alt="Insurance claim work"
                 fill
                 className="object-cover"
               />
@@ -45,144 +217,100 @@ export default function PanelBeatingPage() {
         </div>
       </section>
 
-      {/* Services */}
-      <section className="py-16">
+      {/* Pricing */}
+      <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">Body Repair Services</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              { icon: Hammer, title: "Dent Removal", desc: "Professional dent repair and panel straightening" },
-              { icon: CheckCircle, title: "Scratch Repair", desc: "Paint scratch removal and touch-up work" },
-              { icon: Shield, title: "Collision Repair", desc: "Complete accident damage restoration" },
-              { icon: Clock, title: "Rust Treatment", desc: "Rust removal and prevention treatment" },
-              { icon: Hammer, title: "Panel Replacement", desc: "New panel fitting and alignment" },
-              { icon: CheckCircle, title: "Paint Matching", desc: "Color matching and professional spray work" },
-            ].map((service, index) => (
-              <Card key={index} className="text-center">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">Repair Pricing Guide</h2>
+              <p className="text-lg text-gray-600">
+                Competitive pricing for professional panel beating services
+              </p>
+            </div>
+            
+            <div className="grid md:grid-cols-2 gap-8">
+              <Card className="shadow-lg">
                 <CardHeader>
-                  <service.icon className="h-12 w-12 text-primary mx-auto mb-4" />
-                  <CardTitle>{service.title}</CardTitle>
+                  <CardTitle className="text-xl">Minor Repairs</CardTitle>
+                  <CardDescription>Small dents and scratches</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  {[
+                    { service: "Small Dent Repair", price: "$50 - $150" },
+                    { service: "Scratch Repair", price: "$100 - $300" },
+                    { service: "Minor Panel Work", price: "$200 - $500" },
+                    { service: "Touch-up Paint", price: "$50 - $200" },
+                  ].map((item, index) => (
+                    <div key={index} className="flex justify-between items-center py-2 border-b border-gray-100 last:border-b-0">
+                      <span className="text-gray-700">{item.service}</span>
+                      <span className="font-semibold text-red-600">{item.price}</span>
+                    </div>
+                  ))}
+                </CardContent>
+              </Card>
+
+              <Card className="shadow-lg">
+                <CardHeader>
+                  <CardTitle className="text-xl">Major Repairs</CardTitle>
+                  <CardDescription>Collision damage and panel replacement</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  {[
+                    { service: "Panel Replacement", price: "$500 - $1,500" },
+                    { service: "Major Dent Repair", price: "$300 - $800" },
+                    { service: "Full Panel Respray", price: "$400 - $1,000" },
+                    { service: "Frame Straightening", price: "$800 - $2,000" },
+                  ].map((item, index) => (
+                    <div key={index} className="flex justify-between items-center py-2 border-b border-gray-100 last:border-b-0">
+                      <span className="text-gray-700">{item.service}</span>
+                      <span className="font-semibold text-red-600">{item.price}</span>
+                    </div>
+                  ))}
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h2>
+            <p className="text-lg text-gray-600">
+              Common questions about panel beating services
+            </p>
+          </div>
+          
+          <div className="max-w-3xl mx-auto space-y-6">
+            {[
+              {
+                q: "How long does panel beating work take?",
+                a: "Minor repairs can take 1-3 days, while major collision repairs may take 1-2 weeks depending on the extent of damage and parts availability.",
+              },
+              {
+                q: "Will the repair be noticeable?",
+                a: "Our skilled technicians use professional techniques and color matching to ensure repairs blend seamlessly with your vehicle's original finish.",
+              },
+              {
+                q: "Do you provide warranties on repairs?",
+                a: "Yes, we provide comprehensive warranties on all panel beating work, including paint and workmanship guarantees.",
+              },
+              {
+                q: "Can you work with my insurance company?",
+                a: "Absolutely! We work with all major insurance companies and can handle the paperwork and direct billing to make the process easier for you.",
+              },
+            ].map((faq, index) => (
+              <Card key={index} className="shadow-md">
+                <CardHeader>
+                  <CardTitle className="text-lg text-gray-900">{faq.q}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <CardDescription>{service.desc}</CardDescription>
+                  <p className="text-gray-600">{faq.a}</p>
                 </CardContent>
               </Card>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Process */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">Our Repair Process</h2>
-          <div className="grid md:grid-cols-5 gap-6">
-            {[
-              { step: "1", title: "Assessment", desc: "Detailed damage evaluation and quote" },
-              { step: "2", title: "Insurance", desc: "Insurance claim assistance if needed" },
-              { step: "3", title: "Repair Work", desc: "Professional panel beating and bodywork" },
-              { step: "4", title: "Paint & Finish", desc: "Color matching and spray painting" },
-              { step: "5", title: "Quality Check", desc: "Final inspection and delivery" },
-            ].map((item, index) => (
-              <div key={index} className="text-center">
-                <div className="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center text-lg font-bold mx-auto mb-4">
-                  {item.step}
-                </div>
-                <h3 className="font-semibold mb-2">{item.title}</h3>
-                <p className="text-sm text-gray-600">{item.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Pricing */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <div className="max-w-2xl mx-auto">
-            <h2 className="text-3xl font-bold text-center mb-8">Repair Pricing Guide</h2>
-            <Card>
-              <CardHeader>
-                <CardTitle>Body Repair Costs</CardTitle>
-                <CardDescription>Professional collision repair with warranty</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="flex justify-between">
-                  <span>Minor Dent Repair</span>
-                  <span className="font-semibold">$100 - $300</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Scratch Repair & Touch-up</span>
-                  <span className="font-semibold">$150 - $500</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Panel Replacement</span>
-                  <span className="font-semibold">$500 - $1,500</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Full Panel Respray</span>
-                  <span className="font-semibold">$400 - $800</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Major Collision Repair</span>
-                  <span className="font-semibold">$2,000 - $8,000</span>
-                </div>
-                <div className="pt-4 border-t">
-                  <p className="text-sm text-gray-600">
-                    * Final pricing depends on damage extent and vehicle type. Insurance claims welcome.
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Insurance */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-8">Insurance Claims Welcome</h2>
-          <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-            We work directly with all major insurance companies to make your claim process smooth and hassle-free. Our
-            team will handle the paperwork and communicate directly with your insurer.
-          </p>
-          <div className="grid md:grid-cols-4 gap-6 max-w-4xl mx-auto">
-            {[
-              "Free damage assessment",
-              "Insurance paperwork assistance",
-              "Direct billing available",
-              "Approved repair facility",
-            ].map((benefit, index) => (
-              <Card key={index} className="p-6">
-                <CheckCircle className="h-8 w-8 text-primary mx-auto mb-3" />
-                <p className="font-medium">{benefit}</p>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-16 bg-primary text-white">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-4">Need Body Repair Work?</h2>
-          <p className="text-xl mb-8 opacity-90">
-            Get a free assessment and quote for your vehicle's body repair needs.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" variant="secondary" asChild>
-              <Link href="/quote">Get Free Quote</Link>
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="bg-transparent border-white text-white hover:bg-white hover:text-primary"
-              asChild
-            >
-              <a href="https://wa.me/263123456789" className="bg-green-600 hover:bg-green-700 border-green-600">
-                WhatsApp Us
-              </a>
-            </Button>
           </div>
         </div>
       </section>

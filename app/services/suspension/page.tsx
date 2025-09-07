@@ -4,7 +4,7 @@ import { MobileCTA } from "@/components/mobile-cta"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { CheckCircle, Clock, Shield, Settings } from "lucide-react"
+import { CheckCircle, Clock, Shield, Settings, ArrowLeft, Wrench } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -14,29 +14,155 @@ export default function SuspensionPage() {
       <Header />
 
       {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-r from-primary/10 to-primary/5">
+      <section className="relative pt-32 pb-20 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="space-y-6">
+              {/* Back Button */}
+              <div>
+                <Button 
+                  variant="outline" 
+                  asChild
+                  className="border-gray-300 text-gray-600 hover:bg-gray-50"
+                >
+                  <Link href="/services" className="flex items-center space-x-2">
+                    <ArrowLeft className="w-4 h-4" />
+                    <span>Back to Services</span>
+                  </Link>
+                </Button>
+              </div>
+
+              <div className="space-y-4">
+                <Badge className="bg-red-50 text-red-600 border-red-200 hover:bg-red-100">
+                  Suspension Specialists
+                </Badge>
+                
+                <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
+                  Suspension Repairs & 
+                  <span className="text-red-600">Fitments</span>
+                </h1>
+                
+                <p className="text-lg text-gray-600 leading-relaxed">
+                  Professional suspension system repairs, replacements, and upgrades. Improve your vehicle's handling,
+                  comfort, and safety with our expert suspension services and quality parts.
+                </p>
+                
+                <div className="flex flex-col sm:flex-row gap-3 pt-4">
+                  <Button size="lg" asChild className="bg-red-600 hover:bg-red-700 text-white">
+                    <Link href="/quote" className="flex items-center space-x-2">
+                      <span>Get Free Quote</span>
+                      <CheckCircle className="w-4 h-4" />
+                    </Link>
+                  </Button>
+                  <Button variant="outline" size="lg" asChild className="border-gray-300 text-gray-700 hover:bg-gray-50">
+                    <a href="tel:+263776556717" className="flex items-center space-x-2">
+                      <span>Call Now</span>
+                      <Clock className="w-4 h-4" />
+                    </a>
+                  </Button>
+                </div>
+              </div>
+            </div>
+            
+            <div className="relative">
+              <div className="relative h-[400px] rounded-lg overflow-hidden shadow-lg">
+                <Image
+                  src="/image2.jpg"
+                  alt="Professional suspension repair service"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Services Overview */}
+      <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Our Suspension Services</h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Complete suspension system care for optimal ride comfort and handling
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                icon: Settings,
+                title: "Shock Absorber Replacement",
+                desc: "Professional installation of quality shock absorbers for improved ride comfort",
+              },
+              {
+                icon: Wrench,
+                title: "Strut Replacement",
+                desc: "Complete strut assembly replacement and installation service",
+              },
+              {
+                icon: Shield,
+                title: "Spring Replacement",
+                desc: "Coil spring and leaf spring replacement for all vehicle types",
+              },
+              {
+                icon: CheckCircle,
+                title: "Suspension Bushings",
+                desc: "Replacement of worn suspension bushings and rubber components",
+              },
+              {
+                icon: Settings,
+                title: "Ball Joint Service",
+                desc: "Ball joint inspection, replacement, and lubrication service",
+              },
+              {
+                icon: Wrench,
+                title: "Suspension Alignment",
+                desc: "Proper suspension geometry setup and wheel alignment",
+              },
+            ].map((service, index) => (
+              <Card key={index} className="border-0 shadow-md hover:shadow-lg transition-shadow">
+                <CardHeader>
+                  <service.icon className="w-8 h-8 text-red-600 mb-2" />
+                  <CardTitle className="text-xl">{service.title}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600">{service.desc}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Signs You Need Suspension Work */}
+      <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <Badge className="mb-4">Suspension Specialists</Badge>
-              <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">Suspension Repairs & Fitments</h1>
-              <p className="text-xl text-gray-600 mb-8">
-                Professional suspension system repairs, replacements, and upgrades. Improve your vehicle's handling,
-                comfort, and safety with our expert suspension services.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" asChild>
-                  <Link href="/quote">Get Free Quote</Link>
-                </Button>
-                <Button variant="outline" size="lg" asChild>
-                  <a href="tel:+263123456789">Call Now</a>
-                </Button>
+              <h2 className="text-3xl font-bold text-gray-900 mb-6">Signs You Need Suspension Work</h2>
+              <div className="space-y-4">
+                {[
+                  "Vehicle bounces excessively after hitting bumps",
+                  "Uneven tire wear patterns",
+                  "Vehicle pulls to one side while driving",
+                  "Nose dives when braking",
+                  "Excessive body roll when cornering",
+                  "Visible fluid leaks from shock absorbers",
+                  "Clunking or rattling noises over bumps",
+                  "Vehicle sits lower on one side",
+                ].map((sign, index) => (
+                  <div key={index} className="flex items-start space-x-3">
+                    <CheckCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
+                    <span className="text-gray-700">{sign}</span>
+                  </div>
+                ))}
               </div>
             </div>
-            <div className="relative h-96 rounded-lg overflow-hidden">
+            <div className="relative h-[300px] rounded-lg overflow-hidden shadow-lg">
               <Image
-                src="/images/suspension-repair.jpg"
-                alt="Professional suspension repair service"
+                src="/image2.jpg"
+                alt="Suspension system components"
                 fill
                 className="object-cover"
               />
@@ -45,165 +171,100 @@ export default function SuspensionPage() {
         </div>
       </section>
 
-      {/* Services Overview */}
-      <section className="py-16">
+      {/* Pricing */}
+      <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">Suspension Services</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              { icon: Settings, title: "Shock Absorber Replacement", desc: "Quality shock absorbers for smooth ride" },
-              { icon: CheckCircle, title: "Strut Replacement", desc: "Complete strut assembly service" },
-              { icon: Shield, title: "Spring Replacement", desc: "Coil and leaf spring repairs" },
-              { icon: Clock, title: "Wheel Alignment", desc: "Precision alignment for even tire wear" },
-              { icon: Settings, title: "Ball Joint Replacement", desc: "Upper and lower ball joint service" },
-              { icon: CheckCircle, title: "Suspension Bushings", desc: "Rubber bushing replacement service" },
-            ].map((service, index) => (
-              <Card key={index} className="text-center">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">Suspension Service Pricing</h2>
+              <p className="text-lg text-gray-600">
+                Competitive pricing for professional suspension services
+              </p>
+            </div>
+            
+            <div className="grid md:grid-cols-2 gap-8">
+              <Card className="shadow-lg">
                 <CardHeader>
-                  <service.icon className="h-12 w-12 text-primary mx-auto mb-4" />
-                  <CardTitle>{service.title}</CardTitle>
+                  <CardTitle className="text-xl">Service Costs</CardTitle>
+                  <CardDescription>Professional suspension services</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  {[
+                    { service: "Shock Absorber (per pair)", price: "$150 - $400" },
+                    { service: "Strut Replacement (per pair)", price: "$300 - $800" },
+                    { service: "Spring Replacement", price: "$200 - $500" },
+                    { service: "Ball Joint Replacement", price: "$100 - $300" },
+                  ].map((item, index) => (
+                    <div key={index} className="flex justify-between items-center py-2 border-b border-gray-100 last:border-b-0">
+                      <span className="text-gray-700">{item.service}</span>
+                      <span className="font-semibold text-red-600">{item.price}</span>
+                    </div>
+                  ))}
+                </CardContent>
+              </Card>
+
+              <Card className="shadow-lg">
+                <CardHeader>
+                  <CardTitle className="text-xl">Complete Packages</CardTitle>
+                  <CardDescription>Full suspension system services</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  {[
+                    { package: "Front Suspension Overhaul", price: "$800 - $1,500" },
+                    { package: "Rear Suspension Overhaul", price: "$600 - $1,200" },
+                    { package: "Complete Suspension Service", price: "$1,200 - $2,500" },
+                    { package: "Performance Upgrade", price: "$1,500 - $3,000" },
+                  ].map((item, index) => (
+                    <div key={index} className="flex justify-between items-center py-2 border-b border-gray-100 last:border-b-0">
+                      <span className="text-gray-700">{item.package}</span>
+                      <span className="font-semibold text-red-600">{item.price}</span>
+                    </div>
+                  ))}
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h2>
+            <p className="text-lg text-gray-600">
+              Common questions about suspension services
+            </p>
+          </div>
+          
+          <div className="max-w-3xl mx-auto space-y-6">
+            {[
+              {
+                q: "How often should suspension components be replaced?",
+                a: "Shock absorbers typically last 50,000-100,000 km depending on driving conditions. Springs can last longer, but should be inspected regularly for wear and damage.",
+              },
+              {
+                q: "Can I drive with worn suspension?",
+                a: "While possible, worn suspension affects safety, handling, and tire wear. It's recommended to address suspension issues promptly to maintain vehicle safety and performance.",
+              },
+              {
+                q: "Do you offer performance suspension upgrades?",
+                a: "Yes, we offer performance suspension upgrades including sport shocks, lowering springs, and complete coilover systems for improved handling and appearance.",
+              },
+              {
+                q: "How long does suspension work take?",
+                a: "Simple shock replacement can take 2-4 hours, while complete suspension overhauls may require 1-2 days depending on the complexity and parts availability.",
+              },
+            ].map((faq, index) => (
+              <Card key={index} className="shadow-md">
+                <CardHeader>
+                  <CardTitle className="text-lg text-gray-900">{faq.q}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <CardDescription>{service.desc}</CardDescription>
+                  <p className="text-gray-600">{faq.a}</p>
                 </CardContent>
               </Card>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Suspension Components */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">Suspension Components We Service</h2>
-          <p className="text-lg text-gray-600 text-center mb-12">
-            We specialize in servicing and replacing all suspension system components to ensure optimal vehicle performance and safety.
-          </p>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {[
-              "Shock Absorbers",
-              "Coil Springs (depending on mode)",
-              "Control Arms",
-              "Stabilizer Links",
-              "Stabilizer Bar Bushes",
-              "Steering Knuckle",
-              "Wheel Hub & Bearings",
-              "Tie Rod Ends",
-              "Leaf Springs",
-              "D Bushes",
-              "Shackles Bushes",
-              "Bump Stops"
-            ].map((component, index) => (
-              <Card key={index} className="text-center p-4 hover:shadow-md transition-shadow">
-                <Settings className="h-8 w-8 text-primary mx-auto mb-3" />
-                <h3 className="font-semibold text-gray-900">{component}</h3>
-              </Card>
-            ))}
-          </div>
-          <div className="mt-12 text-center">
-            <Card className="max-w-3xl mx-auto">
-              <CardHeader>
-                <CardTitle className="text-xl">Complete Suspension System Care</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-600">
-                  Our experienced technicians can diagnose, repair, or replace any of these suspension components 
-                  using quality parts and professional installation. Whether you need a single component replaced 
-                  or a complete suspension overhaul, we have the expertise to keep your vehicle riding smoothly and safely.
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Warning Signs */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">Signs You Need Suspension Repair</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              "Bumpy or rough ride",
-              "Vehicle pulls to one side",
-              "Uneven tire wear",
-              "Nose dives when braking",
-              "Excessive bouncing",
-              "Steering wheel vibration",
-              "Difficulty steering",
-              "Vehicle sits lower on one side",
-            ].map((sign, index) => (
-              <Card key={index} className="text-center p-6">
-                <CheckCircle className="h-8 w-8 text-primary mx-auto mb-3" />
-                <p className="font-medium">{sign}</p>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Pricing */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <div className="max-w-2xl mx-auto">
-            <h2 className="text-3xl font-bold text-center mb-8">Service Pricing</h2>
-            <Card>
-              <CardHeader>
-                <CardTitle>Suspension Service Costs</CardTitle>
-                <CardDescription>Professional suspension repairs with warranty</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="flex justify-between">
-                  <span>Shock Absorber (per pair)</span>
-                  <span className="font-semibold">$150 - $400</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Strut Assembly (per pair)</span>
-                  <span className="font-semibold">$300 - $800</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Coil Springs (per pair)</span>
-                  <span className="font-semibold">$200 - $500</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Wheel Alignment</span>
-                  <span className="font-semibold">$80 - $120</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Ball Joints (per pair)</span>
-                  <span className="font-semibold">$120 - $300</span>
-                </div>
-                <div className="pt-4 border-t">
-                  <p className="text-sm text-gray-600">
-                    * Prices include parts and labor. Final cost depends on vehicle make and model.
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-16 bg-primary text-white">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-4">Improve Your Ride Quality Today</h2>
-          <p className="text-xl mb-8 opacity-90">
-            Professional suspension service with quality parts and expert installation.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" variant="secondary" asChild>
-              <Link href="/quote">Get Free Quote</Link>
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="bg-transparent border-white text-white hover:bg-white hover:text-primary"
-              asChild
-            >
-              <a href="https://wa.me/263123456789" className="bg-green-600 hover:bg-green-700 border-green-600">
-                WhatsApp Us
-              </a>
-            </Button>
           </div>
         </div>
       </section>

@@ -10,9 +10,10 @@ interface FileUploadProps {
   className?: string
   children?: React.ReactNode
   disabled?: boolean
+  mode?: 'api' | 'base64' // default 'api'
 }
 
-export function FileUpload({ onUpload, accept = "image/*", className, children, disabled }: FileUploadProps) {
+export function FileUpload({ onUpload, accept = 'image/*', className, children, disabled, mode = 'api' }: FileUploadProps) {
   const [uploading, setUploading] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
 
@@ -21,7 +22,7 @@ export function FileUpload({ onUpload, accept = "image/*", className, children, 
     if (!file) return
 
     setUploading(true)
-    
+
     try {
       // Validate file type
       if (!file.type.startsWith('image/')) {
@@ -37,26 +38,40 @@ export function FileUpload({ onUpload, accept = "image/*", className, children, 
         return
       }
 
-      // Convert file to base64 data URL for preview
-      const reader = new FileReader()
-      reader.onload = (e) => {
-        const result = e.target?.result as string
-        console.log('FileUpload: File converted to base64')
-        console.log('FileUpload: Result type:', typeof result)
-        console.log('FileUpload: Result length:', result.length)
-        console.log('FileUpload: Result starts with data:', result.startsWith('data:'))
-        onUpload(result)
+      if (mode === 'base64') {
+        // Convert file to base64 data URL
+        const reader = new FileReader()
+        reader.onload = (e) => {
+          const result = e.target?.result as string
+          onUpload(result)
+          setUploading(false)
+        }
+        reader.onerror = () => {
+          alert('Error reading file')
+          setUploading(false)
+        }
+        reader.readAsDataURL(file)
+      } else {
+        // Upload via API route, get back a URL
+        const formData = new FormData()
+        formData.append('file', file)
+
+        const res = await fetch('/api/upload', {
+          method: 'POST',
+          body: formData,
+        })
+
+        if (!res.ok) {
+          const data = await res.json().catch(() => ({}))
+          throw new Error(data.error || 'Upload failed')
+        }
+        const data = await res.json()
+        onUpload(data.url as string)
         setUploading(false)
       }
-      reader.onerror = () => {
-        console.error('FileUpload: Error reading file')
-        alert('Error reading file')
-        setUploading(false)
-      }
-      reader.readAsDataURL(file)
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error uploading file:', error)
-      alert('Error uploading file')
+      alert(error?.message || 'Error uploading file')
       setUploading(false)
     }
 

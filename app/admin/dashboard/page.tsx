@@ -153,15 +153,24 @@ export default function AdminDashboard() {
                 {stats?.recentPosts?.length ? (
                   stats.recentPosts.map((post: any) => (
                     <div key={post.id} className="flex items-center justify-between p-3 bg-white/5 rounded-lg">
-                      <div className="flex-1">
-                        <h4 className="font-medium text-white truncate">{post.title}</h4>
-                        <div className="flex items-center space-x-2 mt-1">
-                          <Badge variant={post.published ? "default" : "secondary"} className="text-xs">
-                            {post.published ? "Published" : "Draft"}
-                          </Badge>
-                          <span className="text-xs text-gray-400">
-                            {new Date(post.createdAt).toLocaleDateString()}
-                          </span>
+                      <div className="flex items-center gap-3 flex-1 min-w-0">
+                        <div className="relative w-10 h-10 rounded overflow-hidden bg-white/10 border border-white/20 flex-shrink-0">
+                          <img
+                            src={post.image && post.image.trim() ? post.image : '/placeholder.jpg'}
+                            alt={post.title}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <h4 className="font-medium text-white truncate">{post.title}</h4>
+                          <div className="flex items-center space-x-2 mt-1">
+                            <Badge variant={post.published ? "default" : "secondary"} className="text-xs">
+                              {post.published ? "Published" : "Draft"}
+                            </Badge>
+                            <span className="text-xs text-gray-400">
+                              {new Date(post.createdAt).toLocaleDateString('en-GB', { year: 'numeric', month: '2-digit', day: '2-digit', timeZone: 'UTC' })}
+                            </span>
+                          </div>
                         </div>
                       </div>
                       <div className="flex items-center space-x-1">

@@ -35,6 +35,12 @@ async function getBlogPosts() {
   }
 }
 
+function extractFirstImage(markdown: string | null | undefined): string | null {
+  if (!markdown) return null
+  const match = markdown.match(/!\[[^\]]*\]\(([^)]+)\)/)
+  return match ? match[1] : null
+}
+
 export default async function BlogPage() {
   const blogPosts = await getBlogPosts()
   const featuredPost = blogPosts.find((post) => post.featured)
@@ -45,39 +51,46 @@ export default async function BlogPage() {
       <Header />
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 bg-gradient-to-br from-black via-gray-900 to-black overflow-hidden">
+      <section className="relative pt-32 pb-20 bg-gray-900 overflow-hidden">
         {/* Background Image + Overlay */}
         <div className="absolute inset-0">
           <Image
-            src="/images/hero-workshop.jpg"
+            src="/image2.jpg"
             alt="Automotive workshop background"
             fill
             priority
             className="object-cover"
           />
-          <div className="absolute inset-0 bg-black/70" />
-          <div className="absolute inset-0 opacity-20" style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23dc2626' fill-opacity='0.15'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
-          }} />
+          <div className="absolute inset-0 bg-black/60" />
         </div>
 
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
+            {/* Back Button */}
+            <div className="mb-8">
+              <Button 
+                variant="outline" 
+                asChild
+                className="border-white/30 text-white hover:bg-white hover:text-black backdrop-blur-sm"
+              >
+                <Link href="/" className="flex items-center space-x-2">
+                  <ArrowLeft className="w-4 h-4" />
+                  <span>Back to Home</span>
+                </Link>
+              </Button>
+            </div>
 
             {/* Header */}
             <div className="mb-12">
-              <div className="inline-flex items-center space-x-2 bg-red-600/20 backdrop-blur-sm border border-red-500/30 rounded-full px-6 py-3 mb-8">
-                <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
-                <span className="text-red-400 font-semibold text-sm uppercase tracking-wider">
-                  Expert Advice
-                </span>
-              </div>
+              <Badge className="mb-6 bg-red-600/20 text-red-400 border-red-500/30 backdrop-blur-sm">
+                Expert Advice
+              </Badge>
               
-              <h1 className="text-4xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-                <span className="block text-red-500 gradient-text">Blog</span>
+              <h1 className="text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">
+                Automotive <span className="text-red-500">Blog</span>
               </h1>
               
-              <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+              <p className="text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed">
                 Expert automotive advice, maintenance tips, and the latest news from Zimbabwe's trusted 
                 vehicle repair specialists.
               </p>
@@ -99,7 +112,11 @@ export default async function BlogPage() {
               <div className="grid lg:grid-cols-2">
                 <div className="relative h-64 lg:h-full">
                   <Image
-                    src={featuredPost.image || "/images/routine-service.jpg"}
+                    src={
+                      featuredPost.image && featuredPost.image.trim()
+                        ? featuredPost.image
+                        : extractFirstImage(featuredPost.content) || "/placeholder.jpg"
+                    }
                     alt={featuredPost.title}
                     fill
                     className="object-cover"
@@ -138,11 +155,20 @@ export default async function BlogPage() {
       )}
 
       {/* Categories Filter */}
-      <section className="py-8 bg-gray-50">
+      <section className="py-12 bg-white border-b border-gray-200">
         <div className="container mx-auto px-4">
-          <div className="flex flex-wrap gap-2 justify-center">
+          <div className="text-center mb-8">
+            <h2 className="text-2xl font-bold text-gray-900 mb-2">Browse by Category</h2>
+            <p className="text-gray-600">Find articles on topics that interest you</p>
+          </div>
+          <div className="flex flex-wrap gap-3 justify-center">
             {categories.map((category) => (
-              <Button key={category} variant={category === "All" ? "default" : "outline"} size="sm">
+              <Button 
+                key={category} 
+                variant={category === "All" ? "default" : "outline"} 
+                size="sm"
+                className={category === "All" ? "bg-red-600 hover:bg-red-700 text-white" : "border-gray-300 text-gray-700 hover:bg-gray-50"}
+              >
                 {category}
               </Button>
             ))}
@@ -159,7 +185,16 @@ export default async function BlogPage() {
             {regularPosts.map((post) => (
               <Card key={post.id} className="overflow-hidden hover:shadow-lg transition-shadow">
                 <div className="relative h-48">
-                  <Image src={post.image || "/images/routine-service.jpg"} alt={post.title} fill className="object-cover" />
+                  <Image 
+                    src={
+                      post.image && post.image.trim()
+                        ? post.image
+                        : extractFirstImage(post.content) || "/placeholder.jpg"
+                    }
+                    alt={post.title}
+                    fill 
+                    className="object-cover" 
+                  />
                 </div>
                 <CardHeader>
                   <div className="flex items-center gap-2 mb-2">
@@ -196,16 +231,22 @@ export default async function BlogPage() {
       </section>
 
       {/* Newsletter Signup */}
-      <section className="py-16 bg-primary text-white">
+      <section className="py-16 bg-red-600 text-white">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-4">Stay Updated with Car Care Tips</h2>
-          <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
+          <p className="text-lg mb-8 opacity-90 max-w-2xl mx-auto">
             Subscribe to our newsletter for the latest automotive maintenance tips, seasonal advice, and exclusive
             promotions.
           </p>
-          <div className="max-w-md mx-auto flex gap-4">
-            <input type="email" placeholder="Enter your email" className="flex-1 px-4 py-2 rounded-lg text-gray-900" />
-            <Button variant="secondary">Subscribe</Button>
+          <div className="max-w-md mx-auto flex gap-3">
+            <input 
+              type="email" 
+              placeholder="Enter your email" 
+              className="flex-1 px-4 py-3 rounded-lg text-gray-900 border-0 focus:ring-2 focus:ring-white" 
+            />
+            <Button variant="secondary" className="bg-white text-red-600 hover:bg-gray-100">
+              Subscribe
+            </Button>
           </div>
         </div>
       </section>

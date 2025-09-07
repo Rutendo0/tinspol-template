@@ -4,10 +4,9 @@ import { MobileCTA } from "@/components/mobile-cta"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { CheckCircle, Shield, Award, Users, Clock, Wrench, Star, Target } from "lucide-react"
+import { CheckCircle, Shield, Award, Users, Clock, Wrench, Star, Target, ArrowLeft, Phone } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
-import { Reveal } from "@/components/ui/reveal"
 
 export default function AboutPage() {
   return (
@@ -15,60 +14,84 @@ export default function AboutPage() {
       <Header />
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 bg-gradient-to-br from-black via-gray-900 to-black overflow-hidden section-divider-parallax">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23dc2626' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
-          }}></div>
+      <section className="relative pt-32 pb-20 bg-gray-900 overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0">
+          <Image
+            src="/image.jpg"
+            alt="Tinspol Motors professional workshop"
+            fill
+            priority
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-black/60" />
         </div>
 
         <div className="container mx-auto px-4 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <Badge className="mb-4 bg-red-600 text-white hover:bg-red-700">100% Zimbabwean Owned</Badge>
-              <h1 className="text-4xl lg:text-5xl font-bold text-white mb-6">
-                Zimbabwe's Trusted 
-                <span className="block text-red-500 gradient-text">Vehicle Repair Specialists</span>
-              </h1>
-              <p className="text-xl text-gray-300 mb-8">
-                Tinspol Motors is a full-service automotive repairing company offering a broad range of services that the Zimbabwean market relies on daily. We are your trusted one-stop shop for repairs, tyres, spares, bodywork, and routine servicing, with clear communication and professional service standards.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" asChild className="bg-red-600 hover:bg-red-700 text-white">
-                  <Link href="/quote">Get Free Quote</Link>
-                </Button>
-                <Button variant="outline" size="lg" asChild className="border-white text-white hover:bg-white hover:text-black">
-                  <a href="tel:+263776556717">Call Now</a>
+          <div className="max-w-4xl mx-auto text-center">
+            <div className="space-y-8">
+              {/* Back Button */}
+              <div className="flex justify-center">
+                <Button 
+                  variant="outline" 
+                  asChild
+                  className="border-white/30 text-white hover:bg-white hover:text-black backdrop-blur-sm"
+                >
+                  <Link href="/" className="flex items-center space-x-2">
+                    <ArrowLeft className="w-4 h-4" />
+                    <span>Back to Home</span>
+                  </Link>
                 </Button>
               </div>
-            </div>
-            <div className="relative h-96 rounded-lg overflow-hidden">
-              <Image
-                src="/image.jpg"
-                alt="Tinspol Motors professional workshop"
-                fill
-                className="object-cover"
-              />
+
+              <div className="space-y-6">
+                <Badge className="bg-red-600/20 text-red-400 border-red-500/30 backdrop-blur-sm">
+                  100% Zimbabwean Owned
+                </Badge>
+                
+                <h1 className="text-4xl lg:text-6xl font-bold text-white leading-tight">
+                  Zimbabwe's Trusted 
+                  <span className="block text-red-500">Vehicle Repair Specialists</span>
+                </h1>
+                
+                <p className="text-xl text-gray-300 leading-relaxed max-w-3xl mx-auto">
+                  Tinspol Motors is a full-service automotive repairing company offering a broad range of services that the Zimbabwean market relies on daily. We are your trusted one-stop shop for repairs, tyres, spares, bodywork, and routine servicing.
+                </p>
+                
+                <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
+                  <Button size="lg" asChild className="bg-red-600 hover:bg-red-700 text-white">
+                    <Link href="/quote" className="flex items-center space-x-2">
+                      <span>Get Free Quote</span>
+                      <CheckCircle className="w-4 h-4" />
+                    </Link>
+                  </Button>
+                  <Button variant="outline" size="lg" asChild className="border-white/30 text-white hover:bg-white hover:text-black backdrop-blur-sm">
+                    <a href="tel:+263776556717" className="flex items-center space-x-2">
+                      <Phone className="w-4 h-4" />
+                      <span>Call Now</span>
+                    </a>
+                  </Button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-white border-b border-gray-200">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-4 gap-8 text-center">
             {[
-              { icon: Users, number: "100%", label: "Zimbabwean Owned" },
-              { icon: Wrench, number: "Quality", label: "Vehicle Repairs" },
-              { icon: CheckCircle, number: "Professional", label: "Service Team" },
-              { icon: Clock, number: "Mon-Sat", label: "Available" },
+              { icon: Users, number: "20+", label: "Years Experience" },
+              { icon: Wrench, number: "1000+", label: "Vehicles Serviced" },
+              { icon: CheckCircle, number: "100%", label: "Customer Satisfaction" },
+              { icon: Clock, number: "6 Days", label: "Weekly Service" },
             ].map((stat, index) => (
               <div key={index} className="space-y-4">
                 <stat.icon className="h-12 w-12 text-red-600 mx-auto" />
                 <div>
-                  <div className="text-3xl font-bold text-black">{stat.number}</div>
+                  <div className="text-3xl font-bold text-gray-900">{stat.number}</div>
                   <div className="text-gray-600">{stat.label}</div>
                 </div>
               </div>
@@ -80,38 +103,33 @@ export default function AboutPage() {
       {/* Our Story */}
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <div className="inline-flex items-center space-x-2 mb-4">
-                <div className="w-12 h-0.5 bg-red-600"></div>
-                <span className="text-red-600 font-semibold uppercase tracking-wider text-sm">Our Story</span>
-                <div className="w-12 h-0.5 bg-red-600"></div>
-              </div>
-              <h2 className="text-3xl font-bold mb-4 text-black">Our Story</h2>
-              <p className="text-xl text-gray-600">
+              <h2 className="text-3xl font-bold mb-4 text-gray-900">Our Story</h2>
+              <p className="text-lg text-gray-600">
                 Built on a foundation of quality, trust, and customer satisfaction
               </p>
             </div>
 
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="space-y-6">
-                <p className="text-gray-600 leading-relaxed">
+                <p className="text-gray-700 leading-relaxed text-lg">
                   Tinspol Motors is a full-service automotive repairing company offering a broad range of services that the Zimbabwean market relies on daily. We specialize in motor mechanics, suspension repairs and fitments, tyre repairs and fitments, car wash, panel beating, spares and body parts supplies, tyres supply, and routine services.
                 </p>
-                <p className="text-gray-600 leading-relaxed">
+                <p className="text-gray-700 leading-relaxed text-lg">
                   Our experienced team recognizes the need for a service center that combines technical expertise with 
                   genuine customer care. We are committed to providing quality workmanship that meets international standards
                   while understanding the unique needs of Zimbabwean motorists.
                 </p>
-                <p className="text-gray-600 leading-relaxed">
+                <p className="text-gray-700 leading-relaxed text-lg">
                   We use quality diagnostic equipment, maintain high standards of workmanship, and focus on building lasting
                   relationships with our customers. Our commitment to excellence has earned us the trust of customers who
                   return to us for all their vehicle repair needs.
                 </p>
               </div>
-              <div className="relative h-80 rounded-lg overflow-hidden">
+              <div className="relative h-[400px] rounded-lg overflow-hidden shadow-lg">
                 <Image
-                  src="/image1.jpg"
+                  src="/image2.jpg"
                   alt="Tinspol Motors team at work"
                   fill
                   className="object-cover"

@@ -33,6 +33,11 @@ export function AdminLayout({ children }: AdminLayoutProps) {
   const router = useRouter()
   const pathname = usePathname()
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   useEffect(() => {
     if (status === 'loading') return
@@ -173,14 +178,17 @@ export function AdminLayout({ children }: AdminLayoutProps) {
               <Menu className="h-5 w-5" />
             </Button>
             <div className="flex items-center space-x-4">
-              <span className="text-sm text-gray-400">
-                {new Date().toLocaleDateString('en-US', { 
-                  weekday: 'long', 
-                  year: 'numeric', 
-                  month: 'long', 
-                  day: 'numeric' 
-                })}
-              </span>
+              {/* Avoid hydration mismatch by rendering date only on client */}
+              {mounted && (
+                <span className="text-sm text-gray-400">
+                  {new Date().toLocaleDateString('en-US', { 
+                    weekday: 'long', 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+                  })}
+                </span>
+              )}
             </div>
           </div>
         </div>

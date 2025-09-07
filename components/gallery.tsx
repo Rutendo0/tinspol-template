@@ -19,23 +19,46 @@ const workImages = [
 
 export function Gallery() {
   return (
-    <section id="gallery" className="py-24 bg-gradient-to-b from-gray-50 to-white">
-      <div className="container mx-auto px-4">
+    <section id="gallery" className="relative py-28 bg-gradient-to-br from-gray-100 via-gray-200 to-gray-300 overflow-hidden">
+      {/* Section Indicator */}
+      <div className="absolute right-0 top-0 h-full w-1 bg-gradient-to-b from-red-600 via-red-500 to-red-600 shadow-lg shadow-red-600/20"></div>
+      
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-20">
+        <div className="absolute top-20 left-16 w-32 h-32 border-2 border-red-600 rounded-full animate-pulse"></div>
+        <div className="absolute bottom-20 right-16 w-24 h-24 border-2 border-black rounded-full animate-pulse animation-delay-600"></div>
+        <div className="absolute top-1/3 right-1/4 w-20 h-20 border border-red-400 rounded-full animate-float"></div>
+        <div className="absolute top-1/4 left-1/3 w-16 h-16 border border-black/30 rounded-full animate-float animation-delay-300"></div>
+      </div>
+
+      <div className="container mx-auto px-4 relative">
         {/* Section Header */}
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center space-x-2 mb-6">
-            <div className="w-12 h-0.5 bg-red-600"></div>
-            <span className="text-red-600 font-semibold uppercase tracking-wider text-sm">Our Work</span>
-            <div className="w-12 h-0.5 bg-red-600"></div>
+        <div className="text-center mb-20">
+          <div className="inline-flex items-center space-x-4 mb-8">
+            <div className="w-16 h-1 bg-gradient-to-r from-red-600 to-red-500 rounded-full"></div>
+            <span className="text-red-600 font-bold uppercase tracking-wider text-base px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full border border-red-200 shadow-lg">Our Work</span>
+            <div className="w-16 h-1 bg-gradient-to-l from-red-600 to-red-500 rounded-full"></div>
           </div>
-          <h2 className="text-4xl lg:text-5xl font-bold text-black mb-4">
+          <h2 className="text-4xl lg:text-6xl font-bold text-black mb-6">
             A Glimpse Into
-            <span className="block text-red-600">Tinspol Motors</span>
+            <span className="block gradient-text">Tinspol Motors</span>
           </h2>
+          <p className="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed font-medium mb-6">
+            Explore our portfolio of quality automotive services and satisfied customers.
+          </p>
+          <div className="w-24 h-1 bg-gradient-to-r from-red-600 to-red-500 rounded-full mx-auto"></div>
         </div>
 
         {/* Image Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+        <div className="relative grid sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+          {/* Grid Animation Background */}
+          <div className="absolute inset-0 opacity-10 pointer-events-none">
+            <div className="grid grid-cols-3 gap-8 h-full">
+              {Array.from({ length: 6 }).map((_, i) => (
+                <div key={i} className="border-2 border-dashed border-red-600/30 rounded-2xl animate-pulse" style={{ animationDelay: `${i * 300}ms` }}></div>
+              ))}
+            </div>
+          </div>
           {workImages.map((item, idx) => (
             <Card key={idx} className="overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 bg-white">
               <div className="relative aspect-[4/3]">

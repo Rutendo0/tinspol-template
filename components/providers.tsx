@@ -85,6 +85,8 @@ export function Providers({ children }: { children: React.ReactNode }) {
       <div id="route-root" className="route-container">
         {children}
       </div>
+      {/* App Toaster */}
+      {require('@/components/ui/toaster').Toaster ? require('@/components/ui/toaster').Toaster() : null}
     </SessionProvider>
   )
 }

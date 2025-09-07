@@ -27,6 +27,7 @@ interface BlogPost {
   title: string
   slug: string
   excerpt: string
+  image?: string | null
   category: string
   published: boolean
   featured: boolean
@@ -44,6 +45,12 @@ export default function AdminBlogPage() {
   const [loading, setLoading] = useState(true)
   const [searchTerm, setSearchTerm] = useState('')
   const [filterStatus, setFilterStatus] = useState<'all' | 'published' | 'draft'>('all')
+
+  // Use stable, timezone-fixed date formatting to avoid hydration mismatch
+  const formatDate = (iso: string) =>
+    new Date(iso).toLocaleDateString('en-GB', {
+      year: 'numeric', month: '2-digit', day: '2-digit', timeZone: 'UTC'
+    })
 
   useEffect(() => {
     if (status === 'loading') return
@@ -105,7 +112,7 @@ export default function AdminBlogPage() {
   }
 
   return (
-    <AdminLayout>
+    <AdminLayout suppressHydrationWarning>
       <div className="space-y-6">
         {/* Header */}
         <div className="flex items-center justify-between">
@@ -170,29 +177,55 @@ export default function AdminBlogPage() {
               <Card key={post.id} className="bg-white/10 backdrop-blur-md border-white/20">
                 <CardContent className="p-6">
                   <div className="flex items-start justify-between">
-                    <div className="flex-1">
-                      <div className="flex items-center space-x-2 mb-2">
-                        <h3 className="text-lg font-semibold text-white">{post.title}</h3>
-                        {post.featured && (
-                          <Badge className="bg-yellow-600 text-white">Featured</Badge>
-                        )}
-                        <Badge variant={post.published ? "default" : "secondary"}>
-                          {post.published ? "Published" : "Draft"}
-                        </Badge>
-                      </div>
-                      <p className="text-gray-300 mb-3 line-clamp-2">{post.excerpt}</p>
-                      <div className="flex items-center space-x-4 text-sm text-gray-400">
-                        <div className="flex items-center space-x-1">
-                          <Calendar className="h-4 w-4" />
-                          <span>{new Date(post.createdAt).toLocaleDateString()}</span>
+                    <div className="flex items-start gap-4 flex-1">
+                      {/* Thumbnail */}
+                      {(() => {
+                        const src = (post.image && post.image.trim()) ? post.image : '/placeholder.jpg'
+                        return (
+                          <div
+                            className="relative w-20 h-20 rounded-md overflow-hidden bg-white/10 border border-white/20 flex-shrink-0"
+                            style={{ backgroundImage: `url(${src})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+                            title={src}
+                          >
+                            <img
+                              src={src}
+                              alt={post.title}
+                              className="w-full h-full object-cover"
+                              loading="eager"
+                              decoding="async"
+                              onError={(e) => {
+                                const t = e.currentTarget as HTMLImageElement
+                                if (t.src.endsWith('/placeholder.jpg')) return
+                                t.src = '/placeholder.jpg'
+                              }}
+                            />
+                          </div>
+                        )
+                      })()}
+                      <div className="flex-1">
+                        <div className="flex items-center space-x-2 mb-2">
+                          <h3 className="text-lg font-semibold text-white">{post.title}</h3>
+                          {post.featured && (
+                            <Badge className="bg-yellow-600 text-white">Featured</Badge>
+                          )}
+                          <Badge variant={post.published ? "default" : "secondary"}>
+                            {post.published ? "Published" : "Draft"}
+                          </Badge>
                         </div>
-                        <div className="flex items-center space-x-1">
-                          <Clock className="h-4 w-4" />
-                          <span>Updated {new Date(post.updatedAt).toLocaleDateString()}</span>
+                        <p className="text-gray-300 mb-3 line-clamp-2">{post.excerpt}</p>
+                        <div className="flex items-center space-x-4 text-sm text-gray-400">
+                          <div className="flex items-center space-x-1">
+                            <Calendar className="h-4 w-4" />
+                            <span>{formatDate(post.createdAt)}</span>
+                          </div>
+                          <div className="flex items-center space-x-1">
+                            <Clock className="h-4 w-4" />
+                            <span>Updated {formatDate(post.updatedAt)}</span>
+                          </div>
+                          <Badge variant="outline" className="border-red-500/50 text-red-400">
+                            {post.category}
+                          </Badge>
                         </div>
-                        <Badge variant="outline" className="border-red-500/50 text-red-400">
-                          {post.category}
-                        </Badge>
                       </div>
                     </div>
                     <div className="flex items-center space-x-2 ml-4">

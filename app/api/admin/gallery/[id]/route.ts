@@ -3,9 +3,10 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 
+// Handle async params (Next.js 15)
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  ctx: { params: Promise<{ id: string }> } | { params: { id: string } }
 ) {
   try {
     const session = await getServerSession(authOptions)
@@ -14,8 +15,12 @@ export async function GET(
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
+    const rawParams = (ctx as any).params
+    const resolvedParams = rawParams && typeof rawParams.then === 'function' ? await rawParams : rawParams
+    const id: string = resolvedParams?.id
+
     const item = await prisma.galleryItem.findUnique({
-      where: { id: params.id },
+      where: { id },
       include: {
         author: {
           select: {
@@ -41,7 +46,7 @@ export async function GET(
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  ctx: { params: Promise<{ id: string }> } | { params: { id: string } }
 ) {
   try {
     const session = await getServerSession(authOptions)
@@ -53,8 +58,12 @@ export async function PUT(
     const body = await request.json()
     const { title, description, beforeImage, afterImage, category, featured } = body
 
+    const rawParams = (ctx as any).params
+    const resolvedParams = rawParams && typeof rawParams.then === 'function' ? await rawParams : rawParams
+    const id: string = resolvedParams?.id
+
     const item = await prisma.galleryItem.update({
-      where: { id: params.id },
+      where: { id },
       data: {
         title,
         description,
@@ -84,7 +93,7 @@ export async function PUT(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  ctx: { params: Promise<{ id: string }> } | { params: { id: string } }
 ) {
   try {
     const session = await getServerSession(authOptions)
@@ -93,8 +102,12 @@ export async function DELETE(
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
+    const rawParams = (ctx as any).params
+    const resolvedParams = rawParams && typeof rawParams.then === 'function' ? await rawParams : rawParams
+    const id: string = resolvedParams?.id
+
     await prisma.galleryItem.delete({
-      where: { id: params.id }
+      where: { id }
     })
 
     return NextResponse.json({ success: true })

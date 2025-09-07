@@ -4,7 +4,7 @@ import { MobileCTA } from "@/components/mobile-cta"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { CheckCircle, Clock, Shield, Wrench } from "lucide-react"
+import { CheckCircle, Clock, Shield, Wrench, ArrowLeft } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -14,55 +14,120 @@ export default function TyresPage() {
       <Header />
 
       {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-r from-primary/10 to-primary/5">
+      <section className="relative pt-32 pb-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <Badge className="mb-4">Tyre Specialists</Badge>
-              <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">Tyre Repairs & Fitments</h1>
-              <p className="text-xl text-gray-600 mb-8">
-                Complete tyre services including repairs, replacements, balancing, and alignment. We stock quality tyres
-                from leading brands for all vehicle types.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" asChild>
-                  <Link href="/quote">Get Tyre Quote</Link>
-                </Button>
-                <Button variant="outline" size="lg" asChild>
-                  <a href="tel:+263123456789">Call Now</a>
+            <div className="space-y-6">
+              {/* Back Button */}
+              <div>
+                <Button 
+                  variant="outline" 
+                  asChild
+                  className="border-gray-300 text-gray-600 hover:bg-gray-50"
+                >
+                  <Link href="/services" className="flex items-center space-x-2">
+                    <ArrowLeft className="w-4 h-4" />
+                    <span>Back to Services</span>
+                  </Link>
                 </Button>
               </div>
+
+              <div className="space-y-4">
+                <Badge className="bg-red-50 text-red-600 border-red-200 hover:bg-red-100">
+                  Tyre Specialists
+                </Badge>
+                
+                <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
+                  Tyre Repairs & 
+                  <span className="text-red-600">Fitments</span>
+                </h1>
+                
+                <p className="text-lg text-gray-600 leading-relaxed">
+                  Complete tyre services including repairs, replacements, balancing, and alignment. We stock quality tyres
+                  from leading brands for all vehicle types and budgets.
+                </p>
+                
+                <div className="flex flex-col sm:flex-row gap-3 pt-4">
+                  <Button size="lg" asChild className="bg-red-600 hover:bg-red-700 text-white">
+                    <Link href="/quote" className="flex items-center space-x-2">
+                      <span>Get Tyre Quote</span>
+                      <CheckCircle className="w-4 h-4" />
+                    </Link>
+                  </Button>
+                  <Button variant="outline" size="lg" asChild className="border-gray-300 text-gray-700 hover:bg-gray-50">
+                    <a href="tel:+263776556717" className="flex items-center space-x-2">
+                      <span>Call Now</span>
+                      <Clock className="w-4 h-4" />
+                    </a>
+                  </Button>
+                </div>
+              </div>
             </div>
-            <div className="relative h-96 rounded-lg overflow-hidden">
-              <Image
-                src="/images/tyre-service.jpg"
-                alt="Professional tyre fitting service"
-                fill
-                className="object-cover"
-              />
+            
+            <div className="relative">
+              <div className="relative h-[400px] rounded-lg overflow-hidden shadow-lg">
+                <Image
+                  src="/image3.jpg"
+                  alt="Professional tyre fitting service"
+                  fill
+                  className="object-cover"
+                />
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Services */}
-      <section className="py-16">
+      {/* Services Overview */}
+      <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">Tyre Services</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Our Tyre Services</h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Professional tyre services for all vehicle types
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
-              { icon: Wrench, title: "Tyre Fitting", desc: "Professional tyre installation and mounting" },
-              { icon: CheckCircle, title: "Puncture Repairs", desc: "Quick and reliable puncture fixes" },
-              { icon: Shield, title: "Wheel Balancing", desc: "Precision balancing for smooth driving" },
-              { icon: Clock, title: "Wheel Alignment", desc: "Proper alignment for even wear" },
+              {
+                icon: Wrench,
+                title: "Tyre Fitting",
+                desc: "Professional tyre installation with proper balancing and alignment",
+              },
+              {
+                icon: Shield,
+                title: "Tyre Repairs",
+                desc: "Puncture repairs and tyre maintenance to extend tyre life",
+              },
+              {
+                icon: CheckCircle,
+                title: "Wheel Balancing",
+                desc: "Precision wheel balancing for smooth driving and even tyre wear",
+              },
+              {
+                icon: Clock,
+                title: "Wheel Alignment",
+                desc: "Professional wheel alignment to improve handling and tyre longevity",
+              },
+              {
+                icon: Wrench,
+                title: "Tyre Rotation",
+                desc: "Regular tyre rotation service to ensure even wear patterns",
+              },
+              {
+                icon: Shield,
+                title: "Pressure Checks",
+                desc: "Regular tyre pressure monitoring and adjustment service",
+              },
             ].map((service, index) => (
-              <Card key={index} className="text-center">
+              <Card key={index} className="border-0 shadow-md hover:shadow-lg transition-shadow">
                 <CardHeader>
-                  <service.icon className="h-12 w-12 text-primary mx-auto mb-4" />
-                  <CardTitle>{service.title}</CardTitle>
+                  <service.icon className="w-8 h-8 text-red-600 mb-2" />
+                  <CardTitle className="text-xl">{service.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <CardDescription>{service.desc}</CardDescription>
+                  <p className="text-gray-600">{service.desc}</p>
                 </CardContent>
               </Card>
             ))}
@@ -71,24 +136,30 @@ export default function TyresPage() {
       </section>
 
       {/* Tyre Brands */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">Quality Tyre Brands</h2>
-          <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Quality Tyre Brands</h2>
+            <p className="text-lg text-gray-600">
+              We stock tyres from leading manufacturers
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               "Bridgestone",
-              "Michelin",
+              "Michelin", 
               "Continental",
-              "Dunlop",
-              "Goodyear",
               "Pirelli",
+              "Goodyear",
+              "Dunlop",
               "Yokohama",
-              "Falken",
-              "Kumho",
-              "Hankook",
+              "Hankook"
             ].map((brand, index) => (
-              <Card key={index} className="text-center p-6">
-                <h3 className="font-semibold text-lg">{brand}</h3>
+              <Card key={index} className="text-center p-6 shadow-md">
+                <CardContent className="p-0">
+                  <h3 className="font-semibold text-gray-900">{brand}</h3>
+                </CardContent>
               </Card>
             ))}
           </div>
@@ -96,68 +167,99 @@ export default function TyresPage() {
       </section>
 
       {/* Pricing */}
-      <section className="py-16">
+      <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
-          <div className="max-w-2xl mx-auto">
-            <h2 className="text-3xl font-bold text-center mb-8">Tyre Service Pricing</h2>
-            <Card>
-              <CardHeader>
-                <CardTitle>Service Costs</CardTitle>
-                <CardDescription>Competitive pricing on all tyre services</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="flex justify-between">
-                  <span>Puncture Repair</span>
-                  <span className="font-semibold">$15 - $25</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Tyre Fitting (per tyre)</span>
-                  <span className="font-semibold">$20 - $35</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Wheel Balancing (per wheel)</span>
-                  <span className="font-semibold">$15 - $25</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Wheel Alignment</span>
-                  <span className="font-semibold">$80 - $120</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Budget Tyres (each)</span>
-                  <span className="font-semibold">$60 - $150</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Premium Tyres (each)</span>
-                  <span className="font-semibold">$150 - $400</span>
-                </div>
-                <div className="pt-4 border-t">
-                  <p className="text-sm text-gray-600">* Tyre prices vary by size and brand. Installation included.</p>
-                </div>
-              </CardContent>
-            </Card>
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">Tyre Service Pricing</h2>
+              <p className="text-lg text-gray-600">
+                Competitive pricing for all tyre services
+              </p>
+            </div>
+            
+            <div className="grid md:grid-cols-2 gap-8">
+              <Card className="shadow-lg">
+                <CardHeader>
+                  <CardTitle className="text-xl">Service Costs</CardTitle>
+                  <CardDescription>Professional tyre services</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  {[
+                    { service: "Tyre Fitting (per tyre)", price: "$15 - $25" },
+                    { service: "Puncture Repair", price: "$10 - $20" },
+                    { service: "Wheel Balancing", price: "$20 - $40" },
+                    { service: "Wheel Alignment", price: "$50 - $100" },
+                  ].map((item, index) => (
+                    <div key={index} className="flex justify-between items-center py-2 border-b border-gray-100 last:border-b-0">
+                      <span className="text-gray-700">{item.service}</span>
+                      <span className="font-semibold text-red-600">{item.price}</span>
+                    </div>
+                  ))}
+                </CardContent>
+              </Card>
+
+              <Card className="shadow-lg">
+                <CardHeader>
+                  <CardTitle className="text-xl">Tyre Price Ranges</CardTitle>
+                  <CardDescription>Per tyre, fitted and balanced</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  {[
+                    { category: "Budget Tyres", price: "$50 - $100" },
+                    { category: "Mid-Range Tyres", price: "$100 - $200" },
+                    { category: "Premium Tyres", price: "$200 - $400" },
+                    { category: "Performance Tyres", price: "$300 - $600" },
+                  ].map((item, index) => (
+                    <div key={index} className="flex justify-between items-center py-2 border-b border-gray-100 last:border-b-0">
+                      <span className="text-gray-700">{item.category}</span>
+                      <span className="font-semibold text-red-600">{item.price}</span>
+                    </div>
+                  ))}
+                </CardContent>
+              </Card>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-16 bg-primary text-white">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-4">Need New Tyres?</h2>
-          <p className="text-xl mb-8 opacity-90">Get a quote on quality tyres with professional fitting service.</p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" variant="secondary" asChild>
-              <Link href="/quote">Get Tyre Quote</Link>
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="bg-transparent border-white text-white hover:bg-white hover:text-primary"
-              asChild
-            >
-              <a href="https://wa.me/263123456789" className="bg-green-600 hover:bg-green-700 border-green-600">
-                WhatsApp Us
-              </a>
-            </Button>
+      {/* FAQ Section */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h2>
+            <p className="text-lg text-gray-600">
+              Common questions about our tyre services
+            </p>
+          </div>
+          
+          <div className="max-w-3xl mx-auto space-y-6">
+            {[
+              {
+                q: "How often should I replace my tyres?",
+                a: "Tyres should typically be replaced every 40,000-60,000 km or when tread depth reaches 1.6mm. However, this varies based on driving conditions and tyre quality.",
+              },
+              {
+                q: "Do you offer mobile tyre fitting?",
+                a: "Yes, we offer mobile tyre fitting services for your convenience. Contact us to arrange a mobile service at your location.",
+              },
+              {
+                q: "What's included in wheel alignment?",
+                a: "Our wheel alignment service includes checking and adjusting camber, caster, and toe angles to manufacturer specifications, plus a test drive.",
+              },
+              {
+                q: "Can you repair run-flat tyres?",
+                a: "Run-flat tyres can sometimes be repaired depending on the damage location and severity. We'll assess each case individually and advise accordingly.",
+              },
+            ].map((faq, index) => (
+              <Card key={index} className="shadow-md">
+                <CardHeader>
+                  <CardTitle className="text-lg text-gray-900">{faq.q}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600">{faq.a}</p>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </div>
       </section>

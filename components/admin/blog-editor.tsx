@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -13,8 +13,9 @@ import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Badge } from '@/components/ui/badge'
 import { Save, Eye, Upload, X, Link, Image } from 'lucide-react'
-import { CldUploadWidget } from 'next-cloudinary'
 import { FileUpload } from '@/components/ui/file-upload'
+import { showToast } from '@/components/ui/toaster'
+import { AlertDialog, AlertDialogContent, AlertDialogHeader, AlertDialogTitle, AlertDialogDescription, AlertDialogFooter, AlertDialogCancel, AlertDialogAction } from '@/components/ui/alert-dialog'
 
 interface BlogPost {
   id?: string
@@ -62,10 +63,32 @@ export function BlogEditor({ post, isEditing = false }: BlogEditorProps) {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
+  const [postCreatedDialogOpen, setPostCreatedDialogOpen] = useState(false)
+  const [createdPost, setCreatedPost] = useState<{ id: string; slug: string } | null>(null)
   const [imageInputMethod, setImageInputMethod] = useState<'upload' | 'url'>('upload')
   const [imageUrl, setImageUrl] = useState('')
-  const [contentImageMethod, setContentImageMethod] = useState<'cloud' | 'url'>('cloud')
-  const hasCloudinary = false // Disabled for now - using local file upload instead
+  const [contentImageMethod, setContentImageMethod] = useState<'upload' | 'url'>('upload')
+  const [contentBody, setContentBody] = useState('')
+  const [contentImages, setContentImages] = useState<string[]>([])
+
+  // Initialize content fields from existing post (migrate old posts)
+  useEffect(() => {
+    const raw = (post?.content || formData.content || '').trim()
+    if (!raw) {
+      setContentBody('')
+      setContentImages([])
+      return
+    }
+    // Extract images in markdown ![alt](url)
+    const matches = Array.from(raw.matchAll(/!\[[^\]]*\]\(([^)]+)\)/g))
+    const urls = matches.map((m) => m[1]).filter(Boolean)
+    setContentImages(urls)
+
+    // Remove image markdown from body
+    const bodyOnly = raw.replace(/!\[[^\]]*\]\(([^)]+)\)/g, '').trim()
+    setContentBody(bodyOnly)
+  // only run once on mount or when post changes
+  }, [post])
 
   // Auto-generate slug from title
   useEffect(() => {
@@ -78,8 +101,7 @@ export function BlogEditor({ post, isEditing = false }: BlogEditorProps) {
     }
   }, [formData.title, isEditing])
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+  async function submitPost(isPublished: boolean) {
     setLoading(true)
     setError('')
     setSuccess('')
@@ -88,21 +110,40 @@ export function BlogEditor({ post, isEditing = false }: BlogEditorProps) {
       const url = isEditing ? `/api/admin/blog/${post?.id}` : '/api/admin/blog'
       const method = isEditing ? 'PUT' : 'POST'
 
+      // Build payload directly to avoid stale state
+      const combinedContent = [
+        contentBody.trim(),
+        ...contentImages.map((url) => `![Image](${url})`),
+      ]
+        .filter(Boolean)
+        .join('\n\n')
+
+      const payload = {
+        ...formData,
+        content: combinedContent,
+        published: isPublished,
+      }
+
       const response = await fetch(url, {
         method,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
       })
 
       if (response.ok) {
         setSuccess(isEditing ? 'Post updated successfully!' : 'Post created successfully!')
-        setTimeout(() => {
-          router.push('/admin/blog')
-        }, 1500)
+        showToast(isEditing ? 'Post updated' : 'Post created', 'success')
+        const data = await response.json().catch(() => null)
+        if (!isEditing && data) {
+          setCreatedPost({ id: data.id, slug: data.slug })
+          setPostCreatedDialogOpen(true)
+          return
+        }
+        router.push('/admin/blog')
+        router.refresh()
+        return
       } else {
-        const data = await response.json()
+        const data = await response.json().catch(() => ({}))
         setError(data.error || 'An error occurred')
       }
     } catch (error) {
@@ -112,24 +153,17 @@ export function BlogEditor({ post, isEditing = false }: BlogEditorProps) {
     }
   }
 
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    await submitPost(formData.published)
+  }
+
   const handleSaveDraft = async () => {
-    const draftData = { ...formData, published: false }
-    setFormData(draftData)
-    
-    // Trigger form submission with draft data
-    const event = new Event('submit', { bubbles: true, cancelable: true })
-    document.getElementById('blog-form')?.dispatchEvent(event)
+    await submitPost(false)
   }
 
   const handlePublish = async () => {
-    const publishData = { ...formData, published: true }
-    setFormData(publishData)
-    
-    // Trigger form submission with published data
-    setTimeout(() => {
-      const event = new Event('submit', { bubbles: true, cancelable: true })
-      document.getElementById('blog-form')?.dispatchEvent(event)
-    }, 100)
+    await submitPost(true)
   }
 
   return (
@@ -231,13 +265,13 @@ export function BlogEditor({ post, isEditing = false }: BlogEditorProps) {
                       <div className="flex items-center space-x-1 p-1 bg-white/5 rounded-lg">
                         <Button
                           type="button"
-                          variant={contentImageMethod === 'cloud' ? 'default' : 'ghost'}
+                          variant={contentImageMethod === 'upload' ? 'default' : 'ghost'}
                           size="sm"
-                          onClick={() => setContentImageMethod('cloud')}
-                          className={contentImageMethod === 'cloud' ? 'bg-red-600 hover:bg-red-700 text-white text-xs px-2 py-1' : 'text-white hover:bg-white/10 hover:text-white text-xs px-2 py-1'}
+                          onClick={() => setContentImageMethod('upload')}
+                          className={contentImageMethod === 'upload' ? 'bg-red-600 hover:bg-red-700 text-white text-xs px-2 py-1' : 'text-white hover:bg-white/10 hover:text-white text-xs px-2 py-1'}
                         >
                           <Upload className="h-3 w-3 mr-1" />
-                          Cloud
+                          Upload
                         </Button>
                         <Button
                           type="button"
@@ -251,32 +285,19 @@ export function BlogEditor({ post, isEditing = false }: BlogEditorProps) {
                         </Button>
                       </div>
                       
-                      {contentImageMethod === 'cloud' ? (
-                        <CldUploadWidget
-                          uploadPreset="tinspol_blog"
-                          onSuccess={(result: any) => {
-                            const imageMarkdown = `\n![Image](${result.info.secure_url})\n`
-                            setFormData(prev => ({ 
-                              ...prev, 
-                              content: prev.content + imageMarkdown 
-                            }))
+                      {contentImageMethod === 'upload' ? (
+                        <FileUpload
+                          mode="api"
+                          onUpload={(url) => {
+                            setContentImages((prev) => [...prev, url])
                             setSuccess('Image added to content successfully!')
                             setTimeout(() => setSuccess(''), 3000)
                           }}
+                          className="text-white hover:text-white hover:bg-white/10 bg-transparent border-white/20 text-xs px-2 py-1"
                         >
-                          {({ open }) => (
-                            <Button
-                              type="button"
-                              variant="outline"
-                              size="sm"
-                              onClick={() => open()}
-                              className="text-white hover:text-white hover:bg-white/10 bg-transparent border-white/20 text-xs px-2 py-1"
-                            >
-                              <Image className="h-4 w-4 mr-1" />
-                              Add Image
-                            </Button>
-                          )}
-                        </CldUploadWidget>
+                          <Image className="h-4 w-4 mr-1" />
+                          Add Image
+                        </FileUpload>
                       ) : (
                         <Button
                           type="button"
@@ -285,11 +306,7 @@ export function BlogEditor({ post, isEditing = false }: BlogEditorProps) {
                           onClick={() => {
                             const imageUrl = prompt('Enter image URL:')
                             if (imageUrl) {
-                              const imageMarkdown = `\n![Image](${imageUrl})\n`
-                              setFormData(prev => ({ 
-                                ...prev, 
-                                content: prev.content + imageMarkdown 
-                              }))
+                              setContentImages((prev) => [...prev, imageUrl])
                               setSuccess('Image URL added to content successfully!')
                               setTimeout(() => setSuccess(''), 3000)
                             }
@@ -304,8 +321,8 @@ export function BlogEditor({ post, isEditing = false }: BlogEditorProps) {
                   </div>
                   <Textarea
                     id="content"
-                    value={formData.content}
-                    onChange={(e) => setFormData(prev => ({ ...prev, content: e.target.value }))}
+                    value={contentBody}
+                    onChange={(e) => setContentBody(e.target.value)}
                     className="bg-white/10 border-white/20 text-white placeholder:text-gray-400 min-h-[400px]"
                     placeholder="Write your blog post content here..."
                     required
@@ -314,6 +331,29 @@ export function BlogEditor({ post, isEditing = false }: BlogEditorProps) {
                     <span>Supports Markdown formatting</span>
                     <span>Use "Add Image" buttons above to insert images</span>
                   </div>
+
+                  {/* Visual preview of content images (separate from textarea) */}
+                  {!!contentImages.length && (
+                    <div className="mt-4 space-y-2">
+                      <Label className="text-white">Content Images</Label>
+                      <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                        {contentImages.map((url, idx) => (
+                          <div key={idx} className="relative rounded-lg overflow-hidden border border-white/10">
+                            <img src={url} alt={`Image ${idx + 1}`} className="w-full h-32 object-cover" />
+                            <Button
+                              type="button"
+                              size="sm"
+                              variant="destructive"
+                              className="absolute top-2 right-2"
+                              onClick={() => setContentImages((prev) => prev.filter((_, i) => i !== idx))}
+                            >
+                              <X className="h-4 w-4" />
+                            </Button>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
               </CardContent>
             </Card>
@@ -431,36 +471,15 @@ export function BlogEditor({ post, isEditing = false }: BlogEditorProps) {
 
                     {/* Upload Method */}
                     {imageInputMethod === 'upload' && (
-                      hasCloudinary ? (
-                        <CldUploadWidget
-                          uploadPreset="tinspol_blog"
-                          onSuccess={(result: any) => {
-                            setFormData(prev => ({ ...prev, image: result.info.secure_url }))
-                          }}
-                        >
-                          {({ open }) => (
-                            <Button
-                              type="button"
-                              variant="outline"
-                              onClick={() => open()}
-                              className="w-full border-white/20 text-white hover:bg-white hover:text-black bg-transparent"
-                            >
-                              <Upload className="h-4 w-4 mr-2" />
-                              {formData.image ? 'Change Image' : 'Upload Image'}
-                            </Button>
-                          )}
-                        </CldUploadWidget>
-                      ) : (
-                        <FileUpload
-                          onUpload={(url) => {
-                            setFormData(prev => ({ ...prev, image: url }))
-                            console.log('Blog image uploaded:', url.substring(0, 50) + '...')
-                          }}
-                          className="w-full border-white/20 text-white hover:bg-white hover:text-black bg-transparent"
-                        >
-                          {formData.image ? 'Change Image' : 'Upload Image'}
-                        </FileUpload>
-                      )
+                      <FileUpload
+                        onUpload={(url) => {
+                          setFormData(prev => ({ ...prev, image: url }))
+                          console.log('Blog image uploaded:', url.substring(0, 50) + '...')
+                        }}
+                        className="w-full border-white/20 text-white hover:bg-white hover:text-black bg-transparent"
+                      >
+                        {formData.image ? 'Change Image' : 'Upload Image'}
+                      </FileUpload>
                     )}
 
                     {/* URL Method */}
@@ -548,9 +567,21 @@ export function BlogEditor({ post, isEditing = false }: BlogEditorProps) {
                     <p className="text-gray-300">{formData.excerpt || 'Post excerpt will appear here...'}</p>
                   </div>
                   <div className="prose prose-invert max-w-none">
-                    <div className="text-gray-300 whitespace-pre-wrap">
-                      {formData.content || 'Post content will appear here...'}
-                    </div>
+                    <div
+                      className="text-gray-300 whitespace-pre-wrap"
+                      dangerouslySetInnerHTML={{
+                        __html: ([
+                          contentBody,
+                          ...contentImages.map((url) => `![Image](${url})`),
+                        ]
+                          .filter(Boolean)
+                          .join('\n\n') || 'Post content will appear here...')
+                          .split('\n\n')
+                          .map((p) => p.replace(/!\[(.*?)\]\((.*?)\)/g, '<img alt="$1" src="$2" class="my-4 rounded-lg" />'))
+                          .map((p) => `<p>${p}</p>`) 
+                          .join(''),
+                      }}
+                    />
                   </div>
                 </div>
               </CardContent>
@@ -592,6 +623,51 @@ export function BlogEditor({ post, isEditing = false }: BlogEditorProps) {
           </div>
         </div>
       </form>
+
+      {/* Post Created Dialog */}
+      {!isEditing && (
+        <AlertDialog open={postCreatedDialogOpen} onOpenChange={setPostCreatedDialogOpen}>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Post created</AlertDialogTitle>
+              <AlertDialogDescription>
+                Your post has been created successfully. What would you like to do next?
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel
+                // Ensure button doesn't submit the form
+                onClick={(e) => {
+                  e.preventDefault()
+                  // Close dialog first, then navigate a tick later
+                  setPostCreatedDialogOpen(false)
+                  setTimeout(() => {
+                    router.replace('/admin/blog/new')
+                    router.refresh()
+                  }, 0)
+                }}
+              >
+                Create another
+              </AlertDialogCancel>
+              <AlertDialogAction
+                // Ensure button doesn't submit the form
+                onClick={(e) => {
+                  e.preventDefault()
+                  // Close dialog first, then navigate a tick later
+                  setPostCreatedDialogOpen(false)
+                  const target = createdPost ? `/admin/blog/${createdPost.id}/edit` : '/admin/blog'
+                  setTimeout(() => {
+                    router.push(target)
+                    router.refresh()
+                  }, 0)
+                }}
+              >
+                Go to post in dashboard
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
+      )}
     </div>
   )
 }

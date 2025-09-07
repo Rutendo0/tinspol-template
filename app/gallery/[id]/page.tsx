@@ -24,8 +24,9 @@ async function getGalleryItem(id: string) {
   }
 }
 
-export default async function GalleryItemPage({ params }: { params: { id: string } }) {
-  const item = await getGalleryItem(params.id)
+export default async function GalleryItemPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
+  const item = await getGalleryItem(id)
   if (!item) notFound()
 
   return (

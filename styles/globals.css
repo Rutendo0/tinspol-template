@@ -146,6 +146,42 @@
 }
 .animate-spin-slow { animation: spin-slow 12s linear infinite }
 
+/* Float animation for decorative elements */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) }
+  50% { transform: translateY(-10px) }
+}
+.animate-float { animation: float 3s ease-in-out infinite }
+
+/* Animation delays */
+.animation-delay-300 { animation-delay: 300ms }
+.animation-delay-600 { animation-delay: 600ms }
+
+/* Gradient text effect */
+.gradient-text {
+  background: linear-gradient(135deg, #dc2626, #ef4444, #dc2626);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-shift 3s ease infinite;
+}
+
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50% }
+  50% { background-position: 100% 50% }
+}
+
+/* Glow effects */
+.glow-red {
+  box-shadow: 0 0 20px rgba(220, 38, 38, 0.3);
+}
+
+/* Enhanced shadows */
+.shadow-3xl {
+  box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.25);
+}
+
 /* Parallax divider helper */
 .section-divider-parallax {
   position: relative;

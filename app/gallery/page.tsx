@@ -53,56 +53,21 @@ export default async function GalleryPage() {
     <div className="min-h-screen">
       <Header />
 
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-20 bg-gradient-to-br from-black via-gray-900 to-black overflow-hidden">
-        {/* Background Image + Overlay */}
-        <div className="absolute inset-0">
-          <Image
-            src="/images/hero-workshop.jpg"
-            alt="Automotive workshop background"
-            fill
-            priority
-            className="object-cover"
-          />
-          <div className="absolute inset-0 bg-black/70" />
-          <div className="absolute inset-0 opacity-20" style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23dc2626' fill-opacity='0.15'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
-          }} />
-        </div>
 
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-           
-            {/* Header */}
-            <div className="mb-12">
-              <div className="inline-flex items-center space-x-2 bg-red-600/20 backdrop-blur-sm border border-red-500/30 rounded-full px-6 py-3 mb-8">
-                <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
-                <span className="text-red-400 font-semibold text-sm uppercase tracking-wider">
-                  Our Work
-                </span>
-              </div>
-              
-              <h1 className="text-4xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-                <span className="block text-red-500 gradient-text">Gallery</span>
-              </h1>
-              
-              <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-                See the transformation! Witness the quality craftsmanship that makes Tinspol Motors Zimbabwe's trusted choice.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Categories Filter */}
-      <section className="py-8 bg-gray-50">
+      <section className="py-12 bg-white border-b border-gray-200">
         <div className="container mx-auto px-4">
-          <div className="flex flex-wrap gap-2 justify-center">
-            <Button variant="default" size="sm" className="bg-red-600 hover:bg-red-700">
-              All
+          <div className="text-center mb-8">
+            <h2 className="text-2xl font-bold text-gray-900 mb-2">Browse by Category</h2>
+            <p className="text-gray-600">Filter our work by service type</p>
+          </div>
+          <div className="flex flex-wrap gap-3 justify-center">
+            <Button variant="default" size="sm" className="bg-red-600 hover:bg-red-700 text-white">
+              All Work
             </Button>
             {Object.entries(categoryLabels).map(([key, label]) => (
-              <Button key={key} variant="outline" size="sm">
+              <Button key={key} variant="outline" size="sm" className="border-gray-300 text-gray-700 hover:bg-gray-50">
                 {label}
               </Button>
             ))}
@@ -128,7 +93,7 @@ export default async function GalleryPage() {
                       <div className="grid grid-cols-2 h-64">
                         <div className="relative overflow-hidden">
                           <Image
-                            src={item.beforeImage}
+                            src={item.beforeImage && item.beforeImage.trim() ? item.beforeImage : "/placeholder.jpg"}
                             alt="Before"
                             fill
                             className="object-cover transition-transform duration-300 group-hover:scale-105"
@@ -139,7 +104,7 @@ export default async function GalleryPage() {
                         </div>
                         <div className="relative overflow-hidden">
                           <Image
-                            src={item.afterImage}
+                            src={item.afterImage && item.afterImage.trim() ? item.afterImage : "/placeholder.jpg"}
                             alt="After"
                             fill
                             className="object-cover transition-transform duration-300 group-hover:scale-105"
@@ -200,7 +165,7 @@ export default async function GalleryPage() {
                       <div className="grid grid-cols-2 h-48">
                         <div className="relative overflow-hidden">
                           <Image
-                            src={item.beforeImage}
+                            src={item.beforeImage && item.beforeImage.trim() ? item.beforeImage : "/placeholder.jpg"}
                             alt="Before"
                             fill
                             className="object-cover transition-transform duration-300 group-hover:scale-105"
@@ -211,7 +176,7 @@ export default async function GalleryPage() {
                         </div>
                         <div className="relative overflow-hidden">
                           <Image
-                            src={item.afterImage}
+                            src={item.afterImage && item.afterImage.trim() ? item.afterImage : "/placeholder.jpg"}
                             alt="After"
                             fill
                             className="object-cover transition-transform duration-300 group-hover:scale-105"

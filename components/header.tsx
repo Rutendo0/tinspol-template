@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
-import { Menu, X, Phone, ChevronDown, FileText, Settings } from "lucide-react"
+import { Menu, X, Phone, ChevronDown, FileText, Settings, MessageCircle } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
@@ -135,17 +135,63 @@ export function Header() {
 
           {/* Desktop CTA Buttons */}
           <div className="hidden lg:flex items-center space-x-3">
+            {/* Phone Dropdown */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  className="text-black hover:text-red-600 hover:bg-red-50 transition-all duration-300"
+                >
+                  <Phone className="w-4 h-4 mr-2" />
+                  <span className="font-medium">Call Now</span>
+                  <ChevronDown className="w-3 h-3 ml-1" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-56 bg-white/95 backdrop-blur-md border border-gray-200/50 shadow-xl">
+                <DropdownMenuItem asChild className="hover:bg-red-50 hover:text-red-600">
+                  <a href="tel:+263776556717" className="flex items-center space-x-2">
+                    <Phone className="w-4 h-4" />
+                    <div>
+                      <div className="font-medium">Mobile</div>
+                      <div className="text-xs text-gray-500">+263 776 556 717</div>
+                    </div>
+                  </a>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild className="hover:bg-red-50 hover:text-red-600">
+                  <a href="tel:+263242779099" className="flex items-center space-x-2">
+                    <Phone className="w-4 h-4" />
+                    <div>
+                      <div className="font-medium">Office</div>
+                      <div className="text-xs text-gray-500">+263 242 779 099</div>
+                    </div>
+                  </a>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild className="hover:bg-red-50 hover:text-red-600">
+                  <a href="tel:+263719757957" className="flex items-center space-x-2">
+                    <Phone className="w-4 h-4" />
+                    <div>
+                      <div className="font-medium">Alternative</div>
+                      <div className="text-xs text-gray-500">+263 719 757 957</div>
+                    </div>
+                  </a>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+
+            {/* WhatsApp Button */}
             <Button 
               variant="ghost" 
               size="sm" 
               asChild
-              className="text-black hover:text-red-600 hover:bg-red-50 transition-all duration-300"
+              className="text-green-600 hover:text-green-700 hover:bg-green-50 transition-all duration-300"
             >
-              <a href="tel:+263776556717" className="flex items-center space-x-2">
-                <Phone className="w-4 h-4" />
-                <span className="font-medium">Call Now</span>
+              <a href="https://wa.me/263776556717" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2">
+                <MessageCircle className="w-4 h-4" />
+                <span className="font-medium">WhatsApp</span>
               </a>
             </Button>
+
             <Button 
               variant="ghost" 
               size="sm" 
@@ -264,16 +310,62 @@ export function Header() {
 
               {/* Mobile CTA Buttons */}
               <div className="pt-4 space-y-3 border-t border-gray-200">
+                {/* Phone Numbers */}
+                <div className="space-y-2">
+                  <div className="text-sm font-medium text-gray-700 mb-2">Call Us:</div>
+                  <Button 
+                    variant="outline" 
+                    className="w-full border-red-600 text-red-600 hover:bg-red-600 hover:text-white text-sm"
+                    asChild
+                  >
+                    <a href="tel:+263776556717" className="flex items-center justify-center space-x-2">
+                      <Phone className="w-4 h-4" />
+                      <div className="text-left">
+                        <div>Mobile</div>
+                        <div className="text-xs opacity-75">+263 776 556 717</div>
+                      </div>
+                    </a>
+                  </Button>
+                  <Button 
+                    variant="outline" 
+                    className="w-full border-red-600 text-red-600 hover:bg-red-600 hover:text-white text-sm"
+                    asChild
+                  >
+                    <a href="tel:+263242779099" className="flex items-center justify-center space-x-2">
+                      <Phone className="w-4 h-4" />
+                      <div className="text-left">
+                        <div>Office</div>
+                        <div className="text-xs opacity-75">+263 242 779 099</div>
+                      </div>
+                    </a>
+                  </Button>
+                  <Button 
+                    variant="outline" 
+                    className="w-full border-red-600 text-red-600 hover:bg-red-600 hover:text-white text-sm"
+                    asChild
+                  >
+                    <a href="tel:+263719757957" className="flex items-center justify-center space-x-2">
+                      <Phone className="w-4 h-4" />
+                      <div className="text-left">
+                        <div>Alternative</div>
+                        <div className="text-xs opacity-75">+263 719 757 957</div>
+                      </div>
+                    </a>
+                  </Button>
+                </div>
+
+                {/* WhatsApp */}
                 <Button 
                   variant="outline" 
-                  className="w-full border-red-600 text-red-600 hover:bg-red-600 hover:text-white"
+                  className="w-full border-green-600 text-green-600 hover:bg-green-600 hover:text-white"
                   asChild
                 >
-                  <a href="tel:+263776556717" className="flex items-center justify-center space-x-2">
-                    <Phone className="w-4 h-4" />
-                    <span>Call Now</span>
+                  <a href="https://wa.me/263776556717" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center space-x-2">
+                    <MessageCircle className="w-4 h-4" />
+                    <span>WhatsApp Us</span>
                   </a>
                 </Button>
+
                 <Button 
                   variant="outline" 
                   className="w-full border-gray-600 text-gray-600 hover:bg-gray-600 hover:text-white"

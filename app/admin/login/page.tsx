@@ -17,7 +17,27 @@ export default function AdminLoginPage() {
   const [showPassword, setShowPassword] = useState(false)
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
+  const [testing, setTesting] = useState(false)
   const router = useRouter()
+
+  const testCredentials = async () => {
+    setTesting(true)
+    try {
+      const response = await fetch('/api/test-auth', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: 'admin@tinspol.com', password: 'admin123' })
+      })
+      const result = await response.json()
+      console.log('Test result:', result)
+      alert(`Test result: ${JSON.stringify(result, null, 2)}`)
+    } catch (error) {
+      console.error('Test error:', error)
+      alert(`Test error: ${error}`)
+    } finally {
+      setTesting(false)
+    }
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -25,22 +45,36 @@ export default function AdminLoginPage() {
     setError('')
 
     try {
+      console.log('Attempting login with:', { email })
+      
       const result = await signIn('credentials', {
         email,
         password,
         redirect: false,
       })
 
+      console.log('SignIn result:', result)
+
       if (result?.error) {
-        setError('Invalid email or password')
-      } else {
+        console.error('SignIn error:', result.error)
+        setError(`Login failed: ${result.error}`)
+      } else if (result?.ok) {
+        console.log('SignIn successful, getting session...')
         const session = await getSession()
+        console.log('Session:', session)
+        
         if (session) {
+          console.log('Redirecting to dashboard...')
           router.push('/admin/dashboard')
+        } else {
+          setError('Session creation failed')
         }
+      } else {
+        setError('Unknown login error')
       }
     } catch (error) {
-      setError('An error occurred. Please try again.')
+      console.error('Login catch error:', error)
+      setError(`An error occurred: ${error}`)
     } finally {
       setLoading(false)
     }
@@ -134,6 +168,16 @@ export default function AdminLoginPage() {
                 disabled={loading}
               >
                 {loading ? 'Signing in...' : 'Sign In'}
+              </Button>
+              
+              <Button
+                type="button"
+                variant="outline"
+                className="w-full mt-2 border-white/20 text-white hover:bg-white/10"
+                onClick={testCredentials}
+                disabled={testing}
+              >
+                {testing ? 'Testing...' : 'Test Credentials'}
               </Button>
             </form>
           </CardContent>

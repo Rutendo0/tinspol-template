@@ -4,7 +4,7 @@ import { MobileCTA } from "@/components/mobile-cta"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { CheckCircle, Shield, Droplets } from "lucide-react"
+import { CheckCircle, Shield, Droplets, ArrowLeft, Clock, Wrench } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -14,89 +14,142 @@ export default function CarWashPage() {
       <Header />
 
       {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-r from-primary/10 to-primary/5">
+      <section className="relative pt-32 pb-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <Badge className="mb-4">Premium Car Care</Badge>
-              <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">Professional Car Wash Services</h1>
-              <p className="text-xl text-gray-600 mb-8">
-                Complete car cleaning services from basic wash to premium detailing. Keep your vehicle looking its best
-                with our professional car care services.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" asChild>
-                  <Link href="/booking">Book Car Wash</Link>
-                </Button>
-                <Button variant="outline" size="lg" asChild>
-                  <a href="tel:+263776556717">Call Now</a>
+            <div className="space-y-6">
+              {/* Back Button */}
+              <div>
+                <Button 
+                  variant="outline" 
+                  asChild
+                  className="border-gray-300 text-gray-600 hover:bg-gray-50"
+                >
+                  <Link href="/services" className="flex items-center space-x-2">
+                    <ArrowLeft className="w-4 h-4" />
+                    <span>Back to Services</span>
+                  </Link>
                 </Button>
               </div>
+
+              <div className="space-y-4">
+                <Badge className="bg-red-50 text-red-600 border-red-200 hover:bg-red-100">
+                  Premium Car Care
+                </Badge>
+                
+                <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
+                  Professional Car Wash 
+                  <span className="text-red-600">Services</span>
+                </h1>
+                
+                <p className="text-lg text-gray-600 leading-relaxed">
+                  Complete car cleaning services from basic wash to premium detailing. Keep your vehicle looking its best
+                  with our professional car care services and eco-friendly products.
+                </p>
+                
+                <div className="flex flex-col sm:flex-row gap-3 pt-4">
+                  <Button size="lg" asChild className="bg-red-600 hover:bg-red-700 text-white">
+                    <Link href="/quote" className="flex items-center space-x-2">
+                      <span>Book Car Wash</span>
+                      <CheckCircle className="w-4 h-4" />
+                    </Link>
+                  </Button>
+                  <Button variant="outline" size="lg" asChild className="border-gray-300 text-gray-700 hover:bg-gray-50">
+                    <a href="tel:+263776556717" className="flex items-center space-x-2">
+                      <span>Call Now</span>
+                      <Clock className="w-4 h-4" />
+                    </a>
+                  </Button>
+                </div>
+              </div>
             </div>
-            <div className="relative h-96 rounded-lg overflow-hidden">
-              <Image src="/images/car-wash.jpg" alt="Professional car wash service" fill className="object-cover" />
+            
+            <div className="relative">
+              <div className="relative h-[400px] rounded-lg overflow-hidden shadow-lg">
+                <Image
+                  src="/image4.jpg"
+                  alt="Professional car wash service"
+                  fill
+                  className="object-cover"
+                />
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Service Packages */}
-      <section className="py-16">
+      <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">Car Wash Packages</h2>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Car Wash Packages</h2>
+            <p className="text-lg text-gray-600">
+              Choose the perfect package for your vehicle
+            </p>
+          </div>
+          
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
                 title: "Basic Wash",
                 price: "$15",
-                icon: Droplets,
-                features: ["Exterior wash & rinse", "Wheel cleaning", "Basic interior vacuum", "Dashboard wipe down"],
+                features: [
+                  "Exterior wash & rinse",
+                  "Wheel cleaning",
+                  "Basic interior vacuum",
+                  "Window cleaning"
+                ],
+                popular: false
               },
               {
                 title: "Premium Wash",
                 price: "$25",
-                icon: Shield,
                 features: [
                   "Everything in Basic",
-                  "Interior deep clean",
-                  "Seat cleaning",
-                  "Window cleaning (inside & out)",
-                  "Tire shine",
+                  "Tire shine application",
+                  "Dashboard cleaning",
+                  "Interior wipe down",
+                  "Air freshener"
                 ],
+                popular: true
               },
               {
-                title: "Full Valet",
+                title: "Full Detail",
                 price: "$45",
-                icon: CheckCircle,
                 features: [
                   "Everything in Premium",
-                  "Engine bay cleaning",
                   "Wax application",
+                  "Deep interior cleaning",
                   "Leather conditioning",
-                  "Air freshener",
+                  "Engine bay cleaning"
                 ],
-              },
+                popular: false
+              }
             ].map((pkg, index) => (
-              <Card key={index} className="text-center relative">
-                {index === 1 && (
-                  <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2">Most Popular</Badge>
+              <Card key={index} className={`relative shadow-lg ${pkg.popular ? 'border-red-500 border-2' : ''}`}>
+                {pkg.popular && (
+                  <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                    <Badge className="bg-red-600 text-white">Most Popular</Badge>
+                  </div>
                 )}
-                <CardHeader>
-                  <pkg.icon className="h-12 w-12 text-primary mx-auto mb-4" />
+                <CardHeader className="text-center">
                   <CardTitle className="text-2xl">{pkg.title}</CardTitle>
-                  <CardDescription className="text-3xl font-bold text-primary">{pkg.price}</CardDescription>
+                  <div className="text-3xl font-bold text-red-600">{pkg.price}</div>
                 </CardHeader>
                 <CardContent>
-                  <ul className="space-y-2 text-left">
-                    {pkg.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-center gap-2">
-                        <CheckCircle className="h-4 w-4 text-green-500" />
-                        <span className="text-sm">{feature}</span>
+                  <ul className="space-y-2">
+                    {pkg.features.map((feature, i) => (
+                      <li key={i} className="flex items-center space-x-2">
+                        <CheckCircle className="w-4 h-4 text-red-600" />
+                        <span className="text-gray-700">{feature}</span>
                       </li>
                     ))}
                   </ul>
-                  <Button className="w-full mt-6" asChild>
-                    <Link href="/booking">Book Now</Link>
+                  <Button 
+                    className={`w-full mt-6 ${pkg.popular ? 'bg-red-600 hover:bg-red-700' : 'bg-gray-600 hover:bg-gray-700'} text-white`}
+                    asChild
+                  >
+                    <Link href="/quote">Choose Package</Link>
                   </Button>
                 </CardContent>
               </Card>
@@ -105,74 +158,132 @@ export default function CarWashPage() {
         </div>
       </section>
 
-      {/* Add-On Services */}
-      <section className="py-16 bg-gray-50">
+      {/* Additional Services */}
+      <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">Add-On Services</h2>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Additional Services</h2>
+            <p className="text-lg text-gray-600">
+              Extra services to keep your car in perfect condition
+            </p>
+          </div>
+          
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { service: "Engine Wash", price: "$15" },
-              { service: "Undercarriage Wash", price: "$10" },
-              { service: "Carpet Shampooing", price: "$20" },
-              { service: "Headlight Restoration", price: "$25" },
-              { service: "Paint Protection", price: "$30" },
-              { service: "Odor Elimination", price: "$15" },
-              { service: "Leather Treatment", price: "$20" },
-              { service: "Chrome Polishing", price: "$15" },
-            ].map((addon, index) => (
-              <Card key={index} className="text-center p-4">
-                <h3 className="font-semibold mb-2">{addon.service}</h3>
-                <p className="text-primary font-bold text-lg">{addon.price}</p>
+              {
+                icon: Shield,
+                title: "Paint Protection",
+                desc: "Ceramic coating and paint protection services",
+                price: "From $50"
+              },
+              {
+                icon: Droplets,
+                title: "Interior Detailing",
+                desc: "Deep cleaning and conditioning of all interior surfaces",
+                price: "From $30"
+              },
+              {
+                icon: Wrench,
+                title: "Engine Cleaning",
+                desc: "Professional engine bay cleaning and degreasing",
+                price: "From $25"
+              },
+              {
+                icon: CheckCircle,
+                title: "Headlight Restoration",
+                desc: "Restore cloudy headlights to like-new condition",
+                price: "From $40"
+              }
+            ].map((service, index) => (
+              <Card key={index} className="text-center shadow-md hover:shadow-lg transition-shadow">
+                <CardHeader>
+                  <service.icon className="w-8 h-8 text-red-600 mx-auto mb-2" />
+                  <CardTitle className="text-lg">{service.title}</CardTitle>
+                  <div className="text-red-600 font-semibold">{service.price}</div>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600 text-sm">{service.desc}</p>
+                </CardContent>
               </Card>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Process */}
-      <section className="py-16">
+      {/* Why Choose Us */}
+      <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">Our Process</h2>
-          <div className="grid md:grid-cols-4 gap-8">
-            {[
-              { step: "1", title: "Book Online", desc: "Choose your package and preferred time slot" },
-              { step: "2", title: "Drop Off", desc: "Bring your vehicle to our facility" },
-              { step: "3", title: "Professional Clean", desc: "Our team performs the selected service" },
-              { step: "4", title: "Quality Check", desc: "Final inspection and pickup notification" },
-            ].map((item, index) => (
-              <div key={index} className="text-center">
-                <div className="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
-                  {item.step}
-                </div>
-                <h3 className="font-semibold text-lg mb-2">{item.title}</h3>
-                <p className="text-gray-600">{item.desc}</p>
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="text-3xl font-bold text-gray-900 mb-6">Why Choose Our Car Wash?</h2>
+              <div className="space-y-4">
+                {[
+                  "Eco-friendly cleaning products",
+                  "Professional trained staff",
+                  "State-of-the-art equipment",
+                  "Quick and efficient service",
+                  "Competitive pricing",
+                  "Customer satisfaction guarantee",
+                  "Convenient location and hours",
+                  "Loyalty program available"
+                ].map((feature, index) => (
+                  <div key={index} className="flex items-center space-x-3">
+                    <CheckCircle className="w-5 h-5 text-red-600 flex-shrink-0" />
+                    <span className="text-gray-700">{feature}</span>
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
+            <div className="relative h-[300px] rounded-lg overflow-hidden shadow-lg">
+              <Image
+                src="/image4.jpg"
+                alt="Professional car washing"
+                fill
+                className="object-cover"
+              />
+            </div>
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-16 bg-primary text-white">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-4">Ready for a Clean Car?</h2>
-          <p className="text-xl mb-8 opacity-90">
-            Book your car wash service today and drive away with a spotless vehicle.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" variant="secondary" asChild>
-              <Link href="/booking">Book Car Wash</Link>
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="bg-transparent border-white text-white hover:bg-white hover:text-primary"
-              asChild
-            >
-              <a href="https://wa.me/263776556717" className="bg-green-600 hover:bg-green-700 border-green-600">
-                WhatsApp Us
-              </a>
-            </Button>
+      {/* FAQ Section */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h2>
+            <p className="text-lg text-gray-600">
+              Common questions about our car wash services
+            </p>
+          </div>
+          
+          <div className="max-w-3xl mx-auto space-y-6">
+            {[
+              {
+                q: "How long does a car wash take?",
+                a: "Basic wash takes 15-20 minutes, Premium wash takes 25-30 minutes, and Full Detail can take 60-90 minutes depending on vehicle size and condition.",
+              },
+              {
+                q: "Do you offer mobile car wash services?",
+                a: "Yes, we offer mobile car wash services for your convenience. Contact us to schedule a mobile service at your location.",
+              },
+              {
+                q: "Are your cleaning products safe for my car?",
+                a: "Absolutely! We use only high-quality, car-safe cleaning products that won't damage your vehicle's paint, interior, or other surfaces.",
+              },
+              {
+                q: "Do you offer membership or loyalty programs?",
+                a: "Yes, we offer a loyalty program with discounts for regular customers. Ask about our monthly unlimited wash packages for the best value.",
+              },
+            ].map((faq, index) => (
+              <Card key={index} className="shadow-md">
+                <CardHeader>
+                  <CardTitle className="text-lg text-gray-900">{faq.q}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600">{faq.a}</p>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </div>
       </section>

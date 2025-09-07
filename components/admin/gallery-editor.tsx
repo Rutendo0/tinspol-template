@@ -14,6 +14,7 @@ import { Badge } from '@/components/ui/badge'
 import { Save, Upload, X, Image as ImageIcon, Link } from 'lucide-react'
 import { CldUploadWidget } from 'next-cloudinary'
 import { FileUpload } from '@/components/ui/file-upload'
+import { showToast } from '@/components/ui/toaster'
 
 interface GalleryItem {
   id?: string
@@ -86,9 +87,10 @@ export function GalleryEditor({ item, isEditing = false }: GalleryEditorProps) {
 
       if (response.ok) {
         setSuccess(isEditing ? 'Gallery item updated successfully!' : 'Gallery item created successfully!')
-        setTimeout(() => {
-          router.push('/admin/gallery')
-        }, 1500)
+        showToast(isEditing ? 'Gallery updated' : 'Gallery created', 'success')
+        router.push('/admin/gallery')
+        router.refresh()
+        return
       } else {
         const data = await response.json()
         setError(data.error || 'An error occurred')
