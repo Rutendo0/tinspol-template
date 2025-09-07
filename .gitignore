@@ -22,6 +22,10 @@ yarn-error.log*
 # vercel
 .vercel
 
+# local caches (prevent huge files from being committed)
+.local/
+.pnpm-store/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
