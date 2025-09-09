@@ -97,29 +97,15 @@ export default function SuspensionPage() {
               },
               {
                 icon: Wrench,
-                title: "Strut Replacement",
-                desc: "Complete strut assembly replacement and installation service",
+                title: "Control Arm",
+                desc: "Control arm inspection and replacement for precise steering and stable handling",
               },
               {
                 icon: Shield,
-                title: "Spring Replacement",
-                desc: "Coil spring and leaf spring replacement for all vehicle types",
+                title: "Wheel Alignment",
+                desc: "Professional wheel alignment to restore proper handling and tyre life",
               },
-              {
-                icon: CheckCircle,
-                title: "Suspension Bushings",
-                desc: "Replacement of worn suspension bushings and rubber components",
-              },
-              {
-                icon: Settings,
-                title: "Ball Joint Service",
-                desc: "Ball joint inspection, replacement, and lubrication service",
-              },
-              {
-                icon: Wrench,
-                title: "Suspension Alignment",
-                desc: "Proper suspension geometry setup and wheel alignment",
-              },
+
             ].map((service, index) => (
               <Card key={index} className="border-0 shadow-md hover:shadow-lg transition-shadow">
                 <CardHeader>
@@ -135,6 +121,39 @@ export default function SuspensionPage() {
         </div>
       </section>
 
+      {/* Suspension Components */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Suspension Components</h2>
+            <p className="text-lg text-gray-600">These are some common components of a vehicle suspension system</p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              "Shock Absorbers",
+              "Coil Springs (depending on model)",
+              "Control Arms",
+              "Stabilizer Links",
+              "Stabilizer Bar Bushes",
+              "Steering Knuckle",
+              "Wheel Hub & Bearings",
+              "Tie Rod Ends",
+              "Leaf Springs",
+              "D-Bushes",
+              "Shackle Bushes",
+              "Bump Stops",
+            ].map((component, index) => (
+              <Card key={index} className="text-center shadow-md hover:shadow-lg transition-shadow">
+                <CardHeader>
+                  <CardTitle className="text-lg">{component}</CardTitle>
+                </CardHeader>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Signs You Need Suspension Work */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
@@ -144,7 +163,7 @@ export default function SuspensionPage() {
               <div className="space-y-4">
                 {[
                   "Vehicle bounces excessively after hitting bumps",
-                  "Uneven tire wear patterns",
+                  "Uneven tyre wear patterns",
                   "Vehicle pulls to one side while driving",
                   "Nose dives when braking",
                   "Excessive body roll when cornering",
@@ -190,14 +209,14 @@ export default function SuspensionPage() {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   {[
-                    { service: "Shock Absorber (per pair)", price: "$150 - $400" },
-                    { service: "Strut Replacement (per pair)", price: "$300 - $800" },
-                    { service: "Spring Replacement", price: "$200 - $500" },
-                    { service: "Ball Joint Replacement", price: "$100 - $300" },
+                    { service: "Shock Absorber (per pair)" },
+                    { service: "Strut Replacement (per pair)" },
+                    { service: "Spring Replacement" },
+                    { service: "Ball Joint Replacement" },
                   ].map((item, index) => (
                     <div key={index} className="flex justify-between items-center py-2 border-b border-gray-100 last:border-b-0">
                       <span className="text-gray-700">{item.service}</span>
-                      <span className="font-semibold text-red-600">{item.price}</span>
+                      <span className="font-semibold text-gray-500">Contact for quote</span>
                     </div>
                   ))}
                 </CardContent>
@@ -210,14 +229,14 @@ export default function SuspensionPage() {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   {[
-                    { package: "Front Suspension Overhaul", price: "$800 - $1,500" },
-                    { package: "Rear Suspension Overhaul", price: "$600 - $1,200" },
-                    { package: "Complete Suspension Service", price: "$1,200 - $2,500" },
-                    { package: "Performance Upgrade", price: "$1,500 - $3,000" },
+                    { package: "Front Suspension Overhaul" },
+                    { package: "Rear Suspension Overhaul" },
+                    { package: "Complete Suspension Service" },
+                    { package: "Performance Upgrade" },
                   ].map((item, index) => (
                     <div key={index} className="flex justify-between items-center py-2 border-b border-gray-100 last:border-b-0">
                       <span className="text-gray-700">{item.package}</span>
-                      <span className="font-semibold text-red-600">{item.price}</span>
+                      <span className="font-semibold text-gray-500">Contact for quote</span>
                     </div>
                   ))}
                 </CardContent>
@@ -245,7 +264,7 @@ export default function SuspensionPage() {
               },
               {
                 q: "Can I drive with worn suspension?",
-                a: "While possible, worn suspension affects safety, handling, and tire wear. It's recommended to address suspension issues promptly to maintain vehicle safety and performance.",
+                a: "While possible, worn suspension affects safety, handling, and tyre wear. It's recommended to address suspension issues promptly to maintain vehicle safety and performance.",
               },
               {
                 q: "Do you offer performance suspension upgrades?",

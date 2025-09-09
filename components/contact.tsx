@@ -64,7 +64,7 @@ export function Contact() {
     {
       icon: Phone,
       title: "Call Us",
-      details: ["0776 556 717", "(0242) 779 099", "0719 757 957"],
+      details: ["0776 556 717", "(0242) 779 099"],
       action: "tel:+263776556717",
       color: "from-red-500 to-red-600"
     },

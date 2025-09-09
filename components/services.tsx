@@ -20,7 +20,7 @@ const services = [
     icon: Settings,
     title: "Suspension Repairs",
     description: "Professional suspension system repairs and upgrades for optimal ride comfort.",
-    features: ["Shock Absorbers", "Struts Replacement", "Alignment", "Springs"],
+    features: ["Shock Absorbers", "Control Arm", "Wheel Alignment"],
     turnaround: "1-2 days",
     image: "/image2.jpg",
     href: "/services/suspension",

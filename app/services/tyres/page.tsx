@@ -171,9 +171,9 @@ export default function TyresPage() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">Tyre Service Pricing</h2>
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">Tyre Services</h2>
               <p className="text-lg text-gray-600">
-                Competitive pricing for all tyre services
+                Contact us for a personalized quote
               </p>
             </div>
             
@@ -185,14 +185,14 @@ export default function TyresPage() {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   {[
-                    { service: "Tyre Fitting (per tyre)", price: "$15 - $25" },
-                    { service: "Puncture Repair", price: "$10 - $20" },
-                    { service: "Wheel Balancing", price: "$20 - $40" },
-                    { service: "Wheel Alignment", price: "$50 - $100" },
+                    { service: "Tyre Fitting (per tyre)" },
+                    { service: "Puncture Repair" },
+                    { service: "Wheel Balancing" },
+                    { service: "Wheel Alignment" },
                   ].map((item, index) => (
                     <div key={index} className="flex justify-between items-center py-2 border-b border-gray-100 last:border-b-0">
                       <span className="text-gray-700">{item.service}</span>
-                      <span className="font-semibold text-red-600">{item.price}</span>
+                      <span className="font-semibold text-gray-500">Contact for quote</span>
                     </div>
                   ))}
                 </CardContent>
@@ -205,14 +205,14 @@ export default function TyresPage() {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   {[
-                    { category: "Budget Tyres", price: "$50 - $100" },
-                    { category: "Mid-Range Tyres", price: "$100 - $200" },
-                    { category: "Premium Tyres", price: "$200 - $400" },
-                    { category: "Performance Tyres", price: "$300 - $600" },
+                    { category: "Budget Tyres" },
+                    { category: "Mid-Range Tyres" },
+                    { category: "Premium Tyres" },
+                    { category: "Performance Tyres" },
                   ].map((item, index) => (
                     <div key={index} className="flex justify-between items-center py-2 border-b border-gray-100 last:border-b-0">
                       <span className="text-gray-700">{item.category}</span>
-                      <span className="font-semibold text-red-600">{item.price}</span>
+                      <span className="font-semibold text-gray-500">Contact for quote</span>
                     </div>
                   ))}
                 </CardContent>

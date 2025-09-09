@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getServerSession } from 'next-auth'
-import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
+import { getSession } from '@/lib/session'
 
 // In Next.js 15 dynamic API routes, `params` can be a Promise and must be awaited
 export async function GET(
@@ -9,7 +8,7 @@ export async function GET(
   ctx: { params: Promise<{ id: string }> } | { params: { id: string } }
 ) {
   try {
-    const session = await getServerSession(authOptions)
+    const session = await getSession()
     
     if (!session) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
@@ -50,7 +49,7 @@ export async function PUT(
   ctx: { params: Promise<{ id: string }> } | { params: { id: string } }
 ) {
   try {
-    const session = await getServerSession(authOptions)
+    const session = await getSession()
     
     if (!session) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
@@ -88,8 +87,8 @@ export async function PUT(
         content,
         image,
         category,
-        featured: featured || false,
-        published: published || false,
+        featured: !!featured,
+        published: !!published,
         readTime: readTime || '5 min read',
       },
       include: {
@@ -116,7 +115,7 @@ export async function DELETE(
   ctx: { params: Promise<{ id: string }> } | { params: { id: string } }
 ) {
   try {
-    const session = await getServerSession(authOptions)
+    const session = await getSession()
     
     if (!session) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })

@@ -2,7 +2,7 @@ import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { MobileCTA } from "@/components/mobile-cta"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { CheckCircle, Shield, Droplets, ArrowLeft, Clock, Wrench } from "lucide-react"
 import Image from "next/image"
@@ -92,7 +92,7 @@ export default function CarWashPage() {
             {[
               {
                 title: "Basic Wash",
-                price: "$15",
+
                 features: [
                   "Exterior wash & rinse",
                   "Wheel cleaning",
@@ -103,7 +103,6 @@ export default function CarWashPage() {
               },
               {
                 title: "Premium Wash",
-                price: "$25",
                 features: [
                   "Everything in Basic",
                   "Tire shine application",
@@ -115,7 +114,6 @@ export default function CarWashPage() {
               },
               {
                 title: "Full Detail",
-                price: "$45",
                 features: [
                   "Everything in Premium",
                   "Wax application",
@@ -134,7 +132,6 @@ export default function CarWashPage() {
                 )}
                 <CardHeader className="text-center">
                   <CardTitle className="text-2xl">{pkg.title}</CardTitle>
-                  <div className="text-3xl font-bold text-red-600">{pkg.price}</div>
                 </CardHeader>
                 <CardContent>
                   <ul className="space-y-2">
@@ -174,32 +171,27 @@ export default function CarWashPage() {
                 icon: Shield,
                 title: "Paint Protection",
                 desc: "Ceramic coating and paint protection services",
-                price: "From $50"
               },
               {
                 icon: Droplets,
                 title: "Interior Detailing",
                 desc: "Deep cleaning and conditioning of all interior surfaces",
-                price: "From $30"
               },
               {
                 icon: Wrench,
                 title: "Engine Cleaning",
                 desc: "Professional engine bay cleaning and degreasing",
-                price: "From $25"
               },
               {
                 icon: CheckCircle,
                 title: "Headlight Restoration",
                 desc: "Restore cloudy headlights to like-new condition",
-                price: "From $40"
               }
             ].map((service, index) => (
               <Card key={index} className="text-center shadow-md hover:shadow-lg transition-shadow">
                 <CardHeader>
                   <service.icon className="w-8 h-8 text-red-600 mx-auto mb-2" />
                   <CardTitle className="text-lg">{service.title}</CardTitle>
-                  <div className="text-red-600 font-semibold">{service.price}</div>
                 </CardHeader>
                 <CardContent>
                   <p className="text-gray-600 text-sm">{service.desc}</p>

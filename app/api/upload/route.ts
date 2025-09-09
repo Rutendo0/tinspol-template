@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import cloudinary from '@/lib/cloudinary'
+import { prisma } from '@/lib/prisma'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -19,7 +19,8 @@ export async function POST(req: Request) {
 
     // 5MB limit
     const maxSize = 5 * 1024 * 1024
-    if ((file as any).size > maxSize) {
+    const size = (file as any).size as number | undefined
+    if (size && size > maxSize) {
       return NextResponse.json({ error: 'File too large (max 5MB)' }, { status: 400 })
     }
 
@@ -27,19 +28,17 @@ export async function POST(req: Request) {
     const arrayBuffer = await file.arrayBuffer()
     const buffer = Buffer.from(arrayBuffer)
 
-    // Upload to Cloudinary using upload_stream to avoid temp files
-    const uploadResult: { secure_url: string } = await new Promise((resolve, reject) => {
-      const stream = cloudinary.uploader.upload_stream(
-        { folder: 'tinspol/uploads', resource_type: 'image' },
-        (error, result) => {
-          if (error || !result) return reject(error || new Error('Upload failed'))
-          resolve(result as any)
-        }
-      )
-      stream.end(buffer)
+    // Persist in DB
+    const created = await prisma.media.create({
+      data: {
+        filename: (file as any).name || 'upload',
+        mimeType: file.type,
+        data: buffer,
+      }
     })
 
-    return NextResponse.json({ url: uploadResult.secure_url })
+    const url = `/api/media/${created.id}`
+    return NextResponse.json({ url, id: created.id })
   } catch (err) {
     console.error('Upload error:', err)
     return NextResponse.json({ error: 'Upload failed' }, { status: 500 })

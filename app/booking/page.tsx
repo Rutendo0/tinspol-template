@@ -32,19 +32,19 @@ const washPackages = [
   {
     id: "basic",
     name: "Basic Wash",
-    price: 15,
+
     features: ["Exterior wash & rinse", "Wheel cleaning", "Basic interior vacuum", "Dashboard wipe down"],
   },
   {
     id: "premium",
     name: "Premium Wash",
-    price: 25,
+
     features: ["Everything in Basic", "Interior deep clean", "Seat cleaning", "Window cleaning", "Tire shine"],
   },
   {
     id: "valet",
     name: "Full Valet",
-    price: 45,
+
     features: [
       "Everything in Premium",
       "Engine bay cleaning",
@@ -56,12 +56,12 @@ const washPackages = [
 ]
 
 const addOns = [
-  { id: "engine", name: "Engine Wash", price: 15 },
-  { id: "undercarriage", name: "Undercarriage Wash", price: 10 },
-  { id: "carpet", name: "Carpet Shampooing", price: 20 },
-  { id: "headlight", name: "Headlight Restoration", price: 25 },
-  { id: "protection", name: "Paint Protection", price: 30 },
-  { id: "odor", name: "Odor Elimination", price: 15 },
+  { id: "engine", name: "Engine Wash" },
+  { id: "undercarriage", name: "Undercarriage Wash" },
+  { id: "carpet", name: "Carpet Shampooing" },
+  { id: "headlight", name: "Headlight Restoration" },
+  { id: "protection", name: "Paint Protection" },
+  { id: "odor", name: "Odor Elimination" },
 ]
 
 export default function BookingPage() {
@@ -97,14 +97,8 @@ export default function BookingPage() {
     alert("Booking request submitted! We'll confirm your appointment via WhatsApp/SMS.")
   }
 
-  const calculateTotal = () => {
-    const packagePrice = washPackages.find((pkg) => pkg.id === formData.package)?.price || 0
-    const addOnPrice = formData.addOns.reduce((total, addonId) => {
-      const addon = addOns.find((a) => a.id === addonId)
-      return total + (addon?.price || 0)
-    }, 0)
-    return packagePrice + addOnPrice
-  }
+  // Pricing removed: no total calculation
+  const calculateTotal = () => 0
 
   return (
     <div className="min-h-screen">
@@ -235,7 +229,7 @@ export default function BookingPage() {
                         <RadioGroupItem value={pkg.id} id={pkg.id} className="mt-1" />
                         <div className="flex-1">
                           <Label htmlFor={pkg.id} className="text-lg font-semibold cursor-pointer">
-                            {pkg.name} - ${pkg.price}
+                            {pkg.name}
                           </Label>
                           <ul className="mt-2 space-y-1">
                             {pkg.features.map((feature, index) => (
@@ -278,7 +272,6 @@ export default function BookingPage() {
                         />
                         <Label htmlFor={addon.id} className="flex-1 cursor-pointer">
                           <span className="font-medium">{addon.name}</span>
-                          <span className="text-primary font-semibold ml-2">+${addon.price}</span>
                         </Label>
                       </div>
                     ))}

@@ -26,6 +26,7 @@ interface BlogPost {
   title: string
   slug: string
   excerpt: string
+  content?: string | null
   image?: string | null
   category: string
   published: boolean
@@ -195,11 +196,16 @@ export default function AdminBlogPage() {
                     <div className="flex items-start gap-4 flex-1">
                       {/* Thumbnail */}
                       {(() => {
-                        const src = (post.image && post.image.trim()) ? post.image : '/placeholder.jpg'
+                        // Prefer explicit image field; if missing, try to extract first markdown image from content
+                        let src = (post.image && post.image.trim()) ? post.image.trim() : ''
+                        if (!src && post.content) {
+                          const m = post.content.match(/!\[[^\]]*\]\(([^)]+)\)/)
+                          if (m && m[1]) src = m[1]
+                        }
+                        if (!src) src = '/placeholder.jpg'
                         return (
                           <div
                             className="relative w-20 h-20 rounded-md overflow-hidden bg-white/10 border border-white/20 flex-shrink-0"
-                            style={{ backgroundImage: `url(${src})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
                             title={src}
                           >
                             <img

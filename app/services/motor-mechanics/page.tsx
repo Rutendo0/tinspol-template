@@ -220,14 +220,14 @@ export default function MotorMechanicsPage() {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   {[
-                    { service: "Diagnostic Scan", price: "$25 - $50" },
-                    { service: "Minor Engine Repairs", price: "$100 - $500" },
-                    { service: "Major Engine Overhaul", price: "$1,500 - $4,000" },
-                    { service: "Transmission Service", price: "$200 - $800" },
+                    { service: "Diagnostic Scan" },
+                    { service: "Minor Engine Repairs" },
+                    { service: "Major Engine Overhaul" },
+                    { service: "Transmission Service" },
                   ].map((item, index) => (
                     <div key={index} className="flex justify-between items-center py-2 border-b border-gray-100 last:border-b-0">
                       <span className="text-gray-700">{item.service}</span>
-                      <span className="font-semibold text-red-600">{item.price}</span>
+                      <span className="font-semibold text-gray-500">Contact for quote</span>
                     </div>
                   ))}
                   

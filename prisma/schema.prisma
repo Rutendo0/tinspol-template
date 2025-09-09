@@ -20,8 +20,9 @@ model User {
   updatedAt DateTime @updatedAt
 
   // Relations
-  blogPosts BlogPost[]
-  galleryItems GalleryItem[]
+  blogPosts     BlogPost[]
+  galleryItems  GalleryItem[]
+  mediaUploads  Media[] @relation("UserMediaUploads")
 
   @@map("users")
 }
@@ -89,4 +90,16 @@ enum GalleryCategory {
   WHEEL_ALIGNMENT
   DETAILING
   OTHER
+}
+
+model Media {
+  id            String   @id @default(cuid())
+  filename      String
+  mimeType      String
+  data          Bytes
+  createdAt     DateTime @default(now())
+  uploadedBy    User?    @relation("UserMediaUploads", fields: [uploadedById], references: [id])
+  uploadedById  String?
+
+  @@map("media")
 }

@@ -222,9 +222,9 @@ export default function PanelBeatingPage() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">Repair Pricing Guide</h2>
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">Repair Services</h2>
               <p className="text-lg text-gray-600">
-                Competitive pricing for professional panel beating services
+                Contact us for a personalized quote
               </p>
             </div>
             
@@ -236,14 +236,14 @@ export default function PanelBeatingPage() {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   {[
-                    { service: "Small Dent Repair", price: "$50 - $150" },
-                    { service: "Scratch Repair", price: "$100 - $300" },
-                    { service: "Minor Panel Work", price: "$200 - $500" },
-                    { service: "Touch-up Paint", price: "$50 - $200" },
+                    { service: "Small Dent Repair" },
+                    { service: "Scratch Repair" },
+                    { service: "Minor Panel Work" },
+                    { service: "Touch-up Paint" },
                   ].map((item, index) => (
                     <div key={index} className="flex justify-between items-center py-2 border-b border-gray-100 last:border-b-0">
                       <span className="text-gray-700">{item.service}</span>
-                      <span className="font-semibold text-red-600">{item.price}</span>
+                      <span className="font-semibold text-gray-500">Contact for quote</span>
                     </div>
                   ))}
                 </CardContent>
@@ -256,14 +256,14 @@ export default function PanelBeatingPage() {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   {[
-                    { service: "Panel Replacement", price: "$500 - $1,500" },
-                    { service: "Major Dent Repair", price: "$300 - $800" },
-                    { service: "Full Panel Respray", price: "$400 - $1,000" },
-                    { service: "Frame Straightening", price: "$800 - $2,000" },
+                    { service: "Panel Replacement" },
+                    { service: "Major Dent Repair" },
+                    { service: "Full Panel Respray" },
+                    { service: "Frame Straightening" },
                   ].map((item, index) => (
                     <div key={index} className="flex justify-between items-center py-2 border-b border-gray-100 last:border-b-0">
                       <span className="text-gray-700">{item.service}</span>
-                      <span className="font-semibold text-red-600">{item.price}</span>
+                      <span className="font-semibold text-gray-500">Contact for quote</span>
                     </div>
                   ))}
                 </CardContent>

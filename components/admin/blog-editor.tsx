@@ -13,6 +13,7 @@ import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Badge } from '@/components/ui/badge'
 import { Save, Eye, Upload, X, Link, Image } from 'lucide-react'
+import NextLink from 'next/link'
 import { FileUpload } from '@/components/ui/file-upload'
 import { showToast } from '@/components/ui/toaster'
 import { AlertDialog, AlertDialogContent, AlertDialogHeader, AlertDialogTitle, AlertDialogDescription, AlertDialogFooter, AlertDialogCancel, AlertDialogAction } from '@/components/ui/alert-dialog'
@@ -636,33 +637,38 @@ export function BlogEditor({ post, isEditing = false }: BlogEditorProps) {
             </AlertDialogHeader>
             <AlertDialogFooter>
               <AlertDialogCancel
-                // Ensure button doesn't submit the form
                 onClick={(e) => {
                   e.preventDefault()
-                  // Close dialog first, then navigate a tick later
                   setPostCreatedDialogOpen(false)
-                  setTimeout(() => {
-                    router.replace('/admin/blog/new')
-                    router.refresh()
-                  }, 0)
+                  setFormData({
+                    title: '',
+                    slug: '',
+                    excerpt: '',
+                    content: '',
+                    image: '',
+                    category: 'Maintenance Tips',
+                    featured: false,
+                    published: false,
+                    readTime: '5 min read',
+                  })
+                  setContentBody('')
+                  setContentImages([])
+                  setCreatedPost(null)
+                  router.replace('/admin/blog/new')
+                  router.refresh()
                 }}
               >
-                Create another
+                Create another post
               </AlertDialogCancel>
               <AlertDialogAction
-                // Ensure button doesn't submit the form
                 onClick={(e) => {
                   e.preventDefault()
-                  // Close dialog first, then navigate a tick later
                   setPostCreatedDialogOpen(false)
-                  const target = createdPost ? `/admin/blog/${createdPost.id}/edit` : '/admin/blog'
-                  setTimeout(() => {
-                    router.push(target)
-                    router.refresh()
-                  }, 0)
+                  router.push('/admin/blog')
+                  router.refresh()
                 }}
               >
-                Go to post in dashboard
+                Go to dashboard
               </AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialogContent>

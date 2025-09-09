@@ -16,27 +16,9 @@ export default function AdminLoginPage() {
   const [showPassword, setShowPassword] = useState(false)
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
-  const [testing, setTesting] = useState(false)
   const router = useRouter()
 
-  const testCredentials = async () => {
-    setTesting(true)
-    try {
-      const response = await fetch('/api/test-auth', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: 'admin@tinspol.com', password: 'admin123' })
-      })
-      const result = await response.json()
-      console.log('Test result:', result)
-      alert(`Test result: ${JSON.stringify(result, null, 2)}`)
-    } catch (error) {
-      console.error('Test error:', error)
-      alert(`Test error: ${error}`)
-    } finally {
-      setTesting(false)
-    }
-  }
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -154,15 +136,7 @@ export default function AdminLoginPage() {
                 {loading ? 'Signing in...' : 'Sign In'}
               </Button>
               
-              <Button
-                type="button"
-                variant="outline"
-                className="w-full mt-2 border-white/20 text-white hover:bg-white/10"
-                onClick={testCredentials}
-                disabled={testing}
-              >
-                {testing ? 'Testing...' : 'Test Credentials'}
-              </Button>
+
             </form>
           </CardContent>
         </Card>

@@ -100,6 +100,12 @@ export function Header() {
                     <span>Panel Beating</span>
                   </Link>
                 </DropdownMenuItem>
+                <DropdownMenuItem asChild className="hover:bg-red-50 hover:text-red-600">
+                  <Link href="/services/spares" className="flex items-center space-x-2">
+                    <span>📦</span>
+                    <span>Spares & Parts</span>
+                  </Link>
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
 
@@ -167,15 +173,7 @@ export function Header() {
                     </div>
                   </a>
                 </DropdownMenuItem>
-                <DropdownMenuItem asChild className="hover:bg-red-50 hover:text-red-600">
-                  <a href="tel:+263719757957" className="flex items-center space-x-2">
-                    <Phone className="w-4 h-4" />
-                    <div>
-                      <div className="font-medium">Alternative</div>
-                      <div className="text-xs text-gray-500">+263 719 757 957</div>
-                    </div>
-                  </a>
-                </DropdownMenuItem>
+
               </DropdownMenuContent>
             </DropdownMenu>
 
@@ -276,6 +274,13 @@ export function Header() {
                   >
                     Panel Beating
                   </Link>
+                  <Link 
+                    href="/services/spares" 
+                    className="block text-gray-600 hover:text-red-600 transition-colors duration-300 py-1"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Spares & Parts
+                  </Link>
                 </div>
               </div>
 
@@ -336,19 +341,6 @@ export function Header() {
                       <div className="text-left">
                         <div>Office</div>
                         <div className="text-xs opacity-75">+263 242 779 099</div>
-                      </div>
-                    </a>
-                  </Button>
-                  <Button 
-                    variant="outline" 
-                    className="w-full border-red-600 text-red-600 hover:bg-red-600 hover:text-white text-sm"
-                    asChild
-                  >
-                    <a href="tel:+263719757957" className="flex items-center justify-center space-x-2">
-                      <Phone className="w-4 h-4" />
-                      <div className="text-left">
-                        <div>Alternative</div>
-                        <div className="text-xs opacity-75">+263 719 757 957</div>
                       </div>
                     </a>
                   </Button>

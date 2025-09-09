@@ -48,7 +48,7 @@ let galleryItems: GalleryItem[] = [
   {
     id: "4",
     title: "Precision Wheel Alignment",
-    description: "Professional wheel alignment service ensuring optimal tire wear and vehicle handling.",
+    description: "Professional wheel alignment service ensuring optimal tyre wear and vehicle handling.",
     category: "alignment",
     image: "/images/wheel-alignment.jpg",
     date: "2024-05-12",

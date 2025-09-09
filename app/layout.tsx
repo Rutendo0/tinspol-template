@@ -34,7 +34,7 @@ export default function RootLayout({
     "@type": "AutoRepair",
     name: "Tinspol Motors",
     url: "https://www.tinspol.co.zw",
-    telephone: ["+263776556717", "+263242779099", "+263719757957"],
+    telephone: ["+263776556717", "+263242779099"],
     address: {
       "@type": "PostalAddress",
       streetAddress: "18608 Bishop Gaul Ave and Rotten Row, Kopje",

@@ -87,6 +87,10 @@ export default function SparesPage() {
           <h2 className="text-3xl font-bold text-black mb-8">Parts Catalogue</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
             {[
+              "OEM suspension parts",
+              "Suspension spares",
+              "Engine oils",
+              "Service kits",
               "Suspension components",
               "Brakes (pads, discs, drums)",
               "Clutch & hydraulics",
@@ -102,6 +106,42 @@ export default function SparesPage() {
                 <span className="text-gray-800">{label}</span>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Accessories & Add-ons */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-black mb-3">Accessories & Add-ons</h2>
+            <p className="text-gray-600">Boost functionality and style — available for most makes and models.</p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              "Accessories",
+              "Batteries",
+              "Car mats",
+              "Bull bars",
+              "Rubberising",
+              "Tonneau covers",
+            ].map((label, i) => (
+              <Card key={i} className="shadow-md">
+                <CardHeader>
+                  <CardTitle className="text-lg text-black">{label}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600 text-sm">Supply and fit on request.</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+          <div className="text-center mt-8">
+            <Button asChild size="lg" className="bg-green-600 hover:bg-green-700 text-white">
+              <a href="https://wa.me/263776556717?text=Hi%20Tinspol%2C%20I%27m%20interested%20in%20accessories%20(Batteries%2C%20Car%20mats%2C%20Bull%20bars%2C%20Rubberising%2C%20Tonneau%20covers)." target="_blank" rel="noopener noreferrer">
+                Chat on WhatsApp
+              </a>
+            </Button>
           </div>
         </div>
       </section>

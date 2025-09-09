@@ -16,7 +16,7 @@ export async function POST(req: Request) {
     const ok = await bcrypt.compare(password, user.password)
     if (!ok) return NextResponse.json({ error: 'Invalid email or password' }, { status: 401 })
 
-    createSession({ id: user.id, email: user.email, role: user.role })
+    await createSession({ id: user.id, email: user.email, role: user.role })
     return NextResponse.json({ success: true })
   } catch (e) {
     console.error('login error', e)
