@@ -24,20 +24,6 @@ export default function ServicesPage() {
 
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            {/* Back Button */}
-            <div className="mb-8">
-              <Button 
-                variant="outline" 
-                asChild
-                className="border-white/20 text-white hover:bg-white hover:text-black backdrop-blur-sm"
-              >
-                <Link href="/" className="flex items-center space-x-2">
-                  <ArrowLeft className="w-4 h-4" />
-                  <span>Back to Home</span>
-                </Link>
-              </Button>
-            </div>
-
             {/* Header */}
             <div className="mb-12">
               <div className="inline-flex items-center space-x-2 bg-red-600/20 backdrop-blur-sm border border-red-500/30 rounded-full px-6 py-3 mb-8">

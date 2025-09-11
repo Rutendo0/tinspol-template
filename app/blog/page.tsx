@@ -51,49 +51,38 @@ export default async function BlogPage() {
       <Header />
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 bg-gray-900 overflow-hidden">
+      <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 bg-white overflow-hidden border-b border-gray-400 min-h-[60vh]">
         {/* Background Image + Overlay */}
         <div className="absolute inset-0">
           <Image
-            src="/image2.jpg"
+            src="/blog.jpg"
             alt="Automotive workshop background"
             fill
             priority
-            className="object-cover"
+            className="object-cover object-center"
           />
-          <div className="absolute inset-0 bg-black/60" />
+          {/* Gradient overlay for contrast */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/20" />
         </div>
 
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            {/* Back Button */}
-            <div className="mb-8">
-              <Button 
-                variant="outline" 
-                asChild
-                className="border-white/30 text-white hover:bg-white hover:text-black backdrop-blur-sm"
-              >
-                <Link href="/" className="flex items-center space-x-2">
-                  <ArrowLeft className="w-4 h-4" />
-                  <span>Back to Home</span>
-                </Link>
-              </Button>
-            </div>
-
+          <div className="max-w-4xl mx-auto text-center text-white drop-shadow-sm">
             {/* Header */}
-            <div className="mb-12">
-              <Badge className="mb-6 bg-red-600/20 text-red-400 border-red-500/30 backdrop-blur-sm">
+            <div className="mb-6">
+              <Badge className="mb-6 bg-red-600/80 text-white border-red-500/60 shadow-sm">
                 Expert Advice
               </Badge>
-              
-              <h1 className="text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">
-                Automotive <span className="text-red-500">Blog</span>
+              <h1 className="text-4xl lg:text-6xl font-extrabold tracking-tight mb-4">
+                Insights, Tips, and Car Care Guides
               </h1>
-              
-              <p className="text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed">
-                Expert automotive advice, maintenance tips, and the latest news from Zimbabwe's trusted 
-                vehicle repair specialists.
-              </p>
+              <div className="mt-8 flex items-center justify-center gap-3">
+                <Button asChild className="bg-red-600 hover:bg-red-700">
+                  <Link href="#latest">Read Latest</Link>
+                </Button>
+                <Button asChild variant="outline" className="bg-white/90 text-gray-800 hover:bg-white">
+                  <Link href="#categories">Browse Categories</Link>
+                </Button>
+              </div>
             </div>
           </div>
         </div>
@@ -101,7 +90,7 @@ export default async function BlogPage() {
 
       {/* Featured Post */}
       {featuredPost && (
-        <section className="py-16">
+        <section id="latest" className="py-16">
           <div className="container mx-auto px-4">
             <div className="mb-8">
               <Badge className="mb-4">Featured Article</Badge>
@@ -110,7 +99,7 @@ export default async function BlogPage() {
 
             <Card className="overflow-hidden">
               <div className="grid lg:grid-cols-2">
-                <div className="relative h-64 lg:h-full">
+                <div className="relative aspect-[16/9] bg-gray-100">
                   <Image
                     src={
                       featuredPost.image && featuredPost.image.trim()
@@ -119,7 +108,7 @@ export default async function BlogPage() {
                     }
                     alt={featuredPost.title}
                     fill
-                    className="object-cover"
+                    className="object-contain"
                   />
                 </div>
                 <div className="p-8 flex flex-col justify-center">
@@ -155,7 +144,7 @@ export default async function BlogPage() {
       )}
 
       {/* Categories Filter */}
-      <section className="py-12 bg-white border-b border-gray-200">
+      <section id="categories" className="py-12 bg-white border-b border-gray-200">
         <div className="container mx-auto px-4">
           <div className="text-center mb-8">
             <h2 className="text-2xl font-bold text-gray-900 mb-2">Browse by Category</h2>
@@ -184,7 +173,7 @@ export default async function BlogPage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {regularPosts.map((post) => (
               <Card key={post.id} className="overflow-hidden hover:shadow-lg transition-shadow">
-                <div className="relative h-48">
+                <div className="relative aspect-[16/9] bg-gray-100">
                   <Image 
                     src={
                       post.image && post.image.trim()
@@ -193,7 +182,7 @@ export default async function BlogPage() {
                     }
                     alt={post.title}
                     fill 
-                    className="object-cover" 
+                    className="object-contain" 
                   />
                 </div>
                 <CardHeader>
@@ -230,26 +219,7 @@ export default async function BlogPage() {
         </div>
       </section>
 
-      {/* Newsletter Signup */}
-      <section className="py-16 bg-red-600 text-white">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-4">Stay Updated with Car Care Tips</h2>
-          <p className="text-lg mb-8 opacity-90 max-w-2xl mx-auto">
-            Subscribe to our newsletter for the latest automotive maintenance tips, seasonal advice, and exclusive
-            promotions.
-          </p>
-          <div className="max-w-md mx-auto flex gap-3">
-            <input 
-              type="email" 
-              placeholder="Enter your email" 
-              className="flex-1 px-4 py-3 rounded-lg text-gray-900 border-0 focus:ring-2 focus:ring-white" 
-            />
-            <Button variant="secondary" className="bg-white text-red-600 hover:bg-gray-100">
-              Subscribe
-            </Button>
-          </div>
-        </div>
-      </section>
+
 
       <Footer />
       <MobileCTA />

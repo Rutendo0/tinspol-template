@@ -18,20 +18,6 @@ export default function PanelBeatingPage() {
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
-              {/* Back Button */}
-              <div>
-                <Button 
-                  variant="outline" 
-                  asChild
-                  className="border-gray-300 text-gray-600 hover:bg-gray-50"
-                >
-                  <Link href="/services" className="flex items-center space-x-2">
-                    <ArrowLeft className="w-4 h-4" />
-                    <span>Back to Services</span>
-                  </Link>
-                </Button>
-              </div>
-
               <div className="space-y-4">
                 <Badge className="bg-red-50 text-red-600 border-red-200 hover:bg-red-100">
                   Collision Repair Experts
@@ -67,7 +53,7 @@ export default function PanelBeatingPage() {
             <div className="relative">
               <div className="relative h-[400px] rounded-lg overflow-hidden shadow-lg">
                 <Image
-                  src="/placeholder.jpg"
+                  src="/panel.jpg"
                   alt="Professional panel beating service"
                   fill
                   className="object-cover"
@@ -102,18 +88,14 @@ export default function PanelBeatingPage() {
               },
               {
                 icon: Shield,
-                title: "Paint Matching",
-                desc: "Expert color matching and professional spray painting services",
+                title: "Spray Painting",
+                desc: "Professional spray painting with high-quality finishes",
               },
-              {
-                icon: CheckCircle,
-                title: "Rust Repair",
-                desc: "Comprehensive rust treatment and prevention services",
-              },
+
               {
                 icon: Hammer,
-                title: "Frame Straightening",
-                desc: "Professional frame alignment and straightening services",
+                title: "Chassis Straightening",
+                desc: "Professional chassis alignment and straightening services",
               },
               {
                 icon: Wrench,
@@ -165,7 +147,7 @@ export default function PanelBeatingPage() {
               {
                 step: "4",
                 title: "Finishing",
-                desc: "Paint matching, application, and quality check"
+                desc: "Spray painting and buffing, with quality check"
               }
             ].map((item, index) => (
               <div key={index} className="text-center">
@@ -207,67 +189,11 @@ export default function PanelBeatingPage() {
             </div>
             <div className="relative h-[300px] rounded-lg overflow-hidden shadow-lg">
               <Image
-                src="/placeholder.jpg"
+                src="/panel2.jpg"
                 alt="Insurance claim work"
                 fill
                 className="object-cover"
               />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Pricing */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">Repair Services</h2>
-              <p className="text-lg text-gray-600">
-                Contact us for a personalized quote
-              </p>
-            </div>
-            
-            <div className="grid md:grid-cols-2 gap-8">
-              <Card className="shadow-lg">
-                <CardHeader>
-                  <CardTitle className="text-xl">Minor Repairs</CardTitle>
-                  <CardDescription>Small dents and scratches</CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  {[
-                    { service: "Small Dent Repair" },
-                    { service: "Scratch Repair" },
-                    { service: "Minor Panel Work" },
-                    { service: "Touch-up Paint" },
-                  ].map((item, index) => (
-                    <div key={index} className="flex justify-between items-center py-2 border-b border-gray-100 last:border-b-0">
-                      <span className="text-gray-700">{item.service}</span>
-                      <span className="font-semibold text-gray-500">Contact for quote</span>
-                    </div>
-                  ))}
-                </CardContent>
-              </Card>
-
-              <Card className="shadow-lg">
-                <CardHeader>
-                  <CardTitle className="text-xl">Major Repairs</CardTitle>
-                  <CardDescription>Collision damage and panel replacement</CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  {[
-                    { service: "Panel Replacement" },
-                    { service: "Major Dent Repair" },
-                    { service: "Full Panel Respray" },
-                    { service: "Frame Straightening" },
-                  ].map((item, index) => (
-                    <div key={index} className="flex justify-between items-center py-2 border-b border-gray-100 last:border-b-0">
-                      <span className="text-gray-700">{item.service}</span>
-                      <span className="font-semibold text-gray-500">Contact for quote</span>
-                    </div>
-                  ))}
-                </CardContent>
-              </Card>
             </div>
           </div>
         </div>
@@ -295,7 +221,7 @@ export default function PanelBeatingPage() {
               },
               {
                 q: "Do you provide warranties on repairs?",
-                a: "Yes, we provide comprehensive warranties on all panel beating work, including paint and workmanship guarantees.",
+                a: "Yes, we provide a comprehensive 3-month warranty on all panel beating work, including paint and workmanship.",
               },
               {
                 q: "Can you work with my insurance company?",

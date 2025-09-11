@@ -101,6 +101,24 @@ export function Header() {
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild className="hover:bg-red-50 hover:text-red-600">
+                  <Link href="/services/towing" className="flex items-center space-x-2">
+                    <span>🚚</span>
+                    <span>Towing</span>
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild className="hover:bg-red-50 hover:text-red-600">
+                  <Link href="/services/car-hire" className="flex items-center space-x-2">
+                    <span>🚗</span>
+                    <span>Car Hire</span>
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild className="hover:bg-red-50 hover:text-red-600">
+                  <Link href="/services/motorcycle" className="flex items-center space-x-2">
+                    <span>🏍️</span>
+                    <span>Motorcycle</span>
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild className="hover:bg-red-50 hover:text-red-600">
                   <Link href="/services/spares" className="flex items-center space-x-2">
                     <span>📦</span>
                     <span>Spares & Parts</span>
@@ -273,6 +291,27 @@ export function Header() {
                     onClick={() => setIsMenuOpen(false)}
                   >
                     Panel Beating
+                  </Link>
+                  <Link 
+                    href="/services/towing" 
+                    className="block text-gray-600 hover:text-red-600 transition-colors duration-300 py-1"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Towing
+                  </Link>
+                  <Link 
+                    href="/services/car-hire" 
+                    className="block text-gray-600 hover:text-red-600 transition-colors duration-300 py-1"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Car Hire
+                  </Link>
+                  <Link 
+                    href="/services/motorcycle" 
+                    className="block text-gray-600 hover:text-red-600 transition-colors duration-300 py-1"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Motorcycle
                   </Link>
                   <Link 
                     href="/services/spares" 

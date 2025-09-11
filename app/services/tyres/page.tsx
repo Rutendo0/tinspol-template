@@ -4,7 +4,7 @@ import { MobileCTA } from "@/components/mobile-cta"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { CheckCircle, Clock, Shield, Wrench, ArrowLeft } from "lucide-react"
+import { CheckCircle, Clock, Shield, Wrench } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -18,20 +18,7 @@ export default function TyresPage() {
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
-              {/* Back Button */}
-              <div>
-                <Button 
-                  variant="outline" 
-                  asChild
-                  className="border-gray-300 text-gray-600 hover:bg-gray-50"
-                >
-                  <Link href="/services" className="flex items-center space-x-2">
-                    <ArrowLeft className="w-4 h-4" />
-                    <span>Back to Services</span>
-                  </Link>
-                </Button>
-              </div>
-
+              
               <div className="space-y-4">
                 <Badge className="bg-red-50 text-red-600 border-red-200 hover:bg-red-100">
                   Tyre Specialists
@@ -67,7 +54,7 @@ export default function TyresPage() {
             <div className="relative">
               <div className="relative h-[400px] rounded-lg overflow-hidden shadow-lg">
                 <Image
-                  src="/image3.jpg"
+                  src="/tyres.jpg"
                   alt="Professional tyre fitting service"
                   fill
                   className="object-cover"
@@ -93,22 +80,22 @@ export default function TyresPage() {
               {
                 icon: Wrench,
                 title: "Tyre Fitting",
-                desc: "Professional tyre installation with proper balancing and alignment",
+                desc: "Professional tyre fitting with proper balancing and alignment",
               },
               {
                 icon: Shield,
                 title: "Tyre Repairs",
-                desc: "Puncture repairs and tyre maintenance to extend tyre life",
+                desc: "Puncture repairs to extend tyre life",
               },
               {
                 icon: CheckCircle,
-                title: "Wheel Balancing",
-                desc: "Precision wheel balancing for smooth driving and even tyre wear",
+                title: "Precision Wheel Balancing",
+                desc: "Precision wheel balancing for smooth driving and stability",
               },
               {
                 icon: Clock,
-                title: "Wheel Alignment",
-                desc: "Professional wheel alignment to improve handling and tyre longevity",
+                title: "Professional Wheel Alignment",
+                desc: "Professional wheel alignment to improve smooth driving and ensure tyre longevity",
               },
               {
                 icon: Wrench,
@@ -165,63 +152,6 @@ export default function TyresPage() {
           </div>
         </div>
       </section>
-
-      {/* Pricing */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">Tyre Services</h2>
-              <p className="text-lg text-gray-600">
-                Contact us for a personalized quote
-              </p>
-            </div>
-            
-            <div className="grid md:grid-cols-2 gap-8">
-              <Card className="shadow-lg">
-                <CardHeader>
-                  <CardTitle className="text-xl">Service Costs</CardTitle>
-                  <CardDescription>Professional tyre services</CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  {[
-                    { service: "Tyre Fitting (per tyre)" },
-                    { service: "Puncture Repair" },
-                    { service: "Wheel Balancing" },
-                    { service: "Wheel Alignment" },
-                  ].map((item, index) => (
-                    <div key={index} className="flex justify-between items-center py-2 border-b border-gray-100 last:border-b-0">
-                      <span className="text-gray-700">{item.service}</span>
-                      <span className="font-semibold text-gray-500">Contact for quote</span>
-                    </div>
-                  ))}
-                </CardContent>
-              </Card>
-
-              <Card className="shadow-lg">
-                <CardHeader>
-                  <CardTitle className="text-xl">Tyre Price Ranges</CardTitle>
-                  <CardDescription>Per tyre, fitted and balanced</CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  {[
-                    { category: "Budget Tyres" },
-                    { category: "Mid-Range Tyres" },
-                    { category: "Premium Tyres" },
-                    { category: "Performance Tyres" },
-                  ].map((item, index) => (
-                    <div key={index} className="flex justify-between items-center py-2 border-b border-gray-100 last:border-b-0">
-                      <span className="text-gray-700">{item.category}</span>
-                      <span className="font-semibold text-gray-500">Contact for quote</span>
-                    </div>
-                  ))}
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* FAQ Section */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
@@ -237,10 +167,6 @@ export default function TyresPage() {
               {
                 q: "How often should I replace my tyres?",
                 a: "Tyres should typically be replaced every 40,000-60,000 km or when tread depth reaches 1.6mm. However, this varies based on driving conditions and tyre quality.",
-              },
-              {
-                q: "Do you offer mobile tyre fitting?",
-                a: "Yes, we offer mobile tyre fitting services for your convenience. Contact us to arrange a mobile service at your location.",
               },
               {
                 q: "What's included in wheel alignment?",

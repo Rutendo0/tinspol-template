@@ -18,7 +18,7 @@ export default function AboutPage() {
         {/* Background Image */}
         <div className="absolute inset-0">
           <Image
-            src="/image.jpg"
+            src="/vehicle1.jpg"
             alt="Tinspol Motors professional workshop"
             fill
             priority
@@ -30,20 +30,7 @@ export default function AboutPage() {
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <div className="space-y-8">
-              {/* Back Button */}
-              <div className="flex justify-center">
-                <Button 
-                  variant="outline" 
-                  asChild
-                  className="border-white/30 text-white hover:bg-white hover:text-black backdrop-blur-sm"
-                >
-                  <Link href="/" className="flex items-center space-x-2">
-                    <ArrowLeft className="w-4 h-4" />
-                    <span>Back to Home</span>
-                  </Link>
-                </Button>
-              </div>
-
+             
               <div className="space-y-6">
                 <Badge className="bg-red-600/20 text-red-400 border-red-500/30 backdrop-blur-sm">
                   100% Zimbabwean Owned
@@ -53,11 +40,6 @@ export default function AboutPage() {
                   Zimbabwe's Trusted 
                   <span className="block text-red-500">Vehicle Repair Specialists</span>
                 </h1>
-                
-                <p className="text-xl text-gray-300 leading-relaxed max-w-3xl mx-auto">
-                  Tinspol Motors is a full-service automotive repairing company offering a broad range of services that the Zimbabwean market relies on daily. We are your trusted one-stop shop for repairs, tyres, spares, bodywork, and routine servicing.
-                </p>
-                
                 <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
                   <Button size="lg" asChild className="bg-red-600 hover:bg-red-700 text-white">
                     <Link href="/quote" className="flex items-center space-x-2">
@@ -65,7 +47,7 @@ export default function AboutPage() {
                       <CheckCircle className="w-4 h-4" />
                     </Link>
                   </Button>
-                  <Button variant="outline" size="lg" asChild className="border-white/30 text-white hover:bg-white hover:text-black backdrop-blur-sm">
+                  <Button variant="outline" size="lg" asChild className="bg-red-600 text-white hover:bg-white hover:text-black backdrop-blur-sm">
                     <a href="tel:+263776556717" className="flex items-center space-x-2">
                       <Phone className="w-4 h-4" />
                       <span>Call Now</span>
@@ -225,10 +207,7 @@ export default function AboutPage() {
                 title: "ASE Certified",
                 description: "Automotive Service Excellence certification for all our technicians",
               },
-              {
-                title: "ISO 9001",
-                description: "Quality management system certification for consistent service delivery",
-              },
+
               {
                 title: "OEM Approved",
                 description: "Authorized service center for major automotive manufacturers",
@@ -258,10 +237,10 @@ export default function AboutPage() {
           <div className="text-center mb-12">
             <div className="inline-flex items-center space-x-2 mb-4">
               <div className="w-12 h-0.5 bg-red-600"></div>
-              <span className="text-red-600 font-semibold uppercase tracking-wider text-sm">Our Process</span>
+              <span className="text-red-600 font-semibold uppercase tracking-wider text-sm">Process</span>
               <div className="w-12 h-0.5 bg-red-600"></div>
             </div>
-            <h2 className="text-3xl font-bold mb-4 text-black">Our Service Process</h2>
+            <h2 className="text-3xl font-bold mb-4 text-black">Service Process</h2>
             <p className="text-xl text-gray-600">How we ensure quality results every time</p>
           </div>
 
@@ -269,7 +248,7 @@ export default function AboutPage() {
             {[
               {
                 step: "1",
-                title: "Initial Assessment",
+                title: "Diagnostic",
                 description: "Comprehensive diagnostic evaluation using advanced equipment",
               },
               {
@@ -284,12 +263,12 @@ export default function AboutPage() {
               },
               {
                 step: "4",
-                title: "Thorough Testing",
+                title: "Quality Control",
                 description: "Complete testing and quality checks before delivery",
               },
               {
                 step: "5",
-                title: "Follow-up Care",
+                title: "After Services",
                 description: "Warranty support and ongoing maintenance recommendations",
               },
             ].map((item, index) => (
@@ -350,66 +329,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Team Section */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center space-x-2 mb-4">
-              <div className="w-12 h-0.5 bg-red-600"></div>
-              <span className="text-red-600 font-semibold uppercase tracking-wider text-sm">Our Team</span>
-              <div className="w-12 h-0.5 bg-red-600"></div>
-            </div>
-            <h2 className="text-3xl font-bold mb-4 text-black">Meet Our Expert Team</h2>
-            <p className="text-xl text-gray-600">Experienced professionals dedicated to your vehicle's care</p>
-          </div>
 
-          <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            {[
-              {
-                name: "James Tinspol",
-                role: "Founder & Master Technician",
-                experience: "20+ years experience",
-                specialties: ["Engine Diagnostics", "Transmission Repair", "Electrical Systems"],
-              },
-              {
-                name: "Michael Chikwanha",
-                role: "Senior Panel Beater",
-                experience: "15+ years experience",
-                specialties: ["Collision Repair", "Paint Matching", "Body Restoration"],
-              },
-              {
-                name: "Sarah Mukamuri",
-                role: "Service Manager",
-                experience: "10+ years experience",
-                specialties: ["Customer Relations", "Quality Control", "Service Coordination"],
-              },
-            ].map((member, index) => (
-              <Card key={index} className="text-center">
-                <CardHeader>
-                  <div className="w-24 h-24 bg-gray-200 rounded-full mx-auto mb-4 flex items-center justify-center">
-                    <Users className="h-12 w-12 text-gray-400" />
-                  </div>
-                  <CardTitle>{member.name}</CardTitle>
-                  <CardDescription className="text-primary font-semibold">{member.role}</CardDescription>
-                  <Badge variant="secondary">{member.experience}</Badge>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-2">
-                    <p className="font-medium text-sm">Specialties:</p>
-                    <div className="flex flex-wrap gap-1 justify-center">
-                      {member.specialties.map((specialty, idx) => (
-                        <Badge key={idx} variant="outline" className="text-xs">
-                          {specialty}
-                        </Badge>
-                      ))}
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* CTA Section */}
       <section className="py-16 bg-gray-50">

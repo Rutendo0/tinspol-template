@@ -589,19 +589,7 @@ export default function QuotePage() {
 
       <section className="pt-32 pb-20 bg-gray-50">
         <div className="container mx-auto px-4">
-          {/* Back Button */}
-          <div className="mb-8">
-            <Button 
-              variant="outline" 
-              asChild
-              className="border-gray-300 text-gray-700 hover:bg-gray-100"
-            >
-              <Link href="/" className="flex items-center space-x-2">
-                <ArrowLeft className="w-4 h-4" />
-                <span>Back to Home</span>
-              </Link>
-            </Button>
-          </div>
+        
 
           <div className="text-center mb-12">
             <div className="inline-flex items-center space-x-2 bg-red-600/10 border border-red-200 rounded-full px-6 py-3 mb-6">

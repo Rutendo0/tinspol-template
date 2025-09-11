@@ -43,10 +43,6 @@ export function Gallery() {
             A Glimpse Into
             <span className="block gradient-text">Tinspol Motors</span>
           </h2>
-          <p className="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed font-medium mb-6">
-            Explore our portfolio of quality automotive services and satisfied customers.
-          </p>
-          <div className="w-24 h-1 bg-gradient-to-r from-red-600 to-red-500 rounded-full mx-auto"></div>
         </div>
 
         {/* Image Grid */}

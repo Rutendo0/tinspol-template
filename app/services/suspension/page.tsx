@@ -18,20 +18,7 @@ export default function SuspensionPage() {
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
-              {/* Back Button */}
-              <div>
-                <Button 
-                  variant="outline" 
-                  asChild
-                  className="border-gray-300 text-gray-600 hover:bg-gray-50"
-                >
-                  <Link href="/services" className="flex items-center space-x-2">
-                    <ArrowLeft className="w-4 h-4" />
-                    <span>Back to Services</span>
-                  </Link>
-                </Button>
-              </div>
-
+              
               <div className="space-y-4">
                 <Badge className="bg-red-50 text-red-600 border-red-200 hover:bg-red-100">
                   Suspension Specialists
@@ -67,7 +54,7 @@ export default function SuspensionPage() {
             <div className="relative">
               <div className="relative h-[400px] rounded-lg overflow-hidden shadow-lg">
                 <Image
-                  src="/image2.jpg"
+                  src="/suspension.png"
                   alt="Professional suspension repair service"
                   fill
                   className="object-cover"
@@ -84,7 +71,7 @@ export default function SuspensionPage() {
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">Our Suspension Services</h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Complete suspension system care for optimal ride comfort and handling
+              Complete suspension system care for optimal ride comfort and handling. Backed by a 3-month warranty.
             </p>
           </div>
           
@@ -180,67 +167,11 @@ export default function SuspensionPage() {
             </div>
             <div className="relative h-[300px] rounded-lg overflow-hidden shadow-lg">
               <Image
-                src="/image2.jpg"
+                src="/suspension2.jpg"
                 alt="Suspension system components"
                 fill
                 className="object-cover"
               />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Pricing */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">Suspension Service Pricing</h2>
-              <p className="text-lg text-gray-600">
-                Competitive pricing for professional suspension services
-              </p>
-            </div>
-            
-            <div className="grid md:grid-cols-2 gap-8">
-              <Card className="shadow-lg">
-                <CardHeader>
-                  <CardTitle className="text-xl">Service Costs</CardTitle>
-                  <CardDescription>Professional suspension services</CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  {[
-                    { service: "Shock Absorber (per pair)" },
-                    { service: "Strut Replacement (per pair)" },
-                    { service: "Spring Replacement" },
-                    { service: "Ball Joint Replacement" },
-                  ].map((item, index) => (
-                    <div key={index} className="flex justify-between items-center py-2 border-b border-gray-100 last:border-b-0">
-                      <span className="text-gray-700">{item.service}</span>
-                      <span className="font-semibold text-gray-500">Contact for quote</span>
-                    </div>
-                  ))}
-                </CardContent>
-              </Card>
-
-              <Card className="shadow-lg">
-                <CardHeader>
-                  <CardTitle className="text-xl">Complete Packages</CardTitle>
-                  <CardDescription>Full suspension system services</CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  {[
-                    { package: "Front Suspension Overhaul" },
-                    { package: "Rear Suspension Overhaul" },
-                    { package: "Complete Suspension Service" },
-                    { package: "Performance Upgrade" },
-                  ].map((item, index) => (
-                    <div key={index} className="flex justify-between items-center py-2 border-b border-gray-100 last:border-b-0">
-                      <span className="text-gray-700">{item.package}</span>
-                      <span className="font-semibold text-gray-500">Contact for quote</span>
-                    </div>
-                  ))}
-                </CardContent>
-              </Card>
             </div>
           </div>
         </div>

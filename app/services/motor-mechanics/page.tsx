@@ -18,20 +18,6 @@ export default function MotorMechanicsPage() {
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
-              {/* Back Button */}
-              <div>
-                <Button 
-                  variant="outline" 
-                  asChild
-                  className="border-gray-300 text-gray-600 hover:bg-gray-50"
-                >
-                  <Link href="/services" className="flex items-center space-x-2">
-                    <ArrowLeft className="w-4 h-4" />
-                    <span>Back to Services</span>
-                  </Link>
-                </Button>
-              </div>
-
               <div className="space-y-4">
                 <Badge className="bg-red-50 text-red-600 border-red-200 hover:bg-red-100">
                   Engine Specialists
@@ -67,7 +53,7 @@ export default function MotorMechanicsPage() {
             <div className="relative">
               <div className="relative h-[400px] rounded-lg overflow-hidden shadow-lg">
                 <Image
-                  src="/image1.jpg"
+                  src="/vehicle.jpeg"
                   alt="Professional motor mechanics service"
                   fill
                   className="object-cover"
@@ -112,7 +98,7 @@ export default function MotorMechanicsPage() {
               },
               {
                 icon: Wrench,
-                title: "Timing Belt Service",
+                title: "Timing Belt Replacement",
                 desc: "Timing belt replacement and related component servicing",
               },
               {
@@ -159,7 +145,7 @@ export default function MotorMechanicsPage() {
             </div>
             <div className="relative h-[300px] rounded-lg overflow-hidden shadow-lg">
               <Image
-                src="/image1.jpg"
+                src="/vehicle1.jpg"
                 alt="Professional mechanics at work"
                 fill
                 className="object-cover"
@@ -195,7 +181,7 @@ export default function MotorMechanicsPage() {
                   { 
                     step: "4", 
                     title: "Testing & Warranty", 
-                    desc: "Comprehensive road test and 6-month warranty on all work",
+                    desc: "Comprehensive road test and 3-month warranty on all work",
                   },
                 ].map((item, index) => (
                   <div key={index} className="flex gap-4">
@@ -209,35 +195,6 @@ export default function MotorMechanicsPage() {
                   </div>
                 ))}
               </div>
-            </div>
-            
-            <div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-8">Pricing Guide</h2>
-              <Card className="shadow-lg">
-                <CardHeader>
-                  <CardTitle className="text-xl">Typical Service Costs</CardTitle>
-                  <CardDescription>Prices may vary based on vehicle make and complexity</CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  {[
-                    { service: "Diagnostic Scan" },
-                    { service: "Minor Engine Repairs" },
-                    { service: "Major Engine Overhaul" },
-                    { service: "Transmission Service" },
-                  ].map((item, index) => (
-                    <div key={index} className="flex justify-between items-center py-2 border-b border-gray-100 last:border-b-0">
-                      <span className="text-gray-700">{item.service}</span>
-                      <span className="font-semibold text-gray-500">Contact for quote</span>
-                    </div>
-                  ))}
-                  
-                  <div className="pt-4 mt-4 border-t border-gray-200">
-                    <p className="text-sm text-gray-600 text-center">
-                      * Final pricing depends on vehicle condition and parts required
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
             </div>
           </div>
         </div>
@@ -261,7 +218,7 @@ export default function MotorMechanicsPage() {
               },
               {
                 q: "Do you provide warranty on engine repairs?",
-                a: "Yes, we provide a comprehensive 6-month warranty on all engine repair work and parts used. This gives you peace of mind and confidence in our quality service.",
+                a: "Yes, we provide a comprehensive 3-month warranty on all engine repair work and parts used. This gives you peace of mind and confidence in our quality service.",
               },
               {
                 q: "Can you work on all vehicle makes?",

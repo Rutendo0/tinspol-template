@@ -2,7 +2,7 @@
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Wrench, Settings, Disc, Droplets, Hammer, Package, ArrowRight, Clock, CheckCircle } from "lucide-react"
+import { Wrench, Settings, Disc, Droplets, Hammer, Package, ArrowRight, Clock, CheckCircle, Truck, Car, Bike } from "lucide-react"
 import Link from "next/link"
 
 const services = [
@@ -29,8 +29,8 @@ const services = [
   {
     icon: Disc,
     title: "Tyre Services",
-    description: "Expert tyre services including repairs, balancing, and new tyre installations.",
-    features: ["Puncture Repairs", "Wheel Balancing", "Tyre Fitting", "Alignment"],
+    description: "Expert tyre services including repairs, balancing, and tyre fitting.",
+    features: ["Puncture Repairs", "Precision Wheel Balancing", "Tyre Fitting", "Professional Wheel Alignment"],
     turnaround: "Same day",
     image: "/image3.jpg",
     href: "/services/tyres",
@@ -50,7 +50,7 @@ const services = [
     icon: Hammer,
     title: "Panel Beating",
     description: "Accident damage repairs and bodywork restoration to factory standards.",
-    features: ["Dent Removal", "Paint Matching", "Rust Treatment", "Body Alignment"],
+    features: ["Dent Removal", "Spray Painting", "Chassis Straightening", "Body Alignment"],
     turnaround: "3-7 days",
     image: "/placeholder.jpg",
     href: "/services/panel-beating",
@@ -66,6 +66,36 @@ const services = [
     href: "/services/spares",
     color: "from-black to-gray-800"
   },
+  {
+    icon: Truck,
+    title: "Towing & Breakdown",
+    description: "Reliable towing and roadside breakdown assistance when you need it most.",
+    features: ["24/7 Assistance", "Local & Long Distance", "Roadside Help"],
+    turnaround: "On call",
+    image: "/placeholder.jpg",
+    href: "/services/towing",
+    color: "from-red-500 to-red-700"
+  },
+  {
+    icon: Car,
+    title: "Car Hiring",
+    description: "Affordable, well-maintained vehicles for short or long-term hire.",
+    features: ["Sedans & SUVs", "Daily & Weekly", "Flexible Rates"],
+    turnaround: "Same day",
+    image: "/placeholder.jpg",
+    href: "/services/car-hire",
+    color: "from-black to-gray-900"
+  },
+  {
+    icon: Bike,
+    title: "Motorcycle",
+    description: "Sales and service support for motorcycles.",
+    features: ["Basic Service", "Tyres & Spares", "Diagnostics"],
+    turnaround: "1-3 days",
+    image: "/placeholder.jpg",
+    href: "/services/motorcycle",
+    color: "from-red-600 to-red-800"
+  },
 ]
 
 export function Services() {
@@ -73,14 +103,6 @@ export function Services() {
     <section id="services" className="relative py-28 bg-gradient-to-br from-black via-gray-900 to-gray-800 overflow-hidden">
       {/* Section Indicator */}
       <div className="absolute right-0 top-0 h-full w-1 bg-gradient-to-b from-red-600 via-red-500 to-red-600 shadow-lg shadow-red-600/20"></div>
-      
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-32 right-20 w-40 h-40 border-2 border-red-600 rounded-full animate-spin-slow"></div>
-        <div className="absolute bottom-32 left-20 w-28 h-28 border-2 border-white rounded-full animate-spin-slow"></div>
-        <div className="absolute top-1/2 left-1/4 w-20 h-20 border border-red-400 rounded-full animate-float"></div>
-      </div>
-
       <div className="container mx-auto px-4 relative">
         {/* Section Header */}
         <div className="text-center mb-24">
@@ -90,14 +112,7 @@ export function Services() {
             <div className="w-16 h-1 bg-gradient-to-l from-red-600 to-red-500 rounded-full"></div>
           </div>
           <h2 className="text-4xl lg:text-6xl font-bold text-white mb-8">
-            Complete Automotive
-            <span className="block gradient-text">Solutions</span>
-          </h2>
-          <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed font-medium">
-            From routine maintenance to complex repairs, our certified technicians deliver 
-            exceptional service with genuine parts and industry-leading warranties.
-          </p>
-          <div className="w-24 h-1 bg-gradient-to-r from-red-600 to-red-500 rounded-full mx-auto mt-6"></div>
+            Complete Solutions</h2>
         </div>
 
         {/* Services Grid */}
@@ -171,8 +186,8 @@ export function Services() {
                 {/* CTA Button */}
                 <Button 
                   asChild
-                  variant="ghost" 
-                  className="w-full group-hover:bg-gradient-to-r group-hover:from-red-50 group-hover:to-red-100 group-hover:text-red-600 transition-all duration-500 justify-between py-6 rounded-2xl border border-transparent group-hover:border-red-200 group-hover:shadow-lg"
+                  variant="ghost"
+                  className="w-full justify-between py-6 rounded-2xl border border-gray-500 hover:bg-white text-gray-900 transition-all duration-500 group-hover:bg-gradient-to-r group-hover:from-red-50 group-hover:to-red-100 group-hover:text-red-900 group-hover:border-red-200 group-hover:shadow-lg"
                 >
                   <Link href={service.href} className="flex items-center justify-between w-full">
                     <span className="font-semibold">Learn More</span>

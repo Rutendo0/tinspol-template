@@ -127,7 +127,8 @@ export function Footer() {
                 <div>
                   <p className="text-gray-400 text-sm">
                     Mon - Sat: 8:00 AM - 5:00 PM<br />
-                    Sunday: Closed
+                    Sunday: Closed<br />
+                    Closed on Public Holidays
                   </p>
                 </div>
               </div>

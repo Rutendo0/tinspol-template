@@ -18,20 +18,6 @@ export default function CarWashPage() {
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
-              {/* Back Button */}
-              <div>
-                <Button 
-                  variant="outline" 
-                  asChild
-                  className="border-gray-300 text-gray-600 hover:bg-gray-50"
-                >
-                  <Link href="/services" className="flex items-center space-x-2">
-                    <ArrowLeft className="w-4 h-4" />
-                    <span>Back to Services</span>
-                  </Link>
-                </Button>
-              </div>
-
               <div className="space-y-4">
                 <Badge className="bg-red-50 text-red-600 border-red-200 hover:bg-red-100">
                   Premium Car Care
@@ -67,7 +53,7 @@ export default function CarWashPage() {
             <div className="relative">
               <div className="relative h-[400px] rounded-lg overflow-hidden shadow-lg">
                 <Image
-                  src="/image4.jpg"
+                  src="/carwash.jpg"
                   alt="Professional car wash service"
                   fill
                   className="object-cover"
@@ -113,7 +99,7 @@ export default function CarWashPage() {
                 popular: true
               },
               {
-                title: "Full Detail",
+                title: "Full Valet",
                 features: [
                   "Everything in Premium",
                   "Wax application",
@@ -228,7 +214,7 @@ export default function CarWashPage() {
             </div>
             <div className="relative h-[300px] rounded-lg overflow-hidden shadow-lg">
               <Image
-                src="/image4.jpg"
+                src="/carwash2.jpg"
                 alt="Professional car washing"
                 fill
                 className="object-cover"
@@ -251,13 +237,10 @@ export default function CarWashPage() {
           <div className="max-w-3xl mx-auto space-y-6">
             {[
               {
-                q: "How long does a car wash take?",
-                a: "Basic wash takes 15-20 minutes, Premium wash takes 25-30 minutes, and Full Detail can take 60-90 minutes depending on vehicle size and condition.",
+                q: "How long does a full valet take?",
+                a: "A full valet typically takes up to 3 days depending on vehicle size and condition.",
               },
-              {
-                q: "Do you offer mobile car wash services?",
-                a: "Yes, we offer mobile car wash services for your convenience. Contact us to schedule a mobile service at your location.",
-              },
+
               {
                 q: "Are your cleaning products safe for my car?",
                 a: "Absolutely! We use only high-quality, car-safe cleaning products that won't damage your vehicle's paint, interior, or other surfaces.",
