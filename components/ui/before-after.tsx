@@ -13,7 +13,7 @@ interface BeforeAfterProps {
 // Draggable before/after image comparison
 export function BeforeAfter({ before, after, alt = "", className }: BeforeAfterProps) {
   const containerRef = useRef<HTMLDivElement | null>(null)
-  const [pos, setPos] = useState(0.6) // 0..1, how much of 'after' is visible
+  const [, setPos] = useState(0.5) // 0..1, how much of 'after' is visible
   const [dragging, setDragging] = useState(false)
 
   // Update position from event (mouse/touch)
@@ -40,7 +40,7 @@ export function BeforeAfter({ before, after, alt = "", className }: BeforeAfterP
     <div
       ref={containerRef}
       className={clsx(
-        "relative w-full h-full select-none overflow-hidden rounded-xl will-change-transform",
+        "relative w-full h-full select-none overflow-hidden rounded-xl will-change-transform bg-black",
         className
       )}
       onMouseMove={(e) => dragging && updateFromEvent(e.clientX)}
@@ -50,15 +50,24 @@ export function BeforeAfter({ before, after, alt = "", className }: BeforeAfterP
       role="region"
       aria-label="Before and after comparison"
     >
-      {/* Before (base) */}
-      <img src={before} alt={alt ? `${alt} (before)` : "Before"} className="absolute inset-0 w-full h-full object-cover" />
-
-      {/* After (clipped by pos) */}
-      <div
-        className="absolute inset-0 overflow-hidden"
-        style={{ width: `${Math.round(pos * 100)}%` }}
-      >
-        <img src={after} alt={alt ? `${alt} (after)` : "After"} className="w-full h-full object-cover" />
+      {/* Split layout: left (before) and right (after) halves */}
+      <div className="absolute inset-0 flex">
+        {/* Left half (before) */}
+        <div className="relative w-1/2 h-full bg-black flex items-center justify-center">
+          <img
+            src={before}
+            alt={alt ? `${alt} (before)` : "Before"}
+            className="max-w-full max-h-full object-contain"
+          />
+        </div>
+        {/* Right half (after) */}
+        <div className="relative w-1/2 h-full bg-black flex items-center justify-center">
+          <img
+            src={after}
+            alt={alt ? `${alt} (after)` : "After"}
+            className="max-w-full max-h-full object-contain"
+          />
+        </div>
       </div>
 
       {/* Gradients for readability */}
@@ -72,27 +81,20 @@ export function BeforeAfter({ before, after, alt = "", className }: BeforeAfterP
         <span className="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-red-600 text-white">After</span>
       </div>
 
-      {/* Handle */}
+      {/* Center divider (static 50/50 split) */}
       <div
-        className={clsx(
-          "absolute top-0 bottom-0 w-0.5 bg-white/60 shadow [transform:translateX(-50%)]",
-          dragging && "bg-red-400"
-        )}
-        style={{ left: `${Math.round(pos * 100)}%` }}
+        className="absolute top-0 bottom-0 w-0.5 bg-white/60 shadow [transform:translateX(-50%)]"
+        style={{ left: "50%" }}
       />
-      <button
-        type="button"
-        aria-label="Drag to compare"
-        className="absolute top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 text-black border border-white/60 shadow flex items-center justify-center [transform:translateX(-50%)] hover:scale-105 transition"
-        style={{ left: `${Math.round(pos * 100)}%` }}
-        onMouseDown={(e) => { e.preventDefault(); setDragging(true) }}
-        onTouchStart={(e) => { e.preventDefault(); setDragging(true) }}
+      <div
+        className="absolute top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 text-black border border-white/60 shadow flex items-center justify-center [transform:translateX(-50%)]"
+        style={{ left: "50%" }}
       >
-        <span className="sr-only">Drag handle</span>
+        <span className="sr-only">Center marker"</span>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <polyline points="15 18 9 12 15 6"></polyline>
         </svg>
-      </button>
+      </div>
     </div>
   )
 }

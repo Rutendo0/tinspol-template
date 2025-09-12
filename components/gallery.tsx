@@ -2,19 +2,18 @@
 
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import Image from "next/image"
 import Link from "next/link"
 import { Camera, ArrowRight } from "lucide-react"
+import { BeforeAfter } from "@/components/ui/before-after"
 
-// Simple image showcase for homepage
-// This replaces the before/after sliders and filters with a clean image grid
-const workImages = [
-  { src: "/image.jpg", title: "Our Workshop" },
-  { src: "/image1.jpg", title: "Motor Mechanics" },
-  { src: "/image2.jpg", title: "Panel Beating" },
-  { src: "/image3.jpg", title: "Suspension Repairs" },
-  { src: "/image4.jpg", title: "Tyre Services" },
-  { src: "/placeholder.jpg", title: "Car Wash & Detailing" },
+// Homepage gallery using before/after comparisons
+const workPairs = [
+  { before: "/panel.jpg", after: "/panel3.jpg", title: "Panel Beating" },
+  { before: "/carwash2.jpg", after: "/carwash.jpg", title: "Car Wash & Detailing" },
+  { before: "/motor1.png", after: "/motor.jpeg", title: "Motor Mechanics" },
+  { before: "/suspension.jpg", after: "/suspension2.jpg", title: "Suspension Repairs" },
+  { before: "/paint.jpg", after: "/vehicle1.jpg", title: "Body & Paint" },
+  { before: "/tyre.png", after: "/tyre1.png", title: "Tyre Services" },
 ]
 
 export function Gallery() {
@@ -45,7 +44,7 @@ export function Gallery() {
           </h2>
         </div>
 
-        {/* Image Grid */}
+        {/* Before/After Grid */}
         <div className="relative grid sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
           {/* Grid Animation Background */}
           <div className="absolute inset-0 opacity-10 pointer-events-none">
@@ -55,18 +54,18 @@ export function Gallery() {
               ))}
             </div>
           </div>
-          {workImages.map((item, idx) => (
+
+          {workPairs.map((item, idx) => (
             <Card key={idx} className="overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 bg-white">
               <div className="relative aspect-[4/3]">
-                <Image
-                  src={item.src}
+                {/* Before/After comparison fills the card area */}
+                <BeforeAfter
+                  before={item.before}
+                  after={item.after}
                   alt={item.title}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  priority={idx < 3}
+                  className="absolute inset-0"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/0 to-transparent"></div>
+                {/* Caption */}
                 <div className="absolute bottom-3 left-3">
                   <span className="inline-block bg-white/90 text-black text-xs font-semibold px-2 py-1 rounded">
                     {item.title}
@@ -83,36 +82,6 @@ export function Gallery() {
               </CardContent>
             </Card>
           ))}
-        </div>
-
-        {/* Bottom CTA */}
-        <div className="text-center">
-          <div className="bg-gradient-to-r from-black to-gray-900 rounded-2xl p-8 text-white shadow-2xl">
-            <h3 className="text-2xl font-bold mb-4">Ready to Work With Us?</h3>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button 
-                size="lg" 
-                asChild
-                className="bg-red-600 hover:bg-red-700 text-white font-semibold shadow-lg hover:shadow-red-600/25 transition-all duration-300 hover:scale-105"
-              >
-                <Link href="/quote" className="flex items-center space-x-2">
-                  <Camera className="w-5 h-5" />
-                  <span>Start Your Project</span>
-                </Link>
-              </Button>
-              <Button 
-                size="lg" 
-                variant="outline"
-                asChild
-                className="bg-red-600 text-white hover:bg-white hover:text-black font-semibold transition-all duration-300 hover:scale-105"
-              >
-                <Link href="/gallery" className="flex items-center space-x-2">
-                  <ArrowRight className="w-5 h-5" />
-                  <span>View More Work</span>
-                </Link>
-              </Button>
-            </div>
-          </div>
         </div>
       </div>
     </section>
