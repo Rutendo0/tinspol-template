@@ -84,7 +84,7 @@ export function AboutPreview() {
               <CardContent className="p-0">
                 <div className="aspect-[4/3] relative">
                   <img
-                    src="/image.jpg"
+                    src="/car.png"
                     alt="Tinspol Motors"
                     className="w-full h-full object-cover"
                   />
@@ -96,22 +96,6 @@ export function AboutPreview() {
                 </div>
               </CardContent>
             </Card>
-
-            <div className="absolute -bottom-6 -left-6 z-10">
-              <Card className="border-0 shadow-xl bg-white">
-                <CardContent className="p-4">
-                  <div className="flex items-center space-x-3">
-                    <MapPin className="w-6 h-6 text-red-600" />
-                    <div>
-                      <div className="font-semibold text-black text-sm">Harare</div>
-                      <div className="text-xs text-gray-600">Zimbabwe</div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-
-           
           </div>
         </div>
       </div>
