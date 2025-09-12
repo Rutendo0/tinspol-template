@@ -24,7 +24,7 @@ export default function MotorcyclePage() {
                   Motorcycle <span className="text-red-600">Service</span>
                 </h1>
                 <p className="text-lg text-gray-600 leading-relaxed">
-                  Sales and service support for motorcycles: routine servicing, diagnostics, tyres, brakes, and
+                  Service support for motorcycles: routine servicing, diagnostics, tyres, brakes, and
                   accessories.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3 pt-4">
@@ -93,7 +93,6 @@ export default function MotorcyclePage() {
                   "Experienced motorcycle technicians",
                   "Genuine and OEM-equivalent parts",
                   "Quick turnaround times",
-                  "Transparent pricing",
                   "Warranty on workmanship",
                 ].map((feature, index) => (
                   <div key={index} className="flex items-center space-x-3">

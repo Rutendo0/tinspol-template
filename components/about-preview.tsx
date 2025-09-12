@@ -84,7 +84,7 @@ export function AboutPreview() {
               <CardContent className="p-0">
                 <div className="aspect-[4/3] relative">
                   <img
-                    src="/car.png"
+                    src="/image5.jpg"
                     alt="Tinspol Motors"
                     className="w-full h-full object-cover"
                   />

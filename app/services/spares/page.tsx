@@ -208,7 +208,7 @@ export default function SparesPage() {
               { label: "Bull bars", image: "/bars.jpeg" },
               { label: "Tonneau covers", image: "/covers.jpg" },
               { label: "Batteries (Exide, Taurus)", image: "/battery.png" },
-              { label: "Veedol engine oils", image: "/oil.png" },
+              { label: "Veedol engine oils", image: "/image1.jpg" },
               { label: "Car mats", image: "/mats.png" },
               { label: "Rubberising", image: "/rubber.jpeg" },
             ].map((item, i) => (

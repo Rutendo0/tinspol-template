@@ -54,7 +54,7 @@ export default function SuspensionPage() {
             <div className="relative">
               <div className="relative h-[400px] rounded-lg overflow-hidden shadow-lg">
                 <Image
-                  src="/suspension.png"
+                  src="/suspension.jpg"
                   alt="Professional suspension repair service"
                   fill
                   className="object-cover"

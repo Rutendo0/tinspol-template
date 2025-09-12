@@ -8,12 +8,12 @@ import { BeforeAfter } from "@/components/ui/before-after"
 
 // Homepage gallery using before/after comparisons
 const workPairs = [
-  { before: "/panel.jpg", after: "/panel3.jpg", title: "Panel Beating" },
+  { before: "/panel4.jpg", after: "/panel3.jpg", title: "Panel Beating" },
   { before: "/carwash2.jpg", after: "/carwash.jpg", title: "Car Wash & Detailing" },
   { before: "/motor1.png", after: "/motor.jpeg", title: "Motor Mechanics" },
   { before: "/suspension.jpg", after: "/suspension2.jpg", title: "Suspension Repairs" },
   { before: "/paint.jpg", after: "/vehicle1.jpg", title: "Body & Paint" },
-  { before: "/tyre.png", after: "/tyre1.png", title: "Tyre Services" },
+  { before: "/tyre.png", after: "/tyres.jpg", title: "Tyre Services" },
 ]
 
 export function Gallery() {
