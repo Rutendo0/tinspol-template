@@ -15,6 +15,7 @@ import { Save, Upload, X, Image as ImageIcon, Link } from 'lucide-react'
 import { CldUploadWidget } from 'next-cloudinary'
 import { FileUpload } from '@/components/ui/file-upload'
 import { showToast } from '@/components/ui/toaster'
+import { BeforeAfterPreview } from '@/components/admin/before-after-preview'
 
 interface GalleryItem {
   id?: string
@@ -484,53 +485,14 @@ export function GalleryEditor({ item, isEditing = false }: GalleryEditorProps) {
             {formData.beforeImage && formData.afterImage && (
               <div className="space-y-4">
                 <Label className="text-white">Preview</Label>
-                <div className="grid grid-cols-2 gap-4 h-64">
-                  <div className="relative bg-gray-800 rounded-lg overflow-hidden">
-                    <img
-                      src={formData.beforeImage}
-                      alt="Before"
-                      className="w-full h-full object-cover"
-                      onError={(e) => {
-                        console.error('Error loading before image preview:', e)
-                        const target = e.target as HTMLImageElement
-                        target.style.display = 'none'
-                        const parent = target.parentElement
-                        if (parent) {
-                          parent.innerHTML = `
-                            <div class="flex items-center justify-center h-full text-red-400">
-                              <p>Failed to load before image</p>
-                            </div>
-                          `
-                        }
-                      }}
-                    />
-                    <div className="absolute top-2 left-2">
-                      <Badge variant="secondary">Before</Badge>
-                    </div>
-                  </div>
-                  <div className="relative bg-gray-800 rounded-lg overflow-hidden">
-                    <img
-                      src={formData.afterImage}
-                      alt="After"
-                      className="w-full h-full object-cover"
-                      onError={(e) => {
-                        console.error('Error loading after image preview:', e)
-                        const target = e.target as HTMLImageElement
-                        target.style.display = 'none'
-                        const parent = target.parentElement
-                        if (parent) {
-                          parent.innerHTML = `
-                            <div class="flex items-center justify-center h-full text-red-400">
-                              <p>Failed to load after image</p>
-                            </div>
-                          `
-                        }
-                      }}
-                    />
-                    <div className="absolute top-2 right-2">
-                      <Badge className="bg-green-600">After</Badge>
-                    </div>
-                  </div>
+                <div className="relative h-64 rounded-lg overflow-hidden bg-gray-800">
+                  {/* Draggable before/after preview for admin posting */}
+                  <BeforeAfterPreview
+                    before={formData.beforeImage}
+                    after={formData.afterImage}
+                    alt={formData.title}
+                    className="h-full"
+                  />
                 </div>
               </div>
             )}

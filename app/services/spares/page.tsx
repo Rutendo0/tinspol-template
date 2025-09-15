@@ -51,12 +51,11 @@ export default function SparesPage() {
             </div>
             
             <div className="relative">
-              <div className="relative h-[400px] rounded-lg overflow-hidden shadow-lg">
-                <Image
+              <div className="relative rounded-lg overflow-hidden shadow-lg bg-gray-100">
+                <img
                   src="/spares.jpeg"
                   alt="Spares and parts service"
-                  fill
-                  className="object-cover"
+                  className="w-full h-auto"
                 />
               </div>
             </div>
@@ -157,12 +156,11 @@ export default function SparesPage() {
                 ))}
               </div>
             </div>
-            <div className="relative h-[300px] rounded-lg overflow-hidden shadow-lg">
-              <Image
+            <div className="relative rounded-lg overflow-hidden shadow-lg bg-gray-100">
+              <img
                 src="/spare.png"
                 alt="Parts installation"
-                fill
-                className="object-cover"
+                className="w-full h-auto"
               />
             </div>
           </div>
@@ -218,8 +216,8 @@ export default function SparesPage() {
                   <CardDescription>Supply and fit on request.</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="relative h-40 w-full rounded-md overflow-hidden bg-gray-100">
-                    <Image src={item.image} alt={item.label} fill className="object-cover" />
+                  <div className="relative h-56 sm:h-64 w-full rounded-md overflow-hidden bg-gray-100">
+                    <Image src={item.image} alt={item.label} fill className="object-contain p-1 sm:p-2" />
                   </div>
                 </CardContent>
               </Card>
@@ -258,7 +256,7 @@ export default function SparesPage() {
                 a: "We supply both genuine OEM and high-quality OEM-equivalent parts. We’ll recommend the best option for your budget and needs.",
               },
               {
-                q: "Can you fit parts I already bought?",
+                q: "Can you fit parts that I've already bought somewhere else?",
                 a: "We recommend sourcing through us to guarantee compatibility and warranty. If you already have parts, we can assess and advise.",
               },
             ].map((faq, index) => (
@@ -281,8 +279,8 @@ export default function SparesPage() {
           <Card className="border-0 shadow-xl">
             <CardContent className="p-8">
               <Badge className="mb-4 bg-red-600 text-white">Need a part?</Badge>
-              <h3 className="text-2xl font-bold text-black mb-4">Request a Part/Quote</h3>
-              <p className="text-gray-600 mb-6">Send us your vehicle details and photos of the part. We'll source and quote fast.</p>
+              <h3 className="text-2xl font-bold text-black mb-4">Send Us A Message Now!</h3>
+              <p className="text-gray-600 mb-6">Send us your vehicle details and the part you need. We'll source and quote fast.</p>
               <Button asChild size="lg" className="bg-red-600 hover:bg-red-700 text-white">
                 <Link href="/tyres-and-spares">Request Now</Link>
               </Button>

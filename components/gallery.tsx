@@ -4,16 +4,17 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { Camera, ArrowRight } from "lucide-react"
-import { BeforeAfter } from "@/components/ui/before-after"
+import Image from "next/image"
 
-// Homepage gallery using before/after comparisons
-const workPairs = [
-  { before: "/panel4.jpg", after: "/panel3.jpg", title: "Panel Beating" },
-  { before: "/carwash2.jpg", after: "/carwash.jpg", title: "Car Wash & Detailing" },
-  { before: "/motor1.png", after: "/motor.jpeg", title: "Motor Mechanics" },
-  { before: "/suspension.jpg", after: "/suspension2.jpg", title: "Suspension Repairs" },
-  { before: "/paint.jpg", after: "/vehicle1.jpg", title: "Body & Paint" },
-  { before: "/tyre.png", after: "/tyres.jpg", title: "Tyre Services" },
+
+// Homepage gallery using single images
+const galleryItems = [
+  { src: "/panel4.jpg", title: "Panel Beating" },
+  { src: "/carwash.jpg", title: "Car Wash & Detailing" },
+  { src: "/motor1.png", title: "Motor Mechanics" },
+  { src: "/suspension.jpg", title: "Suspension Repairs" },
+  { src: "/paint.jpg", title: "Body & Paint" },
+  { src: "/tyre.png", title: "Tyre Services" },
 ]
 
 export function Gallery() {
@@ -40,11 +41,11 @@ export function Gallery() {
           </div>
           <h2 className="text-4xl lg:text-6xl font-bold text-black mb-6">
             A Glimpse Into
-            <span className="block gradient-text">Tinspol Motors</span>
+            <span className="block mt-1 gradient-text">Tinspol Motors</span>
           </h2>
         </div>
 
-        {/* Before/After Grid */}
+        {/* Gallery Grid */}
         <div className="relative grid sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
           {/* Grid Animation Background */}
           <div className="absolute inset-0 opacity-10 pointer-events-none">
@@ -55,15 +56,17 @@ export function Gallery() {
             </div>
           </div>
 
-          {workPairs.map((item, idx) => (
+          {galleryItems.map((item, idx) => (
             <Card key={idx} className="overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 bg-white">
               <div className="relative aspect-[4/3]">
-                {/* Before/After comparison fills the card area */}
-                <BeforeAfter
-                  before={item.before}
-                  after={item.after}
+                {/* Single image */}
+                <Image
+                  src={item.src}
                   alt={item.title}
-                  className="absolute inset-0"
+                  fill
+                  className="object-cover"
+                  sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                  priority={idx < 3}
                 />
                 {/* Caption */}
                 <div className="absolute bottom-3 left-3">
@@ -72,14 +75,6 @@ export function Gallery() {
                   </span>
                 </div>
               </div>
-              <CardContent className="p-4">
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-gray-600">Captured at Tinspol Motors</span>
-                  <Link href="/gallery" className="text-sm font-semibold text-red-600 hover:text-red-700 inline-flex items-center">
-                    View Details <ArrowRight className="w-4 h-4 ml-1" />
-                  </Link>
-                </div>
-              </CardContent>
             </Card>
           ))}
         </div>

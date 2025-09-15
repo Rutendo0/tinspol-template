@@ -1,4 +1,4 @@
-import { MapPin, Phone, Mail, Facebook, Twitter, Instagram, Clock } from "lucide-react"
+import { MapPin, Phone, Mail, Facebook, Linkedin, Instagram, Clock } from "lucide-react"
 import Link from "next/link"
 
 export function Footer() {
@@ -21,26 +21,29 @@ export function Footer() {
             </Link>
 
             <p className="text-gray-400 text-sm leading-relaxed">
-              Zimbabwe's trusted automotive service center providing quality repairs, maintenance, and customer care since 2004.
+              Zimbabwe's trusted automotive service center providing quality repairs, maintenance, and customer care since 2007.
             </p>
 
             {/* Social Links */}
             <div className="flex space-x-3">
               <a 
-                href="#" 
+                href="https://www.facebook.com/TinspolMotors" 
                 className="w-9 h-9 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-red-600 transition-colors"
+                target="_blank" rel="noopener noreferrer"
               >
                 <Facebook className="w-4 h-4" />
               </a>
               <a 
-                href="#" 
+                href="https://www.linkedin.com/in/tinspol-motors-95b495299?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" 
                 className="w-9 h-9 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-red-600 transition-colors"
+                target="_blank" rel="noopener noreferrer"
               >
-                <Twitter className="w-4 h-4" />
+                <Linkedin className="w-4 h-4" />
               </a>
               <a 
-                href="#" 
+                href="https://www.instagram.com/tinspolmotors?igsh=MWZ5ZHhtNDB4MGpxNg==" 
                 className="w-9 h-9 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-red-600 transition-colors"
+                target="_blank" rel="noopener noreferrer"
               >
                 <Instagram className="w-4 h-4" />
               </a>

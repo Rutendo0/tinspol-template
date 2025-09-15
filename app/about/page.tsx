@@ -22,7 +22,7 @@ export default function AboutPage() {
             alt="Tinspol Motors professional workshop"
             fill
             priority
-            className="object-cover"
+            className="object-cover object-center"
           />
           <div className="absolute inset-0 bg-black/60" />
         </div>
@@ -109,9 +109,9 @@ export default function AboutPage() {
                   return to us for all their vehicle repair needs.
                 </p>
               </div>
-              <div className="relative h-[400px] rounded-lg overflow-hidden shadow-lg">
+              <div className="relative h-[600px] rounded-lg overflow-hidden shadow-lg">
                 <Image
-                  src="/image2.jpg"
+                  src="/image1.jpg"
                   alt="Tinspol Motors team at work"
                   fill
                   className="object-cover"

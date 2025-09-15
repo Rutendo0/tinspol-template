@@ -51,12 +51,12 @@ export default function MotorMechanicsPage() {
             </div>
             
             <div className="relative">
-              <div className="relative h-[400px] rounded-lg overflow-hidden shadow-lg">
+              <div className="relative h-56 sm:h-72 lg:h-[360px] rounded-lg overflow-hidden shadow-lg">
                 <Image
                   src="/vehicle.jpeg"
                   alt="Professional motor mechanics service"
                   fill
-                  className="object-cover"
+                  className="object-cover object-center"
                 />
               </div>
             </div>
@@ -143,12 +143,12 @@ export default function MotorMechanicsPage() {
                 ))}
               </div>
             </div>
-            <div className="relative h-[300px] rounded-lg overflow-hidden shadow-lg">
+            <div className="relative h-48 sm:h-60 lg:h-72 rounded-lg overflow-hidden shadow-lg">
               <Image
                 src="/vehicle1.jpg"
                 alt="Professional mechanics at work"
                 fill
-                className="object-cover"
+                className="object-cover object-center"
               />
             </div>
           </div>

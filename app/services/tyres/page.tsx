@@ -54,7 +54,7 @@ export default function TyresPage() {
             <div className="relative">
               <div className="relative h-[400px] rounded-lg overflow-hidden shadow-lg">
                 <Image
-                  src="/tyres.jpg"
+                  src="/tyre.png"
                   alt="Professional tyre fitting service"
                   fill
                   className="object-cover"

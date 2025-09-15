@@ -103,7 +103,7 @@ export default function MotorcyclePage() {
               </div>
             </div>
             <div className="relative h-[300px] rounded-lg overflow-hidden shadow-lg">
-              <Image src="/motor1.png" alt="Motorcycle repairs" fill className="object-cover" />
+              <Image src="/motor3.jpg" alt="Motorcycle repairs" fill className="object-cover" />
             </div>
           </div>
         </div>
