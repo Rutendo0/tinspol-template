@@ -145,7 +145,7 @@ export default function MotorMechanicsPage() {
             </div>
             <div className="relative h-48 sm:h-60 lg:h-72 rounded-lg overflow-hidden shadow-lg">
               <Image
-                src="/vehicle1.jpg"
+                src="/vehicle3.jpg"
                 alt="Professional mechanics at work"
                 fill
                 className="object-cover object-center"
