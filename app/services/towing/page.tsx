@@ -66,7 +66,6 @@ export default function TowingPage() {
               { icon: Clock, title: "Roadside Help", desc: "Jump starts, tyre change, and fuel delivery" },
               { icon: Wrench, title: "Workshop Delivery", desc: "Direct to Tinspol or your preferred garage" },
               { icon: CheckCircle, title: "Long Distance", desc: "City and intercity towing available" },
-              { icon: Shield, title: "Secure Storage", desc: "Short-term vehicle holding on request" },
             ].map((service, index) => (
               <Card key={index} className="border-0 shadow-md hover:shadow-lg transition-shadow">
                 <CardHeader>
