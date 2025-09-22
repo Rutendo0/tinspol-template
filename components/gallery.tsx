@@ -11,7 +11,7 @@ import Image from "next/image"
 const galleryItems = [
   { src: "/panel4.jpg", title: "Panel Beating" },
   { src: "/carwash.jpg", title: "Car Wash & Detailing" },
-  { src: "/motor1.png", title: "Motor Mechanics" },
+  { src: "/image6.jpg", title: "Motor Mechanics" },
   { src: "/suspension.jpg", title: "Suspension Repairs" },
   { src: "/paint.jpg", title: "Body & Paint" },
   { src: "/tyre.png", title: "Tyre Services" },
